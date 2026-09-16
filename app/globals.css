@@ -1,0 +1,274 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: var(--body-font);
+  --font-display: var(--display-font);
+  --font-serif: var(--accent-font);
+
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+
+  --color-coral: var(--coral);
+  --color-coral-foreground: var(--coral-foreground);
+  --color-coral-hover: var(--coral-hover);
+  --color-primary-hover: var(--primary-hover);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-success-border: var(--success-border);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-warning-border: var(--warning-border);
+  --color-primary-tint: var(--primary-tint);
+  --color-primary-tint-foreground: var(--primary-tint-foreground);
+
+  --radius-sm: var(--r-sm);
+  --radius-md: var(--r-md);
+  --radius-lg: var(--r-lg);
+  --radius-xl: var(--r-xl);
+  --radius-2xl: var(--r-2xl);
+}
+
+:root {
+  color-scheme: light;
+
+  /* Brand type. Body: DM Sans; display: NZMA condensed sans; both overridden per brand below. */
+  --body-font: var(--font-dm-sans), 'DM Sans Fallback', system-ui, sans-serif;
+  --accent-font: Georgia, 'Times New Roman', serif;
+  --display-font: var(--font-barlow), 'Barlow Condensed Fallback', 'Arial Narrow', sans-serif;
+
+  --r-sm: 6px;
+  --r-md: 8px;
+  --r-lg: 12px;
+  --r-xl: 16px;
+  --r-2xl: 20px;
+  --display-xl: clamp(3.75rem, 20vw, 5.5rem);
+  --display-tracking: -0.025em;
+
+  --background: #ffffff;
+  --foreground: #222222;
+  --card: #ffffff;
+  --card-foreground: #222222;
+  --popover: #ffffff;
+  --popover-foreground: #222222;
+
+  /* NZMA electric blue */
+  --primary: #0407f2;
+  --primary-hover: #0306c4;
+  --primary-foreground: #ffffff;
+  --primary-tint: #eaeaff;
+  --primary-tint-foreground: #0a0c8a;
+
+  /* NZMA coral */
+  --coral: #ea496a;
+  --coral-hover: #d63a5b;
+  --coral-foreground: #ffffff;
+
+  --secondary: #f4f5f6;
+  --secondary-foreground: #222222;
+  --muted: #f4f5f6;
+  --muted-foreground: #5c6168;
+  --accent: #f4f5f6;
+  --accent-foreground: #222222;
+  --destructive: #b42318;
+  --border: #dfe2e6;
+  --input: #c9cdd3;
+  --ring: #0407f2;
+
+  --success: #e7f5ec;
+  --success-border: #b9e0c6;
+  --success-foreground: #16482b;
+  --warning: #fff4d6;
+  --warning-border: #f2dc9a;
+  --warning-foreground: #6b4300;
+
+  --radius: 12px;
+}
+
+/* Elite School of Beauty & Spa: black, gold, high-contrast serif display */
+[data-brand='elite'] {
+  --display-font: var(--font-elite), 'Cormorant Garamond', Georgia, serif;
+  --display-xl: clamp(2.5rem, 13vw, 4.5rem);
+  --display-tracking: 0.01em;
+
+  --primary: #161616;
+  --primary-hover: #000000;
+  --primary-foreground: #ffffff;
+  --primary-tint: #f4efe3;
+  --primary-tint-foreground: #4a3b18;
+
+  --coral: #cbb073;
+  --coral-hover: #bfa15f;
+  --coral-foreground: #161616;
+
+  --ring: #161616;
+}
+
+/* Yoobee College of Creative Innovation: near-black, lavender, wide geometric display */
+[data-brand='yoobee'] {
+  --display-font: var(--font-yoobee), 'Syne', 'Arial Black', sans-serif;
+  --display-xl: clamp(2.25rem, 12vw, 4.25rem);
+  --display-tracking: -0.02em;
+
+  --primary: #141414;
+  --primary-hover: #000000;
+  --primary-foreground: #ffffff;
+  --primary-tint: #efe6ff;
+  --primary-tint-foreground: #3a2566;
+
+  --coral: #bd89ff;
+  --coral-hover: #ad74f5;
+  --coral-foreground: #141414;
+
+  --ring: #141414;
+}
+
+/* AIPC, matched to www-uat.aipc.net.au: indigo primary, teal secondary, orange CTAs, geometric sans with an italic serif accent, 12px buttons and 20px cards */
+[data-brand='aipc'] {
+  --body-font: var(--font-aipc), 'Outfit Fallback', system-ui, sans-serif;
+  --display-font: var(--font-aipc), 'Outfit Fallback', system-ui, sans-serif;
+  --accent-font: var(--font-aipc-serif), 'Instrument Serif Fallback', Georgia, serif;
+  --display-xl: clamp(2.25rem, 5vw, 3.25rem);
+  --display-tracking: -0.01em;
+
+  --foreground: #000000;
+  --card-foreground: #000000;
+  --muted: #f8f8fa;
+  --muted-foreground: #5a5a5a;
+  --border: #e2e2e2;
+  --input: #c6c6c6;
+
+  --primary: #2d388e;
+  --primary-hover: #232c73;
+  --primary-foreground: #ffffff;
+  --primary-tint: #eae9f4;
+  --primary-tint-foreground: #2d388e;
+
+  --secondary: #e6f8f7;
+  --secondary-foreground: #00756f;
+
+  --coral: #f79321;
+  --coral-hover: #e2841a;
+  --coral-foreground: #ffffff;
+
+  --success: #e6f8f7;
+  --success-foreground: #00605b;
+  --success-border: #99e1de;
+
+  --ring: #2d388e;
+
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 20px;
+  --r-xl: 24px;
+  --r-2xl: 28px;
+}
+
+/* UAT headings: sentence case, weight 600, 1.25 leading (40px / 50px) */
+[data-brand='aipc'] .font-display {
+  text-transform: none;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* Italic serif accent, as in "Careers for people who care" */
+[data-brand='aipc'] .font-serif {
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: 0;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-feature-settings: 'ss01', 'cv11';
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+@layer utilities {
+  .hairline {
+    border-width: 0.5px;
+  }
+  .hairline-t {
+    border-top-width: 0.5px;
+  }
+  .hairline-b {
+    border-bottom-width: 0.5px;
+  }
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+  /* Native range styled to a 4px track with a blue thumb */
+  .range-blue {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 4px;
+    border-radius: 999px;
+    background: linear-gradient(
+      to right,
+      var(--primary) 0%,
+      var(--primary) var(--pct, 0%),
+      var(--border) var(--pct, 0%),
+      var(--border) 100%
+    );
+    outline: none;
+  }
+  .range-blue::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 999px;
+    background: var(--background);
+    border: 2px solid var(--primary);
+    cursor: pointer;
+  }
+  .range-blue::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    border-radius: 999px;
+    background: var(--background);
+    border: 2px solid var(--primary);
+    cursor: pointer;
+  }
+  .range-blue:focus-visible::-webkit-slider-thumb {
+    box-shadow: 0 0 0 4px var(--primary-tint);
+  }
+  dialog::backdrop {
+    background: rgba(34, 34, 34, 0.55);
+  }
+}
