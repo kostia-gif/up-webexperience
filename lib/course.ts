@@ -180,8 +180,45 @@ export type International = {
   caseStudies: CaseStudy[]
 }
 
+export type MarketStat = { value: string; label: string; source: string }
+export type MarketDemand = { eyebrow: string; title: string; intro: string; stats: MarketStat[] }
+
+export type PathwayRung = {
+  award: string
+  unitCount: number
+  duration: string
+  gets: string
+  roles: string[]
+  isTarget?: boolean
+}
+export type PathwayLadder = { eyebrow: string; title: string; intro: string; safetyNote: string; rungs: PathwayRung[] }
+
+export type CareerTier = { when: string; role: string; settings: string; band: string }
+export type CareerLadder = { eyebrow: string; title: string; intro: string; tiers: CareerTier[]; note: string }
+
+export type AcademicLead = {
+  name: string
+  role: string
+  credentials: string
+  years: number
+  photo: { src: string; alt: string }
+  bio: string
+  quote: string
+}
+
+export type StudyPhase = { span: string; label: string; detail: string }
+export type StudyRhythm = { eyebrow: string; title: string; intro: string; weeks: number; perBlock: string; phases: StudyPhase[] }
+
+export type ProgramGuide = { eyebrow: string; title: string; blurb: string; contents: string[]; fileLabel: string }
+
 export type Postgrad = {
   provider: { legalName: string; teqsa: string; aqf: number; since: number }
+  marketDemand?: MarketDemand
+  pathwayLadder?: PathwayLadder
+  careerLadder?: CareerLadder
+  academicLead?: AcademicLead
+  studyRhythm?: StudyRhythm
+  programGuide?: ProgramGuide
   structure: { totalUnits: number; electivesRequired: number }
   international?: International
   accreditations: { body: string; short: string; what: string }[]

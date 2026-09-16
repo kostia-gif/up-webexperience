@@ -346,6 +346,100 @@ export const masterOfCounselling: Course = {
       { title: 'Pay per trimester', body: 'Pay only for the units you are enrolled in that trimester, by card or direct debit, usually within two weeks of the start.' },
       { title: 'Split', body: 'Pay part of each trimester yourself and defer the rest through FEE-HELP. Change the split each trimester.' },
     ],
+    marketDemand: {
+      eyebrow: 'Why now',
+      title: 'A profession the country is short of',
+      intro:
+        'Demand for mental health support in Australia has outrun the workforce that provides it. Qualifying as a registered counsellor puts you into a field that is growing, undersupplied and paid accordingly.',
+      stats: [
+        { value: '1 in 5', label: 'Australian adults experienced a mental disorder in the past 12 months', source: 'ABS National Study of Mental Health and Wellbeing, 2020–22' },
+        { value: '+19%', label: 'Projected growth in counsellor and psychotherapist roles over the next decade', source: 'Jobs and Skills Australia employment projections (placeholder pending sourced data)' },
+        { value: '47%', label: 'Of Australians with a mental health condition access professional support in a year', source: 'ABS, 2022 (placeholder pending sourced data)' },
+        { value: '$96K', label: 'Typical salary for an experienced counsellor, around three years in', source: 'Jobs and Skills Australia occupation profile, 2025' },
+      ],
+    },
+    pathwayLadder: {
+      eyebrow: 'A stackable qualification',
+      title: 'Start small, or go all the way',
+      intro:
+        'The Master is built from three nested awards. Enrol in the one that fits now. Every unit you complete counts toward the next, so you can upskill quickly and decide later how far to take it.',
+      safetyNote:
+        'Each qualification is a full, recognised award in its own right. If life changes, you can step off with a credential in hand rather than nothing, and pick up where you left off when you are ready.',
+      rungs: [
+        {
+          award: 'Graduate Certificate in Counselling',
+          unitCount: 4,
+          duration: 'About 8 months part-time',
+          gets: 'The foundations: the therapeutic relationship, core counselling skills, and the ethics that hold practice together. A recognised credential you can stop at.',
+          roles: ['Peer support worker', 'Wellbeing officer', 'Community services assistant'],
+        },
+        {
+          award: 'Graduate Diploma in Counselling',
+          unitCount: 8,
+          duration: 'About 1 year more, part-time',
+          gets: 'Adds cognitive behavioural and contemporary approaches, human development and case planning. Exit here with a practitioner-level qualification.',
+          roles: ['Counselling support worker', 'Case worker', 'Youth or family support worker'],
+        },
+        {
+          award: 'Master of Counselling',
+          unitCount: 14,
+          duration: 'About 2 years full-time',
+          gets: 'Four specialisations you choose, a 168-hour supervised placement and a capstone. Qualifies you for ACA registration and independent practice.',
+          roles: ['Registered counsellor', 'Private practice counsellor', 'Clinical team lead'],
+          isTarget: true,
+        },
+      ],
+    },
+    careerLadder: {
+      eyebrow: 'Where it takes you',
+      title: 'The years after you graduate',
+      intro:
+        'Registration is the start line, not the finish. Here is the trajectory our graduates typically follow, and what the pay looks like along the way.',
+      note: 'Salary bands are indicative, drawn from Jobs and Skills Australia and AIPC graduate reporting. Private practice earnings vary with caseload. Placeholder pending fully sourced data.',
+      tiers: [
+        { when: 'On graduation', role: 'Provisional or registered counsellor', settings: 'Relationships Australia, headspace, Anglicare, Lifeline', band: '$70K–$78K' },
+        { when: '2 to 4 years', role: 'Registered counsellor with a growing caseload', settings: 'Community health, EAP providers, school wellbeing services', band: '$85K–$96K' },
+        { when: '5 years and beyond', role: 'Senior counsellor or private practice', settings: 'Your own practice, clinical supervision of others', band: '$100K–$130K+' },
+        { when: 'Later career', role: 'Team lead or service manager', settings: 'Program and service leadership in the sector', band: '$130K+' },
+      ],
+    },
+    academicLead: {
+      name: 'Dr Helen Whitmore',
+      role: 'Program Director, Master of Counselling',
+      credentials: 'PhD, MAppSc (Counselling), Clinical Member ACA',
+      years: 30,
+      photo: { src: '/images/aipc/program-director.png', alt: 'Dr Helen Whitmore, Program Director of the Master of Counselling, in her office' },
+      bio: 'Helen has practised, supervised and taught counselling for three decades, from community mental health to private practice. She led the redesign of AIPC’s postgraduate curriculum around real client work and supervised placement.',
+      quote:
+        'You don’t learn to counsel by reading about it. Every unit we teach has to land in a room with a real person in front of you. That’s why placement and supervision sit at the centre of this degree, not tacked on at the end.',
+    },
+    studyRhythm: {
+      eyebrow: 'Your study rhythm',
+      title: 'What a trimester actually looks like',
+      intro:
+        'The degree runs in 12-week trimesters, two a year. Most students take two units a trimester around a job, with one live evening tutorial a week and the rest on your own time.',
+      weeks: 12,
+      perBlock: 'Two units part-time, four full-time',
+      phases: [
+        { span: 'Weeks 1–2', label: 'Settle in', detail: 'Meet your cohort and lecturer and get your first readings. Census date falls at the end of week 2, so there is nothing to pay if you step away before it.' },
+        { span: 'Weeks 3–8', label: 'Core teaching', detail: 'One live evening tutorial a week, recorded lectures when it suits you, and role-plays you submit for lecturer feedback within a week.' },
+        { span: 'Weeks 9–10', label: 'Residential or intensive', detail: 'A 2.5-day campus school or a 5-day online intensive for your skills and approaches units. Twice across the whole degree on campus.' },
+        { span: 'Weeks 11–12', label: 'Assessment', detail: 'Pull it together in your assignments, then a short break before the next block begins.' },
+      ],
+    },
+    programGuide: {
+      eyebrow: 'Program guide',
+      title: 'Get the full Master of Counselling guide',
+      blurb: 'We will email you the complete guide as a PDF. It is the whole picture in one place, so you can read it properly and share it with whoever you talk decisions over with.',
+      contents: [
+        'The full unit-by-unit curriculum and all eight specialisations',
+        'A trimester-by-trimester study plan for full-time and part-time',
+        'Fees, FEE-HELP and the Census Date Guarantee explained plainly',
+        'How credit and RPL are assessed for your background',
+        'Residential schools, placement and the support around you',
+      ],
+      fileLabel: 'PDF, 24 pages',
+    },
     censusGuarantee:
       'Every unit has a census date about two weeks after the trimester starts. Withdraw before it, through the formal process, and you are not charged for that unit and incur no FEE-HELP debt. Zero risk to try a trimester.',
   },
