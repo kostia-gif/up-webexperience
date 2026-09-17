@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Syne } from 'next/font/google'
 import { ShopCoursePage } from '@/components/course/course-page'
+import { GeoBanner } from '@/components/intl/geo-banner'
 import { creativeMediaLevel4 as course } from '@/lib/courses'
 
 const syne = Syne({
@@ -23,9 +24,13 @@ export const viewport: Viewport = {
   initialScale: 1,
 }
 
-export default function Page() {
+export default async function Page({ searchParams }: { searchParams: Promise<{ from?: string }> }) {
+  const { from } = await searchParams
   return (
     <div className={syne.variable}>
+      <div data-brand="yoobee">
+        <GeoBanner from={from} href="/international/yoobee" />
+      </div>
       <ShopCoursePage course={course} />
     </div>
   )

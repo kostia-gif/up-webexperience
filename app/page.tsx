@@ -41,6 +41,47 @@ export default function Home() {
         ))}
       </ul>
 
+      <section aria-labelledby="intl" className="flex flex-col gap-3 border-t border-border pt-8">
+        <div className="flex flex-col gap-1">
+          <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Audience variant</p>
+          <h2 id="intl" className="text-lg font-medium leading-snug">
+            Yoobee, international edition
+          </h2>
+          <p className="text-sm leading-relaxed text-muted-foreground text-pretty">
+            Picks up the visitor&apos;s country from the Vercel geo header and leads with place, facilities and people in a more
+            conservative, institutional register. In preview, simulate a country with the links below.
+          </p>
+        </div>
+        <ul className="flex flex-wrap gap-2">
+          {(
+            [
+              ['CN', 'China'],
+              ['IN', 'India'],
+              ['VN', 'Vietnam'],
+              ['KR', 'Korea'],
+              ['OTHER', 'Elsewhere'],
+            ] as const
+          ).map(([code, name]) => (
+            <li key={code}>
+              <a
+                href={`/international/yoobee?from=${code}`}
+                className="inline-flex min-h-10 items-center gap-1.5 rounded-lg border border-border bg-card px-4 text-sm hover:border-foreground"
+              >
+                {name} <ArrowRight className="size-4" aria-hidden />
+              </a>
+            </li>
+          ))}
+          <li>
+            <a
+              href="/courses/design/creative-media-certificate?from=CN"
+              className="inline-flex min-h-10 items-center gap-1.5 rounded-lg border border-dashed border-border px-4 text-sm text-muted-foreground hover:border-foreground hover:text-foreground"
+            >
+              Domestic page as seen from China (geo banner)
+            </a>
+          </li>
+        </ul>
+      </section>
+
       <section aria-labelledby="opportunity" className="flex flex-col gap-5 border-t border-border pt-8">
         <div className="flex flex-col gap-2">
           <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">The opportunity</p>

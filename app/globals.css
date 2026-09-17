@@ -142,6 +142,50 @@
   --ring: #141414;
 }
 
+/* Yoobee international edition: institutional register for audiences that
+   benchmark against a university. Navy primary, a single gold rule, classical
+   serif headings, tighter radii. Same college, more conservative dress. */
+[data-brand='yoobee-intl'] {
+  --display-font: var(--font-yoobee-intl-serif), 'EB Garamond', Georgia, 'Times New Roman', serif;
+  --accent-font: var(--font-yoobee-intl-serif), 'EB Garamond', Georgia, serif;
+  --display-xl: clamp(2.5rem, 5vw, 3.75rem);
+  --display-tracking: -0.01em;
+
+  --foreground: #14213d;
+  --card-foreground: #14213d;
+  --muted: #f3f4f6;
+  --muted-foreground: #4b5563;
+  --border: #d9dde3;
+  --input: #b9c0ca;
+
+  --primary: #0b2545;
+  --primary-hover: #071a33;
+  --primary-foreground: #ffffff;
+  --primary-tint: #e9eef6;
+  --primary-tint-foreground: #0b2545;
+
+  --secondary: #f7f4ec;
+  --secondary-foreground: #5a4a1e;
+
+  --coral: #a8862d;
+  --coral-hover: #8f7124;
+  --coral-foreground: #ffffff;
+
+  --ring: #0b2545;
+
+  --r-sm: 2px;
+  --r-md: 4px;
+  --r-lg: 6px;
+  --r-xl: 8px;
+  --r-2xl: 10px;
+}
+
+[data-brand='yoobee-intl'] .font-display {
+  text-transform: none;
+  font-weight: 500;
+  line-height: 1.15;
+}
+
 /* AIPC, matched to www-uat.aipc.net.au: indigo primary, teal secondary, orange CTAs, geometric sans with an italic serif accent, 12px buttons and 20px cards */
 [data-brand='aipc'] {
   --body-font: var(--font-aipc), 'Outfit Fallback', system-ui, sans-serif;
