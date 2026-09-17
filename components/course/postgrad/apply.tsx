@@ -7,6 +7,7 @@ import { track } from '@/lib/track'
 import { cn } from '@/lib/utils'
 import { Btn, Field, inputClass, Module, StatusPill } from '../primitives'
 import { usePostgrad } from './context'
+import { ProgramGuideCard } from './program-guide'
 import { useStudyFrom } from './study-from'
 
 type Panel = 'apply' | 'save' | null
@@ -315,6 +316,10 @@ export function ApplyBoard() {
         </a>
         .
       </p>
+
+      <div className="mt-6">
+        <ProgramGuideCard compact />
+      </div>
     </Module>
   )
 }
