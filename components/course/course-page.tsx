@@ -10,6 +10,10 @@ import { Faqs, FormalBit, WhereItTakesYou } from './below-fold'
 import { CareerCoach } from './career-coach'
 import { CourseProvider } from './course-context'
 import { Eligibility } from './eligibility'
+import { Billboard } from './emotional/billboard'
+import { StartBar } from './emotional/start-bar'
+import { StartNow } from './emotional/start-now'
+import { StudentVoices, TalkToSomeone } from './emotional/talk-and-voices'
 import { FreeAndFunded } from './free-and-funded'
 import { Hero } from './hero'
 import { IntakeBoard } from './intake-board'
@@ -88,6 +92,47 @@ export function ShopCoursePage({ course }: { course: Course }) {
         <BasketBar />
         <CheckoutDrawer />
       </BasketProvider>
+    </Shell>
+  )
+}
+
+const EMOTIONAL_NAV: [string, string][] = [
+  ['#start', 'Start dates'],
+  ['#talk', 'Talk to someone'],
+  ['#voices', 'Students'],
+  ['#journey', 'Your year'],
+  ['#like', "What it's like"],
+  ['#outcomes', 'Jobs'],
+  ['#eligibility', 'Am I in'],
+  ['#money', 'Cost'],
+  ['#formal', 'Details'],
+]
+
+/**
+ * Emotional-buyer variant. Decision is already made ("I want to be a chef");
+ * the page's job is to get them to a date or a phone call, then reassure.
+ * Money and eligibility sit low; a course advisor handles them in person.
+ */
+export function EmotionalCoursePage({ course }: { course: Course }) {
+  return (
+    <Shell course={course}>
+      <main className="pb-20">
+        <Billboard />
+        <StartNow />
+        <TalkToSomeone />
+        <InPageNav items={EMOTIONAL_NAV} />
+        <StudentVoices />
+        <Journey />
+        <WhatItsLike />
+        <WhereItTakesYou />
+        <Eligibility />
+        <FreeAndFunded />
+        <TryIt />
+        <CareerCoach />
+        <Faqs />
+        <FormalBit />
+      </main>
+      <StartBar />
     </Shell>
   )
 }

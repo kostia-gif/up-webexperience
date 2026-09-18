@@ -41,6 +41,30 @@ export default function Home() {
         ))}
       </ul>
 
+      <section aria-labelledby="emotional" className="flex flex-col gap-3 border-t border-border pt-8">
+        <div className="flex flex-col gap-1">
+          <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Audience variant</p>
+          <h2 id="emotional" className="text-lg font-medium leading-snug">
+            NZMA Cookery, emotional buyer
+          </h2>
+          <p className="text-sm leading-relaxed text-muted-foreground text-pretty">
+            For the student who already knows: &ldquo;I want to be a cook.&rdquo; Billboard hero, pick a date and hold a seat with a name
+            and a number, or book a call. Student voices and the Day 1 to CV journey follow. Cost, eligibility and the formal bit sit
+            low, for the advisor to walk through face to face.
+          </p>
+        </div>
+        <a
+          href="/courses/cookery/certificate-in-cookery-level-4/start"
+          className="flex items-center justify-between gap-4 rounded-lg border border-border bg-card p-5 hover:border-foreground"
+        >
+          <span className="flex flex-col gap-1">
+            <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">NZMA · Cookery · /start</span>
+            <span className="text-lg font-medium leading-snug">Become a chef. Earn $56,000 to start.</span>
+          </span>
+          <ArrowRight className="size-5 shrink-0" aria-hidden />
+        </a>
+      </section>
+
       <section aria-labelledby="intl" className="flex flex-col gap-3 border-t border-border pt-8">
         <div className="flex flex-col gap-1">
           <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Audience variant</p>
