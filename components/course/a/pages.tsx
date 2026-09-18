@@ -113,8 +113,18 @@ export function OnlineCoursePageA({ course }: { course: Course }) {
  * coach is replaced by a "start your own practice" planner.
  */
 export function PostgradCoursePageA({ course }: { course: Course }) {
+  // Option A drops the comparison section, so the shared "Why AIPC" header
+  // link (#why) has no target here. Neutralize it to match the other
+  // placeholder header items without touching the shared course data.
+  const courseA: Course = {
+    ...course,
+    brand: {
+      ...course.brand,
+      nav: course.brand.nav.map((item) => (item.href === '#why' ? { ...item, href: '#' } : item)),
+    },
+  }
   return (
-    <Shell course={course}>
+    <Shell course={courseA}>
       <PostgradBodyA />
     </Shell>
   )
