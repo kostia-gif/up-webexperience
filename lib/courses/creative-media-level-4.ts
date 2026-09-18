@@ -320,6 +320,71 @@ export const creativeMediaLevel4: Course = {
       a: 'Yes. Live classes are 10am and 1pm on weekdays, about 15 hours a week. Most online students keep a part-time job. The 38-week part-time option runs evenings if you need to keep working full-time.',
     },
   ],
+  structure: {
+    intro:
+      'Four compulsory modules over 19 weeks full-time (38 weeks part-time), 60 credits at Level 4. Every module produces a finished piece for your portfolio and is assessed against a brief, the way a studio would brief you. All four modules must be passed.',
+    terms: [
+      {
+        label: 'Block 1: Fundamentals',
+        weeks: 'Weeks 1 to 5',
+        modules: [
+          {
+            code: 'CM401',
+            title: 'Visual communication and design principles',
+            credits: 15,
+            hours: 150,
+            summary: 'Composition, colour, typography and layout, applied across print and screen.',
+            learn: ['Grid, hierarchy and white space', 'Colour theory and accessible contrast', 'Type pairing and setting', 'Reading and responding to a creative brief'],
+            assessment: 'Three short design responses to set briefs and a written rationale for each.',
+            compulsory: true,
+          },
+          {
+            code: 'CM402',
+            title: 'Digital tools for creative production',
+            credits: 15,
+            hours: 150,
+            summary: 'Industry software across the Adobe suite, Figma and a game engine, with file management and export for each medium.',
+            learn: ['Photoshop, Illustrator and InDesign workflows', 'Figma components and prototyping', 'Premiere and After Effects basics', 'Unity or Unreal scene fundamentals'],
+            assessment: 'Skills portfolio of eight exercises, one per tool, plus a timed practical.',
+            compulsory: true,
+          },
+        ],
+      },
+      {
+        label: 'Block 2: Storytelling',
+        weeks: 'Weeks 6 to 12',
+        modules: [
+          {
+            code: 'CM403',
+            title: 'Narrative, motion and interactive media',
+            credits: 15,
+            hours: 150,
+            summary: 'Storyboarding, shot design, animation timing and interaction design for a moving-image or playable piece.',
+            learn: ['Story structure and storyboarding', 'Shot types and camera language', 'Principles of animation and timing', 'Interaction flows and playtesting'],
+            assessment: 'A 30-second animated or interactive piece from storyboard to export, with a playtest report.',
+            compulsory: true,
+          },
+        ],
+      },
+      {
+        label: 'Block 3: Portfolio',
+        weeks: 'Weeks 13 to 19',
+        modules: [
+          {
+            code: 'CM404',
+            title: 'Creative project and professional practice',
+            credits: 15,
+            hours: 150,
+            summary: 'A self-directed project in your chosen strand, presented in a professional portfolio with your CV and online presence.',
+            learn: ['Scoping and pitching a project', 'Iterating with critique', 'Portfolio site and case study writing', 'Pathway planning into Diploma or work'],
+            assessment: 'Final project, published portfolio and a 10-minute presentation to tutors and an industry guest.',
+            compulsory: true,
+          },
+        ],
+      },
+    ],
+    note: 'Module codes and credit values are indicative for the 2027 programme and subject to NZQA approval. Part-time students complete Blocks 1 and 2 in the first 19 weeks and Block 3 in the second. Micro-credentials completed before enrolment count towards CM402.',
+  },
   formal: {
     level: 4,
     credits: 60,
@@ -328,7 +393,7 @@ export const creativeMediaLevel4: Course = {
     intakesLabel: 'February (online 8 Feb, campus 22 Feb) and July',
     intl: { minAge: 18, ielts: '5.5 (no band under 5)', href: '/international' },
     links: {
-      structure: '#formal',
+      structure: '#structure',
       fees: '#formal',
       support: '#formal',
       enrol: '#intakes',

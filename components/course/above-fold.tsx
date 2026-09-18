@@ -51,6 +51,7 @@ const NAV: [string, string][] = [
   ['#intakes', 'Start dates'],
   ['#tryit', 'Try it'],
   ['#coach', 'Ask a coach'],
+  ['#structure', 'Modules'],
   ['#formal', 'Details'],
 ]
 

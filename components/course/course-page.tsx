@@ -9,6 +9,7 @@ import { BasketProvider } from './basket-context'
 import { Faqs, FormalBit, WhereItTakesYou } from './below-fold'
 import { CareerCoach } from './career-coach'
 import { CourseProvider } from './course-context'
+import { CourseStructure } from './course-structure'
 import { Eligibility } from './eligibility'
 import { Billboard } from './emotional/billboard'
 import { StartBar } from './emotional/start-bar'
@@ -53,6 +54,7 @@ export function CoursePage({ course }: { course: Course }) {
         <TryIt />
         <CareerCoach />
         <Faqs />
+        <CourseStructure />
         <FormalBit />
       </main>
     </Shell>
@@ -66,6 +68,7 @@ const SHOP_NAV: [string, string][] = [
   ['#money', 'Free and funded'],
   ['#eligibility', 'Am I in'],
   ['#intakes', 'Sign up'],
+  ['#structure', 'Modules'],
   ['#formal', 'Details'],
 ]
 
@@ -87,6 +90,7 @@ export function ShopCoursePage({ course }: { course: Course }) {
           <IntakePicker />
           <CareerCoach />
           <Faqs />
+          <CourseStructure />
           <FormalBit />
         </main>
         <BasketBar />
@@ -105,6 +109,7 @@ const EMOTIONAL_NAV: [string, string][] = [
   ['#outcomes', 'Jobs'],
   ['#eligibility', 'Am I in'],
   ['#money', 'Cost'],
+  ['#structure', 'Modules'],
   ['#formal', 'Details'],
 ]
 
@@ -130,6 +135,7 @@ export function EmotionalCoursePage({ course }: { course: Course }) {
         <TryIt />
         <CareerCoach />
         <Faqs />
+        <CourseStructure />
         <FormalBit />
       </main>
       <StartBar />

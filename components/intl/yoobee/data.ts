@@ -173,13 +173,6 @@ export const COHORT = [
   { label: 'Other', pct: 7 },
 ]
 
-export const MODULES = [
-  { code: 'DMD401', title: 'Design principles and visual communication', credits: 15, weeks: '1 to 5' },
-  { code: 'DMD402', title: 'Digital illustration and 2D animation', credits: 15, weeks: '5 to 10' },
-  { code: 'DMD403', title: 'Film: camera, sound and edit', credits: 15, weeks: '10 to 15' },
-  { code: 'DMD404', title: 'Portfolio project and industry brief', credits: 15, weeks: '15 to 19' },
-]
-
 export const PATHWAY = [
   { level: 'Level 4', title: 'NZ Certificate in Digital Media and Design', length: '19 weeks', note: 'You are here' },
   { level: 'Level 5', title: 'NZ Diploma in Animation, Film or Design', length: '1 year', note: 'Guaranteed progression with a pass' },

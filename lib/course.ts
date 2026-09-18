@@ -27,6 +27,29 @@ export type Stage = {
   voice?: StudentVoice
 }
 
+export type CourseModule = {
+  code: string
+  title: string
+  credits: number
+  hours?: number
+  summary: string
+  learn: string[]
+  assessment: string
+  compulsory?: boolean
+}
+
+export type CourseTerm = {
+  label: string
+  weeks: string
+  modules: CourseModule[]
+}
+
+export type CourseStructure = {
+  intro: string
+  terms: CourseTerm[]
+  note?: string
+}
+
 export type Campus = {
   name: string
   left: number
@@ -337,6 +360,7 @@ export type Course = {
   tryIt?: TryItMode[]
   pathways: { work: string; next: string; before: string }
   faqs: { q: string; a: string }[]
+  structure?: CourseStructure
   formal: {
     level: number
     credits: number

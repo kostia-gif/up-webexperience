@@ -1,6 +1,11 @@
-import { ArrowDown } from 'lucide-react'
-import { MODULES, PATHWAY } from './data'
+import { ArrowDown, ChevronDown } from 'lucide-react'
+import { creativeMediaLevel4 } from '@/lib/courses/creative-media-level-4'
+import { PATHWAY } from './data'
 import { SectionHead } from './place'
+
+const STRUCTURE = creativeMediaLevel4.structure!
+const TERMS = STRUCTURE.terms.map((t) => ({ ...t, weeks: t.weeks.replace(/^Weeks?\s*/i, '') }))
+const TOTAL_CREDITS = TERMS.reduce((n, t) => n + t.modules.reduce((m, x) => m + x.credits, 0), 0)
 
 export function Programme() {
   return (
@@ -34,24 +39,48 @@ export function Programme() {
                 </tr>
               </thead>
               <tbody>
-                {MODULES.map((m) => (
-                  <tr key={m.code} className="border-b border-border">
-                    <td className="py-3 pr-4 font-mono text-xs text-muted-foreground">{m.code}</td>
-                    <td className="py-3 pr-4 font-medium">{m.title}</td>
-                    <td className="py-3 pr-4 text-right tabular-nums">{m.credits}</td>
-                    <td className="py-3 text-right tabular-nums text-muted-foreground">{m.weeks}</td>
-                  </tr>
-                ))}
+                {TERMS.flatMap((t) =>
+                  t.modules.map((m) => (
+                    <tr key={m.code} className="border-b border-border align-top">
+                      <td className="py-3 pr-4 font-mono text-xs text-muted-foreground">{m.code}</td>
+                      <td className="py-3 pr-4">
+                        <details className="group">
+                          <summary className="flex cursor-pointer list-none items-start justify-between gap-3 font-medium">
+                            {m.title}
+                            <ChevronDown className="mt-1 size-4 shrink-0 text-muted-foreground transition-transform group-open:rotate-180" aria-hidden />
+                          </summary>
+                          <div className="flex flex-col gap-3 pt-3 text-sm text-muted-foreground">
+                            <p className="leading-relaxed">{m.summary}</p>
+                            <ul className="flex flex-col gap-1">
+                              {m.learn.map((l) => (
+                                <li key={l} className="flex gap-2 leading-snug">
+                                  <span aria-hidden className="mt-2 size-1 shrink-0 rounded-full bg-primary" />
+                                  {l}
+                                </li>
+                              ))}
+                            </ul>
+                            <p className="leading-relaxed">
+                              <span className="font-medium text-foreground">Assessment.</span> {m.assessment}
+                            </p>
+                          </div>
+                        </details>
+                      </td>
+                      <td className="py-3 pr-4 text-right tabular-nums">{m.credits}</td>
+                      <td className="whitespace-nowrap py-3 text-right tabular-nums text-muted-foreground">{t.weeks}</td>
+                    </tr>
+                  )),
+                )}
               </tbody>
               <tfoot>
                 <tr className="text-sm">
                   <td className="pt-3" />
                   <td className="pt-3 font-medium">Total</td>
-                  <td className="pt-3 text-right font-medium tabular-nums">60</td>
-                  <td className="pt-3 text-right text-muted-foreground">19</td>
+                  <td className="pt-3 text-right font-medium tabular-nums">{TOTAL_CREDITS}</td>
+                  <td className="pt-3 text-right text-muted-foreground">{creativeMediaLevel4.funding.weeks}</td>
                 </tr>
               </tfoot>
             </table>
+            <p className="text-xs leading-relaxed text-muted-foreground">Select a module title for the full outline. {STRUCTURE.note}</p>
             <ul className="grid gap-3 pt-4 text-sm sm:grid-cols-3">
               {[
                 ['20 hours', 'in class each week, Monday to Thursday'],

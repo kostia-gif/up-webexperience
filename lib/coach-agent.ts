@@ -97,6 +97,13 @@ PROMISE: ${coursePromise(course)}
 ENTRY: ${course.entry.minAge}+ at start AND one of: ${course.entry.backgrounds.slice(0, -1).join(' / ')}. If none, ${course.entry.fallback.label} (${course.entry.fallback.weeks} weeks) is the way in.
 INTERNATIONAL: ${course.formal.intl.minAge}+, IELTS ${course.formal.intl.ielts}.
 WHAT YOU LEARN: ${course.stages.map((s) => `${s.label}: ${s.items.map((i) => i.can).join(', ')}`).join(' | ')}.
+${
+  course.structure
+    ? `MODULES (${course.formal.credits} credits, all compulsory unless noted): ${course.structure.terms
+        .map((t) => `${t.label} (${t.weeks}): ${t.modules.map((m) => `${m.code} ${m.title}, ${m.credits} cr, assessed by ${m.assessment}`).join('; ')}`)
+        .join(' | ')}. Full outline is in the "Course structure" section of the page (#structure).`
+    : ''
+}
 OUTCOMES: ${course.outcomes.stat?.value} of ${course.outcomes.stat?.cohort} grads in ${copy.jobNoun} within 6 months. Employers include ${course.outcomes.employers.join(', ')} and ${course.outcomes.employersMore} more.
 PAY: industry starting salary about ${formatNZD(course.outcomes.salary?.start ?? 0)}; realistic 3-year goal about ${formatNZD(course.outcomes.salary?.threeYear ?? 0)} (${course.outcomes.salary?.source}, ${course.outcomes.salary?.year}).
 PATHWAYS: Work: ${course.pathways.work} Next: ${course.pathways.next} Before: ${course.pathways.before}
