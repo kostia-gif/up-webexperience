@@ -3,7 +3,6 @@
 import { Building2 } from 'lucide-react'
 import { InPageNav, PromiseLine, QuickAnswers, WhatItsLike } from '../above-fold'
 import { Faqs, WhereItTakesYou } from '../below-fold'
-import { ApplyBoard } from '../postgrad/apply'
 import { HowWeCompare } from '../postgrad/compare'
 import { CountryBanner } from '../postgrad/country-banner'
 import { AccreditedDetails } from '../postgrad/details'
@@ -19,9 +18,10 @@ import { StickyCta } from '../postgrad/sticky-cta'
 import { StudyFromProvider, useStudyFrom } from '../postgrad/study-from'
 import { BusinessBuilder } from './business-builder'
 import { FeesLite } from './fees-lite'
+import { PostgradStart } from './postgrad-start'
 
 const DOMESTIC_NAV: [string, string][] = [
-  ['#apply', 'Apply'],
+  ['#apply', 'Get started'],
   ['#specialist', 'Talk to us'],
   ['#why', 'Why AIPC'],
   ['#like', "What it's like"],
@@ -32,7 +32,7 @@ const DOMESTIC_NAV: [string, string][] = [
 ]
 
 const INTL_NAV: [string, string][] = [
-  ['#apply', 'Apply'],
+  ['#apply', 'Get started'],
   ['#international', 'International team'],
   ['#why', 'Why AIPC'],
   ['#like', "What it's like"],
@@ -46,10 +46,14 @@ function Body() {
   const { isIntl } = useStudyFrom()
   return (
     <main className="pb-20 md:pb-16">
-      <PostgradHero />
+      <PostgradHero
+        primaryCta={{ href: '#guide', label: 'Download the course guide', cta: 'guide' }}
+        secondaryCta={{ href: isIntl ? '#international' : '#specialist', label: 'Book a time with an advisor', cta: 'specialist' }}
+        hideFeeStats
+      />
       <CountryBanner />
       <PromiseLine />
-      <ApplyBoard />
+      <PostgradStart />
       {isIntl ? <IntlTeam /> : <BookSpecialist />}
       <QuickAnswers />
       <InPageNav items={isIntl ? INTL_NAV : DOMESTIC_NAV} />

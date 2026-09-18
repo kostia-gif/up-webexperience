@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { ArrowRight, BadgeCheck, Globe, Landmark, ShieldCheck, TrendingUp } from 'lucide-react'
 import { track } from '@/lib/track'
+import { cn } from '@/lib/utils'
 import { LinkBtn } from '../primitives'
 import { usePostgrad } from './context'
 import { CountryPicker } from './country-picker'
@@ -10,13 +11,26 @@ import { useStudyFrom } from './study-from'
 
 const ICONS = [BadgeCheck, ShieldCheck, Landmark]
 
-export function PostgradHero() {
+type HeroCta = { href: string; label: string; cta: string }
+
+export function PostgradHero({
+  primaryCta,
+  secondaryCta,
+  hideFeeStats = false,
+}: { primaryCta?: HeroCta; secondaryCta?: HeroCta; hideFeeStats?: boolean } = {}) {
   const { course, pg, money } = usePostgrad()
   const { isIntl, country } = useStudyFrom()
   const { hero, fee, outcomes } = course
   const uniRange = pg.comparison.find((c) => c.label === 'Total tuition')?.uni
   const intl = pg.international
   const tuition = isIntl && intl ? intl.fees.total : fee.amount
+  const primary = primaryCta ?? { href: '#apply', label: 'Apply for a place', cta: 'apply' }
+  const secondary =
+    secondaryCta ?? {
+      href: isIntl ? '#international' : '#specialist',
+      label: isIntl ? 'Talk to the international team' : 'Book a 15-minute call',
+      cta: isIntl ? 'international' : 'specialist',
+    }
 
   return (
     <section aria-labelledby="hero-title" className="bg-background">
@@ -65,16 +79,16 @@ export function PostgradHero() {
             </ul>
 
             <div className="mt-8 flex flex-wrap gap-3">
-              <LinkBtn href="#apply" variant="coral" onClick={() => track('hero_cta_click', { cta: 'apply' })}>
-                Apply for a place
+              <LinkBtn href={primary.href} variant="coral" onClick={() => track('hero_cta_click', { cta: primary.cta })}>
+                {primary.label}
               </LinkBtn>
               <LinkBtn
-                href={isIntl ? '#international' : '#specialist'}
+                href={secondary.href}
                 variant="outline"
                 className="border-primary-foreground/60 bg-transparent text-primary-foreground hover:border-primary-foreground hover:bg-primary-foreground/10"
-                onClick={() => track('hero_cta_click', { cta: isIntl ? 'international' : 'specialist' })}
+                onClick={() => track('hero_cta_click', { cta: secondary.cta })}
               >
-                {isIntl ? 'Talk to the international team' : 'Book a 15-minute call'}
+                {secondary.label}
               </LinkBtn>
             </div>
             <p className="mt-4 text-sm text-primary-foreground/80">
@@ -86,7 +100,13 @@ export function PostgradHero() {
           </div>
         </div>
 
-        <div className="mx-auto mt-6 grid max-w-[960px] gap-3 px-6 pb-8 sm:grid-cols-3 md:mt-8 md:px-0">
+        <div
+          className={cn(
+            'mx-auto mt-6 grid gap-3 px-6 pb-8 md:mt-8 md:px-0',
+            hideFeeStats ? 'max-w-sm' : 'max-w-[960px] sm:grid-cols-3',
+          )}
+        >
+          {!hideFeeStats && (
           <div className="flex flex-col gap-1 rounded-lg border border-border bg-card p-4">
             <p className="text-xs font-medium text-muted-foreground">
               {isIntl ? 'Total tuition, international' : `Total tuition, ${fee.year}`}
@@ -112,8 +132,9 @@ export function PostgradHero() {
               )}
             </p>
           </div>
+          )}
 
-          {isIntl && intl ? (
+          {!hideFeeStats && (isIntl && intl ? (
             <div className="flex flex-col gap-1 rounded-lg border border-success-border bg-success p-4 text-success-foreground">
               <p className="flex items-center gap-1.5 text-xs font-medium">
                 <Globe className="size-4" aria-hidden /> Study from {country?.name}
@@ -139,7 +160,7 @@ export function PostgradHero() {
                 </a>
               </p>
             </div>
-          )}
+          ))}
 
           {outcomes.stat && (
             <div className="flex flex-col gap-1 rounded-lg border border-border bg-card p-4">
