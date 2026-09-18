@@ -14,6 +14,7 @@ import { ReadinessKit } from '../readiness-kit'
 import { Shell } from '../shell'
 import { TryIt } from '../try-it'
 import { WhatYouAchieve } from '../what-you-achieve'
+import { ClinicBuilder } from './clinic-builder'
 import { PostgradBodyA } from './postgrad-body'
 import { SeeItCard } from './see-it-card'
 import { TalkA } from './talk'
@@ -39,13 +40,19 @@ const VOCATIONAL_NAV: [string, string][] = [
  * lower down for anyone who scrolls straight past the nudge.
  */
 export function VocationalCoursePageA({ course }: { course: Course }) {
+  const isElite = course.brand.id === 'elite'
+  const nav = isElite
+    ? VOCATIONAL_NAV.flatMap((item): [string, string][] =>
+        item[0] === '#money' ? [item, ['#clinic', 'Your own salon']] : [item],
+      )
+    : VOCATIONAL_NAV
   return (
     <Shell course={course}>
       <main className="pb-20">
         <Billboard />
         <StartNow />
         <TalkA />
-        <InPageNav items={VOCATIONAL_NAV} />
+        <InPageNav items={nav} />
         <StudentVoices />
         <Journey />
         <WhatItsLike />
@@ -54,6 +61,7 @@ export function VocationalCoursePageA({ course }: { course: Course }) {
         <Eligibility />
         <FreeAndFunded />
         <CareerCoach />
+        {isElite && <ClinicBuilder />}
         <Faqs />
         <CourseStructure />
         <FormalBit />

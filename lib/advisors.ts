@@ -48,3 +48,20 @@ export const ADVISORS: Record<string, Advisor> = {
 export function advisorFor(brandId: string): Advisor {
   return ADVISORS[brandId] ?? ADVISORS.nzma
 }
+
+/** The faces shown on the AIPC "let's talk" section — the people you actually meet. */
+export const AIPC_TEAM: Advisor[] = [
+  { name: 'Megan', role: 'Course specialist', photo: ADVISORS.aipc.photo, line: ADVISORS.aipc.line },
+  {
+    name: 'Daniel',
+    role: 'Placement & credit',
+    photo: '/images/advisors/aipc-daniel.png',
+    line: 'I sort out credit for your prior study and find a placement near where you live.',
+  },
+  {
+    name: 'Sophie',
+    role: 'Student support',
+    photo: '/images/advisors/aipc-sophie.png',
+    line: 'I help you fit study around work, family and everything else going on.',
+  },
+]

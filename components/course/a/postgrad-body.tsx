@@ -5,19 +5,19 @@ import { Faqs, WhereItTakesYou } from '../below-fold'
 import { CountryBanner } from '../postgrad/country-banner'
 import { AccreditedDetails } from '../postgrad/details'
 import { EligibilityAndRpl } from '../postgrad/eligibility'
-import { PostgradHero } from '../postgrad/hero'
 import { IntlTeam } from '../postgrad/intl-team'
 import { Progression } from '../postgrad/progression'
-import { BookSpecialist } from '../postgrad/specialist'
 import { StickyCta } from '../postgrad/sticky-cta'
 import { StudyFromProvider, useStudyFrom } from '../postgrad/study-from'
 import { BusinessBuilder } from './business-builder'
 import { FeesLite } from './fees-lite'
+import { PostgradBillboard } from './postgrad-billboard'
 import { PostgradStart } from './postgrad-start'
+import { PostgradTalk } from './postgrad-talk'
 
 const DOMESTIC_NAV: [string, string][] = [
   ['#apply', 'Get started'],
-  ['#specialist', 'Talk to us'],
+  ['#specialist', "Let's talk"],
   ['#like', "What it's like"],
   ['#progression', 'Your progression'],
   ['#outcomes', 'Jobs'],
@@ -48,15 +48,11 @@ function Body() {
   const { isIntl } = useStudyFrom()
   return (
     <main className="pb-20 md:pb-16">
-      <PostgradHero
-        primaryCta={{ href: '#guide', label: 'Download the course guide', cta: 'guide' }}
-        secondaryCta={{ href: isIntl ? '#international' : '#specialist', label: 'Book a time with an advisor', cta: 'specialist' }}
-        hideFeeStats
-      />
+      <PostgradBillboard />
       <CountryBanner />
       <PromiseLine />
       <PostgradStart />
-      {isIntl ? <IntlTeam /> : <BookSpecialist />}
+      {isIntl ? <IntlTeam /> : <PostgradTalk />}
       <InPageNav items={isIntl ? INTL_NAV : DOMESTIC_NAV} />
       <WhatItsLike />
       <Progression />
