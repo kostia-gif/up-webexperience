@@ -1,14 +1,11 @@
 import { ArrowLeft } from 'lucide-react'
 import type { ReactNode } from 'react'
 import { courseHref, type Course } from '@/lib/course'
-import { SiteFooter } from '@/components/site-footer'
-import { SiteHeader } from '@/components/site-header'
 import { InPageNav, PromiseLine, QuickAnswers, WhatItsLike } from './above-fold'
 import { BasketBar, CheckoutDrawer } from './basket'
 import { BasketProvider } from './basket-context'
 import { Faqs, FormalBit, WhereItTakesYou } from './below-fold'
 import { CareerCoach } from './career-coach'
-import { CourseProvider } from './course-context'
 import { CourseStructure } from './course-structure'
 import { Eligibility } from './eligibility'
 import { Billboard } from './emotional/billboard'
@@ -23,20 +20,9 @@ import { Journey } from './journey'
 import { MoneyContent } from './money'
 import { PostgradBody } from './postgrad/body'
 import { ReadinessKit } from './readiness-kit'
+import { Shell } from './shell'
 import { TryIt } from './try-it'
 import { WhatYouAchieve } from './what-you-achieve'
-
-function Shell({ course, children }: { course: Course; children: ReactNode }) {
-  return (
-    <CourseProvider course={course}>
-      <div data-brand={course.brand.id} className="bg-background text-foreground">
-        <SiteHeader brand={course.brand} />
-        {children}
-        <SiteFooter brand={course.brand} />
-      </div>
-    </CourseProvider>
-  )
-}
 
 export function CoursePage({ course }: { course: Course }) {
   return (

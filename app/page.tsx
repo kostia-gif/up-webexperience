@@ -18,25 +18,45 @@ export default function Home() {
           specialist you can book.
         </p>
       </header>
+      <div className="grid gap-4 text-sm leading-relaxed text-muted-foreground sm:grid-cols-2">
+        <p className="rounded-lg bg-muted p-4 text-pretty">
+          <span className="font-medium text-foreground">Option A, action first.</span> Billboard, pick a start date, then a named advisor
+          who calls or emails you back. Cost sits lower for the advisor to walk through. &ldquo;See it before you decide&rdquo; floats in
+          as a card. Yoobee and AIPC keep their hero and promise but move sign-up and the advisor up, fees down.
+        </p>
+        <p className="rounded-lg bg-muted p-4 text-pretty">
+          <span className="font-medium text-foreground">Option B, the original.</span> Promise, quick answers, what it is like, the
+          journey, am I in, then start dates and try-it. Untouched, so nothing is lost while A is tested.
+        </p>
+      </div>
+
       <ul className="flex flex-col gap-3">
         {courses.map((c) => (
-          <li key={c.id}>
-            <a
-              href={courseHref(c)}
-              className="flex items-center justify-between gap-4 rounded-lg border border-border bg-card p-5 hover:border-foreground"
-            >
-              <span className="flex flex-col gap-1">
-                <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                  {c.brand.legalName} · {c.discipline}
-                </span>
-                <span className="text-lg font-medium leading-snug">{c.title}</span>
-                <span className="text-sm text-muted-foreground">
-                  {c.postgrad ? c.quick.length : `${c.funding.weeks} weeks`} · {c.delivery === 'online' ? 'Online' : `${c.formal.campuses.length} campuses`} ·{' '}
-                  {isFree(c) ? 'Free' : c.hero.h1}
-                </span>
+          <li key={c.id} className="flex flex-col gap-2 rounded-lg border border-border bg-card p-5">
+            <span className="flex flex-col gap-1">
+              <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                {c.brand.legalName} · {c.discipline}
               </span>
-              <ArrowRight className="size-5 shrink-0" aria-hidden />
-            </a>
+              <span className="text-lg font-medium leading-snug">{c.title}</span>
+              <span className="text-sm text-muted-foreground">
+                {c.postgrad ? c.quick.length : `${c.funding.weeks} weeks`} · {c.delivery === 'online' ? 'Online' : `${c.formal.campuses.length} campuses`} ·{' '}
+                {isFree(c) ? 'Free' : c.hero.h1}
+              </span>
+            </span>
+            <span className="flex flex-wrap gap-2">
+              <a
+                href={`${courseHref(c)}/a`}
+                className="inline-flex min-h-10 items-center gap-1.5 rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground hover:opacity-90"
+              >
+                Option A <ArrowRight className="size-4" aria-hidden />
+              </a>
+              <a
+                href={courseHref(c)}
+                className="inline-flex min-h-10 items-center gap-1.5 rounded-md border border-border px-4 text-sm font-medium hover:border-foreground"
+              >
+                Option B <ArrowRight className="size-4" aria-hidden />
+              </a>
+            </span>
           </li>
         ))}
       </ul>
@@ -45,20 +65,18 @@ export default function Home() {
         <div className="flex flex-col gap-1">
           <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Audience variant</p>
           <h2 id="emotional" className="text-lg font-medium leading-snug">
-            NZMA Cookery, emotional buyer
+            NZMA Cookery, emotional buyer (the sketch Option A grew from)
           </h2>
           <p className="text-sm leading-relaxed text-muted-foreground text-pretty">
-            For the student who already knows: &ldquo;I want to be a cook.&rdquo; Billboard hero, pick a date and hold a seat with a name
-            and a number, or book a call. Student voices and the Day 1 to CV journey follow. Cost, eligibility and the formal bit sit
-            low, for the advisor to walk through face to face.
+            Kept for reference. Same billboard and date picker as Option A, but with fixed call slots and try-it as a page section.
           </p>
         </div>
         <a
           href="/courses/cookery/certificate-in-cookery-level-4/start"
-          className="flex items-center justify-between gap-4 rounded-lg border border-border bg-card p-5 hover:border-foreground"
+          className="flex items-center justify-between gap-4 rounded-lg border border-dashed border-border p-5 text-muted-foreground hover:border-foreground hover:text-foreground"
         >
           <span className="flex flex-col gap-1">
-            <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">NZMA · Cookery · /start</span>
+            <span className="text-xs font-medium uppercase tracking-wide">NZMA · Cookery · /start</span>
             <span className="text-lg font-medium leading-snug">Become a chef. Earn $56,000 to start.</span>
           </span>
           <ArrowRight className="size-5 shrink-0" aria-hidden />
