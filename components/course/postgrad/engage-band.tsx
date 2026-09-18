@@ -1,11 +1,14 @@
 'use client'
 
+import type { LucideIcon } from 'lucide-react'
 import { ArrowRight, Download, MessageCircle, PhoneCall } from 'lucide-react'
 import { track } from '@/lib/track'
 import { usePostgrad } from './context'
 import { useStudyFrom } from './study-from'
 
-export function EngageBand() {
+type Action = { icon: LucideIcon; title: string; body: string; href: string; cta: string }
+
+export function EngageBand({ midAction }: { midAction?: Action } = {}) {
   const { pg } = usePostgrad()
   const { isIntl } = useStudyFrom()
   const nextIntake = pg.intakes.find((i) => i.left > 0) ?? pg.intakes[0]
@@ -18,7 +21,7 @@ export function EngageBand() {
       href: isIntl ? '#international' : '#specialist',
       cta: 'talk',
     },
-    {
+    midAction ?? {
       icon: MessageCircle,
       title: 'Ask the AI career coach',
       body: 'Instant, private, and honest about whether this is the right fit for you.',

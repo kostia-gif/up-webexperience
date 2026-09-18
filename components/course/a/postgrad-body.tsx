@@ -1,8 +1,8 @@
 'use client'
 
+import { Building2 } from 'lucide-react'
 import { InPageNav, PromiseLine, QuickAnswers, WhatItsLike } from '../above-fold'
 import { Faqs, WhereItTakesYou } from '../below-fold'
-import { CareerCoach } from '../career-coach'
 import { ApplyBoard } from '../postgrad/apply'
 import { HowWeCompare } from '../postgrad/compare'
 import { CountryBanner } from '../postgrad/country-banner'
@@ -10,15 +10,15 @@ import { AccreditedDetails } from '../postgrad/details'
 import { DigDeeper } from '../postgrad/dig-deeper'
 import { EligibilityAndRpl } from '../postgrad/eligibility'
 import { EngageBand } from '../postgrad/engage-band'
-import { FeesAndHelp } from '../postgrad/fees'
 import { PostgradHero } from '../postgrad/hero'
-import { IntlFees } from '../postgrad/intl-fees'
 import { IntlTeam } from '../postgrad/intl-team'
 import { MarketDemand } from '../postgrad/market-demand'
 import { Progression } from '../postgrad/progression'
 import { BookSpecialist } from '../postgrad/specialist'
 import { StickyCta } from '../postgrad/sticky-cta'
 import { StudyFromProvider, useStudyFrom } from '../postgrad/study-from'
+import { BusinessBuilder } from './business-builder'
+import { FeesLite } from './fees-lite'
 
 const DOMESTIC_NAV: [string, string][] = [
   ['#apply', 'Apply'],
@@ -27,7 +27,7 @@ const DOMESTIC_NAV: [string, string][] = [
   ['#like', "What it's like"],
   ['#progression', 'Your progression'],
   ['#eligibility', 'Eligibility and credit'],
-  ['#fees', 'Fees and FEE-HELP'],
+  ['#practice', 'Your own practice'],
   ['#deeper', 'Dig deeper'],
 ]
 
@@ -38,7 +38,7 @@ const INTL_NAV: [string, string][] = [
   ['#like', "What it's like"],
   ['#progression', 'Your progression'],
   ['#eligibility', 'Eligibility and credit'],
-  ['#intl-fees', 'International fees'],
+  ['#practice', 'Your own practice'],
   ['#deeper', 'Dig deeper'],
 ]
 
@@ -58,11 +58,19 @@ function Body() {
       <WhatItsLike />
       <Progression />
       <WhereItTakesYou />
-      <EngageBand />
+      <EngageBand
+        midAction={{
+          icon: Building2,
+          title: 'Plan your own practice',
+          body: 'Map the degree against the counselling practice you want to build.',
+          href: '#practice',
+          cta: 'practice',
+        }}
+      />
       <EligibilityAndRpl />
-      {isIntl ? <IntlFees /> : <FeesAndHelp />}
+      <FeesLite />
+      <BusinessBuilder />
       <DigDeeper />
-      <CareerCoach />
       <Faqs />
       <AccreditedDetails />
       <StickyCta />

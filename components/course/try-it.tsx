@@ -8,7 +8,7 @@ import { useCourse } from './course-context'
 import { LeadForm } from './lead-form'
 import { Btn, Module, Segmented, StatusPill } from './primitives'
 
-export function TryIt() {
+export function TryIt({ idBase = 'tryit' }: { idBase?: string } = {}) {
   const course = useCourse()
   const tryIt = course.tryIt ?? []
   const modes = tryIt.map((m) => m.mode)
@@ -19,12 +19,12 @@ export function TryIt() {
   if (!current) return null
 
   return (
-    <Module id="tryit" eyebrow="See it before you decide" title="All free. Bring a mate or a parent.">
+    <Module id={idBase} eyebrow="See it before you decide" title="All free. Bring a mate or a parent.">
       <Segmented
         items={modes}
         value={mode}
         label="Ways to try it"
-        idPrefix="tryit"
+        idPrefix={idBase}
         onChange={(v) => {
           setMode(v)
           setBooking(null)
@@ -32,7 +32,7 @@ export function TryIt() {
           track('tryit_mode', { mode: v })
         }}
       />
-      <div id="tryit-panel" role="tabpanel" className="mt-6">
+      <div id={`${idBase}-panel`} role="tabpanel" className="mt-6">
         <p className="text-[15px] leading-relaxed text-pretty">{current.blurb}</p>
 
         {booked ? (
