@@ -18,7 +18,7 @@ type Channel = 'call' | 'email'
 export function TalkA({
   tone = 'muted',
   id = 'talk',
-  heading = 'Talk to a real person',
+  heading = 'Talk to a course specialist',
 }: { tone?: 'muted' | 'card'; id?: string; heading?: string } = {}) {
   const course = useCourse()
   const advisor = advisorFor(course.brand.id)
