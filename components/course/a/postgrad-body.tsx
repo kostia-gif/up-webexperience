@@ -52,7 +52,7 @@ function Body() {
       <CountryBanner />
       <PromiseLine />
       <PostgradStart />
-      {isIntl ? <IntlTeam /> : <TalkA id="specialist" />}
+      {isIntl ? <IntlTeam /> : <TalkA id="specialist" heading="Talk to a course specialist" />}
       <InPageNav items={isIntl ? INTL_NAV : DOMESTIC_NAV} />
       <WhatItsLike />
       <Progression />

@@ -15,7 +15,11 @@ type Channel = 'call' | 'email'
  * a time of day instead of a fixed slot, and a no-choice fallback
  * ("just call me back" / "email me back").
  */
-export function TalkA({ tone = 'muted', id = 'talk' }: { tone?: 'muted' | 'card'; id?: string } = {}) {
+export function TalkA({
+  tone = 'muted',
+  id = 'talk',
+  heading = 'Talk to a real person',
+}: { tone?: 'muted' | 'card'; id?: string; heading?: string } = {}) {
   const course = useCourse()
   const advisor = advisorFor(course.brand.id)
   const talk = course.tryIt?.find((m) => m.mode === 'Talk to someone')
@@ -38,7 +42,7 @@ export function TalkA({ tone = 'muted', id = 'talk' }: { tone?: 'muted' | 'card'
           <div className="flex flex-col gap-3">
             <p className="text-xs font-medium uppercase tracking-wide text-primary">Not ready to pick a date?</p>
             <h2 id={`${id}-title`} className="font-display text-3xl font-bold uppercase leading-none tracking-tight text-balance md:text-4xl">
-              Talk to a real person
+              {heading}
             </h2>
             <p className="text-[15px] leading-relaxed text-pretty text-muted-foreground">
               {talk?.blurb ?? 'Fifteen minutes with a course advisor. No script, no pressure.'} Or just ring {course.brand.phone}.
