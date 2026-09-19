@@ -23,25 +23,25 @@ export const ADVISORS: Record<string, Advisor> = {
     name: 'Aroha',
     role: 'Course advisor, NZMA',
     photo: '/images/advisors/nzma-aroha.png',
-    line: 'I did this course in 2016. Ask me anything, there are no dumb questions.',
+    line: 'I did this course in 2016. I will help you find the right pathway and tell you what it is really like to study here.',
   },
   elite: {
     name: 'Priya',
     role: 'Admissions advisor, Elite',
     photo: '/images/advisors/elite-priya.png',
-    line: 'I will walk you through the loan, the hours and what a first week feels like.',
+    line: 'I will help you pick the right course for your goals and tell you what a first week and the career ahead really look like.',
   },
   yoobee: {
     name: 'Sam',
     role: 'Student advisor, Yoobee',
     photo: '/images/advisors/yoobee-sam.png',
-    line: 'Happy to look at your work so far, or talk about fitting study around a job.',
+    line: 'I will help you choose the right course for the career you are after, and talk you through what it is like to study with us.',
   },
   aipc: {
     name: 'Megan',
     role: 'Course specialist, AIPC',
     photo: '/images/advisors/aipc-megan.png',
-    line: 'I can check your degree for entry and credit before you apply.',
+    line: 'I will help you find the right course and career pathway, and tell you what it is like to study with us.',
   },
 }
 
