@@ -15,26 +15,31 @@ import { Shell } from '../shell'
 import { TryIt } from '../try-it'
 import { WhatYouAchieve } from '../what-you-achieve'
 import { ClinicBuilder } from './clinic-builder'
+import { PostgradBodyA } from './postgrad-body'
 import { SeeItCard } from './see-it-card'
 import { TalkA } from './talk'
 
 const VOCATIONAL_NAV: [string, string][] = [
   ['#start', 'Start dates'],
+  ['#talk', 'Talk to someone'],
+  ['#voices', 'Students'],
   ['#journey', 'Your year'],
+  ['#like', "What it's like"],
+  ['#outcomes', 'Jobs'],
+  ['#tryit', 'Come visit'],
   ['#eligibility', 'Am I in'],
   ['#money', 'Cost'],
-  ['#talk', 'Talk to someone'],
+  ['#structure', 'Modules'],
   ['#formal', 'Details'],
 ]
 
 /**
- * Option A for NZMA and Elite: one ask, then proof, then the second ask.
- * A fact strip in the hero answers length, place, entry and cost before the
- * fold. The reader meets one form (pick a date), then sees the year, whether
- * they get in and the cost, and only then the advisor. "See it before you
- * decide" floats in once they are past the cost, and sits inline lower down.
+ * Option A for NZMA and Elite. Billboard, pick a date, talk to a person,
+ * then reassurance. "See it before you decide" floats in as an inviting card
+ * once the reader is past the journey, and the same module also sits inline
+ * lower down for anyone who scrolls straight past the nudge.
  */
-export function VocationalCoursePageA({ course }: { course: Course }) {
+export function VocationalCoursePageB({ course }: { course: Course }) {
   const isElite = course.brand.id === 'elite'
   const nav = isElite
     ? VOCATIONAL_NAV.flatMap((item): [string, string][] =>
@@ -44,24 +49,24 @@ export function VocationalCoursePageA({ course }: { course: Course }) {
   return (
     <Shell course={course}>
       <main className="pb-20">
-        <Billboard factStrip />
-        <StartNow optionA />
+        <Billboard />
+        <StartNow />
+        <TalkA />
         <InPageNav items={nav} />
+        <StudentVoices />
         <Journey />
         <WhatItsLike />
+        <WhereItTakesYou />
+        <TryIt />
         <Eligibility />
         <FreeAndFunded />
-        <WhereItTakesYou />
-        <TalkA />
-        <StudentVoices />
-        <TryIt />
         <CareerCoach />
         {isElite && <ClinicBuilder />}
         <Faqs />
         <CourseStructure />
         <FormalBit />
       </main>
-      <StartBar coordinateCard />
+      <StartBar />
       <SeeItCard />
     </Shell>
   )
@@ -69,39 +74,66 @@ export function VocationalCoursePageA({ course }: { course: Course }) {
 
 const ONLINE_NAV: [string, string][] = [
   ['#start', 'Start dates'],
-  ['#journey', 'Your year'],
+  ['#talk', 'Talk to someone'],
+  ['#achieve', 'What you get'],
+  ['#like', "What it's like"],
+  ['#journey', 'Your journey'],
+  ['#outcomes', 'Jobs'],
   ['#eligibility', 'Am I in'],
   ['#money', 'Free and funded'],
-  ['#talk', 'Talk to someone'],
+  ['#structure', 'Modules'],
   ['#formal', 'Details'],
 ]
 
 /**
- * Option A for Yoobee. Same one-ask-then-proof sequence as the vocational
- * pages, keeping WhatYouAchieve after the hero block and the ReadinessKit
- * inside the journey. No basket, no multi-step checkout.
+ * Option A for Yoobee. Same simple structure as NZMA and Elite: a billboard,
+ * pick a start date, then talk to a person, with cost sitting low. The old
+ * basket and multi-step checkout are dropped to take complexity away.
  */
-export function OnlineCoursePageA({ course }: { course: Course }) {
+export function OnlineCoursePageB({ course }: { course: Course }) {
   return (
     <Shell course={course}>
       <main className="pb-20">
-        <Billboard factStrip />
-        <StartNow optionA />
+        <Billboard />
+        <StartNow />
+        <TalkA />
         <InPageNav items={ONLINE_NAV} />
         <WhatYouAchieve />
-        <Journey dayOne={<ReadinessKit />} />
         <WhatItsLike />
+        <Journey dayOne={<ReadinessKit />} />
+        <WhereItTakesYou />
         <Eligibility />
         <FreeAndFunded />
-        <WhereItTakesYou />
-        <TalkA />
         <CareerCoach />
         <Faqs />
         <CourseStructure />
         <FormalBit />
       </main>
-      <StartBar coordinateCard />
+      <StartBar />
       <SeeItCard />
+    </Shell>
+  )
+}
+
+/**
+ * Option A for AIPC. Same action-first shape: hero, apply for a place, talk to
+ * a specialist, then reassurance. The complex fees module is gone and the AI
+ * coach is replaced by a "start your own practice" planner.
+ */
+export function PostgradCoursePageB({ course }: { course: Course }) {
+  // Option A drops the comparison section, so the shared "Why AIPC" header
+  // link (#why) has no target here. Neutralize it to match the other
+  // placeholder header items without touching the shared course data.
+  const courseA: Course = {
+    ...course,
+    brand: {
+      ...course.brand,
+      nav: course.brand.nav.map((item) => (item.href === '#why' ? { ...item, href: '#' } : item)),
+    },
+  }
+  return (
+    <Shell course={courseA}>
+      <PostgradBodyA />
     </Shell>
   )
 }

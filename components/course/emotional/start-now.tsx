@@ -1,8 +1,11 @@
 'use client'
 
+import Image from 'next/image'
 import { Check, MapPin, Phone } from 'lucide-react'
 import { useState } from 'react'
+import { advisorFor } from '@/lib/advisors'
 import { placeStatus, type Intake, type PlaceStatus } from '@/lib/course'
+import { floating } from '@/lib/floating-store'
 import { track } from '@/lib/track'
 import { cn } from '@/lib/utils'
 import { useCourse } from '../course-context'
@@ -16,8 +19,9 @@ function intakeStatus(intake: Intake): PlaceStatus {
 
 type Done = { date: string; campus: string; mode: 'seat' | 'call' }
 
-export function StartNow() {
+export function StartNow({ optionA = false }: { optionA?: boolean } = {}) {
   const course = useCourse()
+  const advisor = advisorFor(course.brand.id)
   const [date, setDate] = useState(course.intakes[0].label)
   const [campus, setCampus] = useState<string | null>(null)
   const [name, setName] = useState('')
@@ -36,13 +40,14 @@ export function StartNow() {
       campus: campus ?? 'any',
     })
     setDone({ date, campus: campus ?? 'any campus', mode })
+    if (optionA) floating.markSubmitted()
   }
 
   return (
     <section id="start" aria-labelledby="start-title" className="scroll-mt-20 bg-coral text-coral-foreground">
       <div className="mx-auto flex max-w-[960px] flex-col gap-8 px-6 py-10 md:py-14">
         <header className="flex flex-col gap-2">
-          <p className="text-xs font-medium uppercase tracking-wide opacity-80">Step 1 of 1</p>
+          <p className="text-xs font-medium uppercase tracking-wide opacity-80">{optionA ? 'Takes about 30 seconds' : 'Step 1 of 1'}</p>
           <h2 id="start-title" className="font-display text-4xl font-bold uppercase leading-none tracking-tight text-balance md:text-5xl">
             Pick your start date
           </h2>
@@ -158,23 +163,50 @@ export function StartNow() {
             <p className="text-sm text-muted-foreground">Choose a campus above to hold your seat.</p>
           )}
 
+          {optionA && !done && (
+            <a
+              href="#talk"
+              className="flex items-center gap-3 rounded-lg border border-input p-3 text-left transition-colors hover:border-foreground"
+              onClick={() => track('advisor_card_click', { from: 'start' })}
+            >
+              <Image
+                src={advisor.photo}
+                alt={`${advisor.name}, ${advisor.role}`}
+                width={48}
+                height={48}
+                className="size-12 shrink-0 rounded-full object-cover"
+              />
+              <span className="text-sm leading-snug">
+                <span className="font-medium">Not ready to pick a date?</span>{' '}
+                <span className="text-muted-foreground">Talk to {advisor.name} first.</span>
+              </span>
+            </a>
+          )}
+
           {done && (
             <div role="status" aria-live="polite" className="flex gap-3 rounded-lg border border-success-border bg-success p-4 text-success-foreground">
               <Check className="mt-0.5 size-5 shrink-0" aria-hidden />
               <div className="flex flex-col gap-1 text-[15px] leading-relaxed">
                 {done.mode === 'call' ? (
                   <p>
-                    <span className="font-medium">We&apos;ll call you, {name}.</span> A course advisor rings within a working day to talk through{' '}
+                    <span className="font-medium">We&apos;ll call you, {name}.</span> {advisor.name} rings within a working day to talk through{' '}
                     {done.date} at {done.campus}. Nothing to prepare.
                   </p>
                 ) : chosenStatus === 'waitlist' ? (
                   <p>
                     <span className="font-medium">You&apos;re on the list, {name}.</span> {done.campus} is full for {done.date}, so if a seat opens
-                    you hear first. We&apos;ve texted you.
+                    you hear first.{optionA ? ' This isn\u2019t an enrolment and nothing is decided until you say so.' : ''} We&apos;ve texted you.
                   </p>
                 ) : chosenStatus === 'interest' ? (
                   <p>
-                    <span className="font-medium">Done, {name}.</span> You hear first when {done.date} dates are confirmed. We&apos;ve texted you.
+                    <span className="font-medium">Done, {name}.</span> You hear first when {done.date} dates are confirmed.
+                    {optionA ? ' This isn\u2019t an enrolment and nothing is decided until you say so.' : ''} We&apos;ve texted you.
+                  </p>
+                ) : optionA ? (
+                  <p>
+                    <span className="font-medium">Seat held, {name}.</span> {done.campus}, {done.date}, yours for 7 days. This isn&apos;t an
+                    enrolment and nothing is decided until you say so. We&apos;ve texted you. {advisor.name} will call to talk through the
+                    loan, the gear and your start.
                   </p>
                 ) : (
                   <p>
