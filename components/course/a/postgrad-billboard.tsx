@@ -22,8 +22,8 @@ export function PostgradBillboard() {
   return (
     <section aria-labelledby="hero-title" className="relative bg-foreground text-background">
       <div className="absolute inset-0">
-        <Image src={hero.image} alt="" fill priority sizes="100vw" className="object-cover opacity-55" />
-        <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-foreground via-foreground/75 to-foreground/25" />
+        <Image src={hero.image} alt="" fill priority sizes="100vw" className="object-cover opacity-45" />
+        <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-foreground via-foreground/80 to-foreground/40" />
       </div>
 
       <div className="relative mx-auto flex min-h-[560px] max-w-[960px] flex-col justify-end gap-6 px-6 pb-10 pt-24 md:min-h-[620px] md:pb-14">
@@ -33,7 +33,7 @@ export function PostgradBillboard() {
 
         <h1
           id="hero-title"
-          className="font-display text-5xl font-bold uppercase leading-[0.9] tracking-tight text-balance sm:text-6xl md:text-7xl"
+          className="font-display text-4xl leading-[1.08] tracking-tight text-balance sm:text-5xl md:text-6xl"
         >
           {hero.h1}
           {hero.h1Accent && (

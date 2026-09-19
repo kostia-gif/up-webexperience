@@ -13,7 +13,7 @@ import { BusinessBuilder } from './business-builder'
 import { FeesLite } from './fees-lite'
 import { PostgradBillboard } from './postgrad-billboard'
 import { PostgradStart } from './postgrad-start'
-import { PostgradTalk } from './postgrad-talk'
+import { TalkA } from './talk'
 
 const DOMESTIC_NAV: [string, string][] = [
   ['#apply', 'Get started'],
@@ -52,7 +52,7 @@ function Body() {
       <CountryBanner />
       <PromiseLine />
       <PostgradStart />
-      {isIntl ? <IntlTeam /> : <PostgradTalk />}
+      {isIntl ? <IntlTeam /> : <TalkA id="specialist" />}
       <InPageNav items={isIntl ? INTL_NAV : DOMESTIC_NAV} />
       <WhatItsLike />
       <Progression />

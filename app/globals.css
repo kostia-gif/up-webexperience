@@ -210,8 +210,9 @@
   --secondary: #e6f8f7;
   --secondary-foreground: #00756f;
 
-  --coral: #f79321;
-  --coral-hover: #e2841a;
+  /* Primary action = brand teal-green (was orange, which read as an error state) */
+  --coral: #00796e;
+  --coral-hover: #006358;
   --coral-foreground: #ffffff;
 
   --success: #e6f8f7;
