@@ -2,15 +2,25 @@
 
 import Image from 'next/image'
 import { ArrowDown, CalendarClock, MessageCircle } from 'lucide-react'
-import { formatNZD } from '@/lib/course'
+import { formatNZD, isFree } from '@/lib/course'
 import { track } from '@/lib/track'
 import { useCourse } from '../course-context'
 import { LinkBtn } from '../primitives'
 
-export function Billboard() {
+export function Billboard({ factStrip = false }: { factStrip?: boolean } = {}) {
   const course = useCourse()
-  const { hero, outcomes, quick, funding } = course
+  const { hero, outcomes, quick, funding, fee } = course
   const salary = outcomes.salary
+
+  const costFact = isFree(course)
+    ? fee.freeNote ?? 'Free for domestic students'
+    : `${formatNZD(fee.amount)}${funding.loanApproved ? ', loan approved, nothing upfront' : ''}`
+  const facts: { label: string; value: string; href?: string }[] = [
+    { label: 'Length', value: quick.length },
+    { label: 'Where', value: quick.where },
+    { label: 'You need', value: quick.need },
+    { label: 'Cost', value: costFact, href: '#money' },
+  ]
 
   return (
     <section aria-labelledby="hero-title" className="relative bg-foreground text-background">
@@ -39,8 +49,28 @@ export function Billboard() {
 
         <p className="max-w-lg text-lg leading-relaxed text-pretty text-background/90 md:text-xl">
           {hero.sub} Next class starts <span className="font-medium text-background">{quick.nextStart}</span>.
-          {funding.loanApproved && ' Nothing to pay upfront.'}
+          {!factStrip && funding.loanApproved && ' Nothing to pay upfront.'}
         </p>
+
+        {factStrip && (
+          <dl className="grid grid-cols-2 gap-x-6 gap-y-4 border-y border-background/20 py-5 md:grid-cols-4">
+            {facts.map((f) =>
+              f.href ? (
+                <a key={f.label} href={f.href} className="group flex flex-col gap-1">
+                  <dt className="text-xs font-medium uppercase tracking-wide text-background/70">{f.label}</dt>
+                  <dd className="text-[15px] font-semibold leading-snug text-background underline decoration-background/30 underline-offset-4 group-hover:decoration-background">
+                    {f.value}
+                  </dd>
+                </a>
+              ) : (
+                <div key={f.label} className="flex flex-col gap-1">
+                  <dt className="text-xs font-medium uppercase tracking-wide text-background/70">{f.label}</dt>
+                  <dd className="text-[15px] font-semibold leading-snug text-background">{f.value}</dd>
+                </div>
+              ),
+            )}
+          </dl>
+        )}
 
         <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
           <LinkBtn

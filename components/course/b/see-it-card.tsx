@@ -3,7 +3,6 @@
 import Image from 'next/image'
 import { X } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
-import { floating, useFloating } from '@/lib/floating-store'
 import { track } from '@/lib/track'
 import { useCourse } from '../course-context'
 import { Btn } from '../primitives'
@@ -15,23 +14,13 @@ import { TryIt } from '../try-it'
  * reader is past the journey. It opens the full TryIt booking flow in a
  * dialog, and the same module also lives inline further down the page.
  */
-export function SeeItCard({ afterId = 'money' }: { afterId?: string } = {}) {
+export function SeeItCard({ afterId = 'journey' }: { afterId?: string }) {
   const course = useCourse()
-  const { submitted } = useFloating()
   const tryIt = (course.tryIt ?? []).filter((m) => m.mode !== 'Talk to someone')
   const [visible, setVisible] = useState(false)
   const [shown, setShown] = useState(false)
   const [dismissed, setDismissed] = useState(false)
   const dialogRef = useRef<HTMLDialogElement>(null)
-
-  // The card only earns the floating slot once the reader is past #money and
-  // has not submitted a form. Report that to the shared store so the sticky
-  // StartBar can step aside on mobile while the card is up.
-  const showCard = visible && !dismissed && !submitted
-  useEffect(() => {
-    floating.setCardVisible(showCard)
-    return () => floating.setCardVisible(false)
-  }, [showCard])
 
   useEffect(() => {
     const target = document.getElementById(afterId)
@@ -69,7 +58,7 @@ export function SeeItCard({ afterId = 'money' }: { afterId?: string } = {}) {
 
   return (
     <>
-      {showCard && (
+      {visible && !dismissed && (
         <aside
           aria-label="See it before you decide"
           className={`fixed bottom-20 right-4 z-40 w-[calc(100%-2rem)] max-w-sm overflow-hidden rounded-xl border border-border bg-card shadow-xl transition-all duration-300 ease-out sm:bottom-24 md:right-6 ${

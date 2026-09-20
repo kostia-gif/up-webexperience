@@ -2,13 +2,16 @@
 
 import { MessageCircle } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import { useFloating } from '@/lib/floating-store'
 import { track } from '@/lib/track'
+import { cn } from '@/lib/utils'
 import { useCourse } from '../course-context'
 import { LinkBtn } from '../primitives'
 
 /** Mobile-first sticky bar that appears once the hero and date picker scroll away. */
-export function StartBar() {
+export function StartBar({ coordinateCard = false }: { coordinateCard?: boolean } = {}) {
   const { quick } = useCourse()
+  const { cardVisible } = useFloating()
   const [show, setShow] = useState(false)
 
   useEffect(() => {
@@ -25,7 +28,13 @@ export function StartBar() {
   if (!show) return null
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
+    <div
+      className={cn(
+        'fixed inset-x-0 bottom-0 z-40 border-t border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80',
+        // On mobile, yield to the SeeItCard while it is showing; on desktop both fit.
+        coordinateCard && cardVisible && 'hidden md:block',
+      )}
+    >
       <div className="mx-auto flex max-w-[960px] items-center gap-3 px-4 py-3">
         <p className="hidden flex-1 text-sm sm:block">
           Next class <span className="font-medium">{quick.nextStart}</span> · {quick.length}

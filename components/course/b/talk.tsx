@@ -4,7 +4,6 @@ import Image from 'next/image'
 import { Check, Mail, Phone } from 'lucide-react'
 import { useState } from 'react'
 import { advisorFor, CALL_WINDOWS } from '@/lib/advisors'
-import { floating } from '@/lib/floating-store'
 import { track } from '@/lib/track'
 import { useCourse } from '../course-context'
 import { Btn, Field, inputClass } from '../primitives'
@@ -41,7 +40,7 @@ export function TalkA({
       <div className="mx-auto grid max-w-[960px] gap-8 px-6 py-10 md:grid-cols-[1fr_1.1fr] md:py-14">
         <div className="flex flex-col gap-5">
           <div className="flex flex-col gap-3">
-            <p className="text-xs font-medium uppercase tracking-wide text-primary">Still got questions?</p>
+            <p className="text-xs font-medium uppercase tracking-wide text-primary">Not ready to pick a date?</p>
             <h2 id={`${id}-title`} className="font-display text-3xl font-bold uppercase leading-none tracking-tight text-balance md:text-4xl">
               {heading}
             </h2>
@@ -74,7 +73,7 @@ export function TalkA({
               <p>
                 <span className="font-medium">Thanks, {name}.</span>{' '}
                 {channel === 'call'
-                  ? `${advisor.name} will call you ${whenText}. If you miss it, expect a text first next time.`
+                  ? `${advisor.name} will call you ${whenText}. If you miss it, she'll text first next time.`
                   : `${advisor.name} will email you back within one working day.`}
               </p>
             </div>
@@ -84,7 +83,6 @@ export function TalkA({
               onSubmit={(e) => {
                 e.preventDefault()
                 track('advisor_book', { channel, window: window ?? 'any' })
-                floating.markSubmitted()
                 setDone(true)
               }}
             >

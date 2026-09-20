@@ -18,14 +18,18 @@ export default function Home() {
           specialist you can book.
         </p>
       </header>
-      <div className="grid gap-4 text-sm leading-relaxed text-muted-foreground sm:grid-cols-2">
+      <div className="grid gap-4 text-sm leading-relaxed text-muted-foreground sm:grid-cols-3">
         <p className="rounded-lg bg-muted p-4 text-pretty">
-          <span className="font-medium text-foreground">Option A, action first.</span> Billboard, pick a start date, then a named advisor
+          <span className="font-medium text-foreground">Option A, action first, proof before the second ask.</span> Fact strip in the
+          hero, one form, then the year, am I in and cost, then the advisor.
+        </p>
+        <p className="rounded-lg bg-muted p-4 text-pretty">
+          <span className="font-medium text-foreground">Option B, action first.</span> Billboard, pick a start date, then a named advisor
           who calls or emails you back. Cost sits lower for the advisor to walk through. &ldquo;See it before you decide&rdquo; floats in
           as a card. Yoobee and AIPC keep their hero and promise but move sign-up and the advisor up, fees down.
         </p>
         <p className="rounded-lg bg-muted p-4 text-pretty">
-          <span className="font-medium text-foreground">Option B, the original.</span> Promise, quick answers, what it is like, the
+          <span className="font-medium text-foreground">Option C, the original.</span> Promise, quick answers, what it is like, the
           journey, am I in, then start dates and try-it. Untouched, so nothing is lost while A is tested.
         </p>
       </div>
@@ -51,10 +55,16 @@ export default function Home() {
                 Option A <ArrowRight className="size-4" aria-hidden />
               </a>
               <a
-                href={courseHref(c)}
+                href={`${courseHref(c)}/b`}
                 className="inline-flex min-h-10 items-center gap-1.5 rounded-md border border-border px-4 text-sm font-medium hover:border-foreground"
               >
                 Option B <ArrowRight className="size-4" aria-hidden />
+              </a>
+              <a
+                href={courseHref(c)}
+                className="inline-flex min-h-10 items-center gap-1.5 rounded-md border border-border px-4 text-sm font-medium hover:border-foreground"
+              >
+                Option C <ArrowRight className="size-4" aria-hidden />
               </a>
             </span>
           </li>
