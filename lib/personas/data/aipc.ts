@@ -356,20 +356,20 @@ export function resolveCredit(a: Answers): CheckResult {
   if (credits === 0) {
     return {
       tone: 'start',
-      headline: 'You are in, and your experience counts in placement.',
-      body: 'No subjects are credited from that study, but you meet entry with any bachelor degree and your work counts where it matters most.',
+      headline: 'Your experience counts in placement.',
+      body: 'Credit for subjects is unlikely from that study, but your work counts where it matters most, and any bachelor degree meets entry.',
       bullets: [placementNote, '10 subjects over 18 months part-time, around your shifts.', 'Formal assessment happens after you enrol and costs nothing.'],
-      action: { label: 'Pick a start date and enrol', href: '#enrol' },
-      secondary: { label: 'Chat now', href: '#chat' },
+      action: { label: 'Talk to a course specialist', href: '#talk' },
+      secondary: { label: 'Download the guide', href: '#guide' },
     }
   }
   return {
     tone: 'yes',
-    headline: `You could skip ${credits} subject${credits > 1 ? 's' : ''}.`,
-    body: `That is about ${months} months and $${saved.toLocaleString('en-AU')} less, based on the 2027 structure. A formal assessment confirms it after you enrol, free.`,
-    bullets: [`${AIPC_COURSE.standard.subjects - credits} subjects left, about ${AIPC_COURSE.standard.months - months} months part-time.`, placementNote, 'Maximum credit is 4 subjects.'],
-    action: { label: 'Pick a start date and enrol', href: '#enrol' },
-    secondary: { label: 'Chat now', href: '#chat' },
+    headline: 'Your experience is likely to count.',
+    body: `Based on what you have told us, credit for up to ${credits} subject${credits > 1 ? 's' : ''} is likely, which shortens the course and lowers the fee. A formal assessment confirms it after you enrol, free.`,
+    bullets: [placementNote, 'Maximum credit is 4 of the 10 subjects.'],
+    action: { label: 'Talk to a course specialist', href: '#talk' },
+    secondary: { label: 'Download the guide', href: '#guide' },
   }
 }
 

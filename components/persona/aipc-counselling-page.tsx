@@ -71,9 +71,9 @@ export function AipcCounsellingPage() {
           }
           note={
             <>
-              Any bachelor degree gets you in. Already working in the field?{' '}
+              Any bachelor degree gets you in.{' '}
               <a href="#credit" className="font-medium text-foreground underline underline-offset-4 hover:no-underline">
-                Check your credit
+                Prior study or experience may count
               </a>
             </>
           }
@@ -131,9 +131,9 @@ export function AipcCounsellingPage() {
           />
         </Section>
 
-        <Section id="credit" eyebrow="Already in the field?" title="Credit for prior study and experience" intro="Youth, support and community workers often skip subjects. Three questions for an estimate; the formal assessment is free after you enrol.">
+        <Section id="credit" eyebrow="Credit" title="Credit for prior study and experience" intro="Relevant study and work experience can count towards the degree. Three questions for an indication; the formal assessment is free after you enrol.">
           <Callout eyebrow="Check your credit">
-            <InstantCheck title="How much could you skip?" questions={aipcCreditQuestions} resolve={resolveCredit} ctaLabel="Show my credit" />
+            <InstantCheck title="Could your experience count?" questions={aipcCreditQuestions} resolve={resolveCredit} ctaLabel="Show me" />
           </Callout>
         </Section>
 
