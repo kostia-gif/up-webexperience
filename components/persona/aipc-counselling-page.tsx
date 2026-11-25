@@ -1,50 +1,40 @@
 'use client'
 
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, Download } from 'lucide-react'
 import { useState } from 'react'
 import { AccreditationPanel } from '@/components/modules/accreditation-panel'
-import { ChatNow } from '@/components/modules/chat-now'
+import { BookingSlots } from '@/components/modules/booking-slots'
 import { CompareTable } from '@/components/modules/compare-table'
-import { CostCalculator } from '@/components/modules/cost-calculator'
 import { EnquiryForm } from '@/components/modules/enquiry-form'
 import { FactsStrip } from '@/components/modules/facts-strip'
 import { InstantCheck } from '@/components/modules/instant-check'
 import { OutcomesPanel } from '@/components/modules/outcomes-panel'
-import { PathwayPicture } from '@/components/modules/pathway-picture'
 import { PeopleCards } from '@/components/modules/people-cards'
+import { Callout, CostPlain, DateList, StoryCards, WhatItsLike, WhatYouDo } from '@/components/modules/real-terms'
 import { RoutingQuestion } from '@/components/modules/routing-question'
-import { SendSummary } from '@/components/modules/send-summary'
-import { SessionPicker } from '@/components/modules/session-picker'
 import { StartAndEnrol } from '@/components/modules/start-and-enrol'
-import { StoriesMatched } from '@/components/modules/stories-matched'
-import { ButtonLink, Expander, Placeholder, Section } from '@/components/modules/ui'
+import { ButtonLink, Expander, Section } from '@/components/modules/ui'
 import { WeekPlanner } from '@/components/modules/week-planner'
 import {
   AIPC_COURSE,
   aipcAccreditations,
-  aipcChat,
   aipcCompare,
   aipcCompareNote,
-  aipcCostExtras,
-  aipcCostVersions,
   aipcCreditQuestions,
-  aipcEmployerSummary,
   aipcEmployers,
   aipcFacts,
   aipcGuideRoutes,
   aipcIntakes,
   aipcOutcomeStats,
-  aipcPathway,
-  aipcPay,
-  aipcPlannerModes,
+  aipcPay as aipcPayBands,
   aipcQuestions,
   aipcSessions,
   aipcShiftModes,
   aipcStories,
-  aipcStoryFilters,
   aipcTutors,
   resolveCredit,
 } from '@/lib/personas/data/aipc'
+import { aipcCostLines, aipcDanLike, aipcLike, aipcPay, aipcPhases } from '@/lib/personas/data/real-terms'
 import { PERSONAS } from '@/lib/personas/registry'
 import { PersonaShell } from './shell'
 
@@ -54,6 +44,8 @@ const ROUTES = [
   { id: 'sarah' as const, label: 'I am new to counselling', hint: 'Thinking about a change from another career' },
   { id: 'dan' as const, label: 'I already work in the field', hint: 'Youth, support or community work' },
 ]
+
+const tutorsStatic = aipcTutors.map(({ slots: _slots, video: _video, ...t }) => t)
 
 export function AipcCounsellingPage({ initial = 'sarah' }: { initial?: Who }) {
   const [who, setWho] = useState<Who>(initial)
@@ -66,11 +58,11 @@ export function AipcCounsellingPage({ initial = 'sarah' }: { initial?: Who }) {
       reviewer={{
         forWho: isDan ? `${PERSONAS.dan.name}. ${PERSONAS.dan.oneLine}` : `${PERSONAS.sarah.name}. ${PERSONAS.sarah.oneLine}`,
         testing: isDan
-          ? 'Whether a plain credit answer and the option to enrol without a call move frontliners faster than a callback. Second action: chat.'
-          : 'Whether a calm, proof-led page with "Talk to a tutor" as the main action earns more conversations than "Apply now". Second action: the course guide.',
-        note: 'Both personas are assumed, not researched. Switch between them with the question under the headline. Figures use the 2027 structure.',
+          ? 'Whether a plain credit answer and enrolling online without a call move frontliners faster than a callback.'
+          : 'Whether a calm, readable page that explains the course in real terms, with "Talk to a tutor" as the only main action, earns more conversations than "Apply now".',
+        note: 'Two or three interactive call-outs per version; everything else is plain text to read and scroll. Figures use the 2027 structure. Both personas are assumed.',
       }}
-      mainAction={isDan ? { label: 'Check my credit', href: '#credit' } : { label: 'Talk to a tutor', href: '#tutors' }}
+      mainAction={isDan ? { label: 'Check my credit', href: '#credit' } : { label: 'Talk to a tutor', href: '#talk' }}
     >
       <main className="pb-24 sm:pb-0">
         <section className="mx-auto flex max-w-5xl flex-col gap-8 px-5 pb-10 pt-10 sm:px-8 sm:pt-14">
@@ -93,24 +85,16 @@ export function AipcCounsellingPage({ initial = 'sarah' }: { initial?: Who }) {
               </p>
               <div className="flex flex-wrap gap-3">
                 {isDan ? (
-                  <>
-                    <ButtonLink href="#credit" size="lg">
-                      Check my credit <ArrowRight className="size-4" aria-hidden />
-                    </ButtonLink>
-                    <ButtonLink href="#chat" size="lg" variant="secondary">
-                      Chat now
-                    </ButtonLink>
-                  </>
+                  <ButtonLink href="#credit" size="lg">
+                    Check my credit <ArrowRight className="size-4" aria-hidden />
+                  </ButtonLink>
                 ) : (
                   <>
-                    <ButtonLink href="#tutors" size="lg">
+                    <ButtonLink href="#talk" size="lg">
                       Talk to a tutor <ArrowRight className="size-4" aria-hidden />
                     </ButtonLink>
-                    <ButtonLink href="#sessions" size="lg" variant="secondary">
-                      Join an information session
-                    </ButtonLink>
-                    <ButtonLink href="#guide" variant="link" className="text-sm">
-                      Download the course guide
+                    <ButtonLink href="#guide" size="lg" variant="secondary">
+                      <Download className="size-4" aria-hidden /> Course guide
                     </ButtonLink>
                   </>
                 )}
@@ -126,9 +110,7 @@ export function AipcCounsellingPage({ initial = 'sarah' }: { initial?: Who }) {
             </div>
           </div>
           <FactsStrip facts={aipcFacts} />
-          <div className="rounded-xl border border-border bg-muted p-5">
-            <RoutingQuestion question="Are you new to counselling, or already working in the field?" options={ROUTES} value={who} onChange={setWho} />
-          </div>
+          <RoutingQuestion question="Are you new to counselling, or already working in the field?" options={ROUTES} value={who} onChange={setWho} compact />
         </section>
 
         {isDan ? <DanSections /> : <SarahSections />}
@@ -140,96 +122,56 @@ export function AipcCounsellingPage({ initial = 'sarah' }: { initial?: Who }) {
 function SarahSections() {
   return (
     <>
-      <Section
-        id="accreditation"
-        eyebrow="Accreditation"
-        title="Recognised, and what that lets you do"
-        intro="The qualification is the thing you are checking, so here it is first."
-        tone="muted"
-      >
+      <Section id="like" eyebrow="In real terms" title="What studying this actually looks like" tone="muted">
+        <WhatItsLike {...aipcLike} />
+      </Section>
+
+      <Section id="journey" eyebrow="What you do, and when" title="Eighteen months in three stretches">
+        <WhatYouDo phases={aipcPhases} />
+      </Section>
+
+      <Section id="accreditation" eyebrow="Recognition" title="Accredited, and what that lets you do" tone="muted">
         <AccreditationPanel items={aipcAccreditations} />
       </Section>
 
       <Section
-        id="tutors"
+        id="talk"
         eyebrow="Who teaches you"
-        title="Practising counsellors. Book twenty minutes with one."
-        intro="Not a sales call. A conversation with someone who does the work and teaches it, about whether this is right for you at this stage of life."
+        title="Practising counsellors. Talk to one before you decide."
+        intro="Not a sales call. Twenty minutes with someone who does the work and teaches it, about whether this is right for you at this stage of life."
       >
-        <PeopleCards people={aipcTutors} bookLabel="Book 20 minutes" what="a 20-minute conversation" />
-        <div id="sessions" className="flex scroll-mt-20 flex-col gap-4 rounded-xl border border-border bg-muted p-5 sm:p-6">
-          <div className="flex flex-col gap-1">
-            <h3 className="font-display text-2xl leading-tight">Or join an information session</h3>
-            <p className="text-sm text-muted-foreground">The next three. Forty-five minutes online, with time for questions, and no follow-up calls.</p>
+        <PeopleCards people={tutorsStatic} />
+        <Callout eyebrow="Talk to a tutor">
+          <div className="flex flex-col gap-4 rounded-xl border border-border bg-card p-5 sm:p-6">
+            <p className="text-sm text-muted-foreground">Pick a time. Whoever is free that slot will call. Or come to the next information session instead.</p>
+            <BookingSlots
+              days={[
+                { day: 'Tue 2 Feb', times: ['12:00', '18:30', '19:00'] },
+                { day: 'Wed 3 Feb', times: ['12:30', '17:30', '18:00'] },
+                { day: 'Thu 4 Feb', times: ['08:30', '19:00', '19:30'] },
+              ]}
+              what="a 20-minute conversation with a tutor"
+            />
+            <p className="text-xs text-muted-foreground">
+              Information sessions: {aipcSessions.map((s) => s.date).join(', ')}, 45 minutes online. Ask for the link when you book.
+            </p>
           </div>
-          <SessionPicker sessions={aipcSessions} what="information session" cta="Register" />
-        </div>
+        </Callout>
       </Section>
 
-      <Section
-        id="week"
-        eyebrow="My week"
-        title="The real hours, alongside a job"
-        intro="Choose how you would study and see where it sits in a working week. Most people in their forties take the part-time route."
-        tone="muted"
-      >
-        <WeekPlanner modes={aipcPlannerModes} />
+      <Section id="cost" eyebrow="Cost" title="What it costs, including the bits people forget" tone="muted">
+        <CostPlain lines={aipcCostLines} pay={aipcPay} note="Extras are estimates until UP confirms them." />
       </Section>
 
-      <Section
-        id="placement"
-        eyebrow="Placement"
-        title={`${AIPC_COURSE.placementHours} hours, arranged with you`}
-        intro="Placement is where the degree lands with a real person in front of you. It is organised, supervised and counted properly."
-      >
-        <div className="grid gap-4 md:grid-cols-3">
-          {[
-            { h: 'How many hours', b: `${AIPC_COURSE.placementHours} hours in total, at least ${AIPC_COURSE.directClientHours} of them face to face with clients. The rest is observation, case notes, supervision and service work.` },
-            { h: 'How it is arranged', b: 'A placement coordinator starts with you in your second trimester and matches you to a service near where you live or work. You do not cold-call agencies.' },
-            { h: 'What support you get', b: 'Fortnightly supervision with a practising counsellor, a placement handbook, and a tutor you can call if something is hard.' },
-          ].map((x) => (
-            <div key={x.h} className="flex flex-col gap-2 rounded-xl border border-border bg-card p-5">
-              <h3 className="text-lg font-medium leading-snug">{x.h}</h3>
-              <p className="text-sm leading-relaxed text-muted-foreground text-pretty">{x.b}</p>
-            </div>
-          ))}
-        </div>
+      <Section id="stories" eyebrow="Graduates like you" title="People your age who changed careers">
+        <StoryCards stories={aipcStories.slice(0, 3)} />
       </Section>
 
-      <Section
-        id="cost"
-        eyebrow="Full cost"
-        title="Everything it costs, including the bits people forget"
-        intro="Tuition, workshop travel, placement checks and books, then the three ways to pay, side by side."
-        tone="muted"
-      >
-        <CostCalculator versions={aipcCostVersions} extras={aipcCostExtras} currency="AUD" feeHelpNote={AIPC_COURSE.feeHelpWho} />
-      </Section>
-
-      <Section id="pathway" eyebrow="The pathway" title="Steps, not a leap" intro="Where the Master sits, and how people without a degree get here.">
-        <PathwayPicture steps={aipcPathway} />
-      </Section>
-
-      <Section
-        id="stories"
-        eyebrow="Graduates like me"
-        title="People your age who changed careers"
-        intro="Pick what you did before and see who else made the same move, how old they were and how long it took."
-        tone="muted"
-      >
-        <StoriesMatched prompt="Before counselling, I was..." filters={aipcStoryFilters} stories={aipcStories} />
-      </Section>
-
-      <Section
-        id="compare"
-        eyebrow="An honest comparison"
-        title="AIPC against a university master's"
-        intro="You are comparing anyway. Here is the table, including where a university might suit you better."
-      >
+      <Section id="compare" eyebrow="An honest comparison" title="AIPC against a university master's" tone="muted">
         <CompareTable rows={aipcCompare} usLabel="AIPC Master of Counselling" themLabel="University Master of Counselling" note={aipcCompareNote} />
       </Section>
 
-      <Section id="questions" eyebrow="Questions" title="The ones career changers ask" tone="muted">
+      <Section id="questions" eyebrow="Questions" title="The ones career changers ask">
         <div className="flex flex-col gap-2">
           {aipcQuestions.map((q) => (
             <Expander key={q.q} title={q.q}>
@@ -239,32 +181,30 @@ function SarahSections() {
         </div>
       </Section>
 
-      <Section id="guide" eyebrow="The course guide" title="Take it away and read it properly">
-        <EnquiryForm
-          title="Download the course guide"
-          intro="Subjects, placement, fees, dates and the pathway in one PDF. An email address is all we ask for."
-          routes={aipcGuideRoutes}
-          cta="Send me the guide"
-          emailOnly
-        />
+      <Section id="guide" eyebrow="Take it away" title="The course guide" tone="muted">
+        <Callout eyebrow="Download the course guide">
+          <EnquiryForm
+            title="Everything on this page, in a PDF"
+            intro="Subjects, placement, fees, dates and the pathway. An email address is all we ask for."
+            routes={aipcGuideRoutes}
+            cta="Send me the guide"
+            emailOnly
+          />
+        </Callout>
       </Section>
 
-      <Section id="start" eyebrow="When you are ready" title="Start dates" intro="Four a year. Apply when it suits you, not when a timer says so." tone="muted">
-        <ul className="grid gap-2 sm:grid-cols-4">
-          {AIPC_COURSE.intakes.map((d) => (
-            <li key={d} className="rounded-lg border border-border bg-card px-4 py-3 text-sm font-medium">
-              {d}
-            </li>
-          ))}
-        </ul>
-        <div className="flex flex-wrap items-center gap-3">
-          <ButtonLink href="#tutors" variant="secondary">
-            Talk to a tutor first
-          </ButtonLink>
-          <ButtonLink href="#start" variant="link" className="text-sm">
-            Apply (not in prototype)
-          </ButtonLink>
-        </div>
+      <Section id="start" eyebrow="When you are ready" title="Start dates">
+        <DateList
+          items={AIPC_COURSE.intakes.map((d, i) => ({ when: d, detail: i === 0 ? 'Trimester 1, 2027' : 'Applications open' }))}
+          action={
+            <p className="text-sm text-muted-foreground">
+              Four a year. Apply when it suits you, not when a timer says so.{' '}
+              <a href="#start" className="underline underline-offset-4">
+                Apply (not in prototype)
+              </a>
+            </p>
+          }
+        />
       </Section>
     </>
   )
@@ -273,45 +213,46 @@ function SarahSections() {
 function DanSections() {
   return (
     <>
-      <Section
-        id="credit"
-        eyebrow="Credit for what you have done"
-        title="Check my credit"
-        intro="Three questions. Subjects credited, months saved and cost saved, straight away. The formal assessment is free after you enrol."
-        tone="muted"
-      >
-        <InstantCheck title="How much could you skip?" questions={aipcCreditQuestions} resolve={resolveCredit} ctaLabel="Show my credit" />
+      <Section id="credit" eyebrow="Credit for what you have done" title="How much could you skip?" tone="muted">
+        <Callout eyebrow="Check my credit">
+          <InstantCheck
+            title="Three questions, instant answer"
+            intro="Subjects credited, months saved and cost saved. The formal assessment is free after you enrol."
+            questions={aipcCreditQuestions}
+            resolve={resolveCredit}
+            ctaLabel="Show my credit"
+          />
+        </Callout>
       </Section>
 
-      <Section id="jobs" eyebrow="Jobs and pay" title="What the qualification opens up" intro="Roles, employers and pay bands, each with where the number comes from.">
-        <OutcomesPanel stats={aipcOutcomeStats} employers={aipcEmployers} pay={aipcPay} />
+      <Section id="like" eyebrow="In real terms" title="How it fits around shifts">
+        <p className="max-w-3xl text-[17px] leading-relaxed text-pretty">{aipcDanLike.text}</p>
+        <WeekPlanner modes={[aipcShiftModes[0]]} title="A typical week on rotating shifts" />
       </Section>
 
-      <Section id="shifts" eyebrow="Study around shifts" title="Where it fits in a roster" intro="Set to shift work. The live tutorial is recorded, so a missed one does not matter." tone="muted">
-        <WeekPlanner modes={aipcShiftModes} title="My week, on shifts" />
+      <Section id="jobs" eyebrow="Jobs and pay" title="What the qualification opens up" tone="muted">
+        <OutcomesPanel stats={aipcOutcomeStats} employers={aipcEmployers} pay={aipcPayBands} />
       </Section>
 
-      <Section id="fees" eyebrow="Fees and payment" title="What it costs and how to pay" intro="Pick the version, see the full figure, compare FEE-HELP, per trimester and a mix.">
-        <CostCalculator versions={aipcCostVersions} extras={aipcCostExtras} currency="AUD" feeHelpNote={AIPC_COURSE.feeHelpWho} />
-      </Section>
-
-      <Section id="employer" eyebrow="For your manager" title="Summary for my employer" intro="One page with the course, cost, time and recognition. Send it or download it to ask about funding or study leave." tone="muted">
-        <SendSummary to="your employer" title="Master of Counselling, AIPC" intro="A one-page summary for a manager considering study support." lines={aipcEmployerSummary} />
-      </Section>
-
-      <Section id="chat" eyebrow="Chat now" title="Answers on the page, not in a call" intro="Scripted answers for the common questions, and a real tutor when you want one.">
-        <ChatNow canned={aipcChat} person="Daniel Okafor" />
-      </Section>
-
-      <Section id="enrol" eyebrow="Enrol online" title="Pick a start date and enrol" intro="No information session required. Enrol, then the credit assessment and placement planning start." tone="muted">
-        <StartAndEnrol
-          intakes={aipcIntakes}
-          cta="Enrol online"
-          confirm="A confirmation is on its way with your credit assessment form and the FEE-HELP form. Daniel Okafor will email you by the end of the day to check the credit estimate, not to sell you anything."
-        />
-        <p className="text-xs text-muted-foreground">
-          <Placeholder /> Intake dates follow the 2027 calendar and are placeholders until confirmed.
+      <Section id="cost" eyebrow="Cost" title="What it costs and how to pay">
+        <CostPlain lines={aipcCostLines} pay={aipcPay} note="Extras are estimates until UP confirms them." />
+        <p className="text-sm text-muted-foreground">
+          Need something for your manager?{' '}
+          <a href="#cost" className="underline underline-offset-4">
+            Download the one-page employer summary (not in prototype)
+          </a>
+          .
         </p>
+      </Section>
+
+      <Section id="enrol" eyebrow="Enrol online" title="Pick a start date and enrol" intro="No information session required." tone="muted">
+        <Callout eyebrow="Enrol online">
+          <StartAndEnrol
+            intakes={aipcIntakes}
+            cta="Enrol online"
+            confirm="A confirmation is on its way with your credit assessment form and the FEE-HELP form. Daniel Okafor, who teaches the youth units, will email you by the end of the day to check the credit estimate."
+          />
+        </Callout>
       </Section>
       <div id="start" className="sr-only">
         Start dates are listed under Enrol online.

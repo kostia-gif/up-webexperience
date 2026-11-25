@@ -32,13 +32,15 @@ export function WeekPlanner({ modes, title = 'My week', id }: { modes: PlannerMo
             {mode.hours} <Placeholder className="ml-1 align-middle" />
           </p>
         </div>
-        <div className="flex flex-wrap gap-2" role="group" aria-label="Study mode">
-          {modes.map((m) => (
-            <Pill key={m.id} active={m.id === modeId} onClick={() => setModeId(m.id)}>
-              {m.label}
-            </Pill>
-          ))}
-        </div>
+        {modes.length > 1 && (
+          <div className="flex flex-wrap gap-2" role="group" aria-label="Study mode">
+            {modes.map((m) => (
+              <Pill key={m.id} active={m.id === modeId} onClick={() => setModeId(m.id)}>
+                {m.label}
+              </Pill>
+            ))}
+          </div>
+        )}
       </div>
       <div className="flex flex-col gap-1.5" role="img" aria-label={`${mode.label}: ${mode.hours}. ${mode.note}`}>
         <div className="ml-10 flex justify-between text-[10px] text-muted-foreground tabular-nums">

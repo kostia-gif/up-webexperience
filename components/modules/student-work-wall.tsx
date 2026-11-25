@@ -31,16 +31,18 @@ export function StudentWorkWall({
   const shown = d === 'All' ? works : works.filter((w) => w.discipline === d)
   return (
     <div id={id} className="flex scroll-mt-20 flex-col gap-4">
-      <div className="flex flex-wrap items-center gap-2 px-5 sm:px-8" role="group" aria-label="Filter student work by discipline">
-        {['All', ...disciplines].map((x) => (
-          <Pill key={x} active={x === d} onClick={() => setD(x)}>
-            {x}
-          </Pill>
-        ))}
-        <span className="ml-auto text-xs text-muted-foreground">
-          {shown.length} pieces <Placeholder className="ml-1" />
-        </span>
-      </div>
+      {disciplines.length > 0 && (
+        <div className="flex flex-wrap items-center gap-2 px-5 sm:px-8" role="group" aria-label="Filter student work by discipline">
+          {['All', ...disciplines].map((x) => (
+            <Pill key={x} active={x === d} onClick={() => setD(x)}>
+              {x}
+            </Pill>
+          ))}
+          <span className="ml-auto text-xs text-muted-foreground">
+            {shown.length} pieces <Placeholder className="ml-1" />
+          </span>
+        </div>
+      )}
       <ul className={cn('grid grid-flow-dense gap-1', hero ? 'grid-cols-2 sm:grid-cols-4 lg:grid-cols-6' : 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-4')}>
         {shown.map((w) => (
           <li key={w.id} className={cn('group relative aspect-square overflow-hidden', w.tall && 'row-span-2 aspect-auto')}>
