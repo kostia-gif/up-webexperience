@@ -1,6 +1,6 @@
 'use client'
 
-import { Download, MessageCircle, Search } from 'lucide-react'
+import { BadgeCheck, CalendarClock, Download, Landmark, MessageCircle, Search, ShieldCheck } from 'lucide-react'
 import { useState } from 'react'
 import { InPageNav } from '@/components/course/above-fold'
 import { AccreditationPanel } from '@/components/modules/accreditation-panel'
@@ -37,7 +37,7 @@ import {
 import { aipcBreakdown, aipcFormal, aipcLinks } from '@/lib/personas/data/compliance'
 import { aipcCostLines, aipcDanLike, aipcLike, aipcPay, aipcPhases } from '@/lib/personas/data/real-terms'
 import { PERSONAS } from '@/lib/personas/registry'
-import { Billboard, HeroButton, QuickAnswers } from './billboard'
+import { PanelButton, SplitHero } from './billboard'
 import { PersonaShell } from './shell'
 
 type Who = 'sarah' | 'dan'
@@ -88,59 +88,86 @@ export function AipcCounsellingPage({ initial = 'sarah' }: { initial?: Who }) {
       mainAction={isDan ? { label: 'Check my credit', href: '#credit' } : { label: 'Talk to a tutor', href: '#talk' }}
     >
       <main className="pb-24 sm:pb-0">
-        <Billboard
-          eyebrow={`AIPC · Master of Counselling · ${isDan ? '18 months around shifts' : '18 months part-time'} · Online`}
+        <SplitHero
+          eyebrow="Counselling · Postgraduate · AQF Level 9"
           title={
             isDan ? (
               <>
-                Turn the work you already do into a <span className="text-coral">recognised qualification.</span>
+                Turn the work you already do into a <em className="font-serif">recognised qualification</em>
               </>
             ) : (
               <>
-                Become the counsellor <span className="text-coral">you once needed.</span>
+                Become the counsellor <em className="font-serif">you once needed</em>
               </>
             )
           }
+          titleLine={`Master of Counselling · ${AIPC_COURSE.standard.subjects} subjects · 18 months part-time, or 24 months Advanced`}
           sub={
             isDan
               ? 'You already do the helping. This gets you the title, the registration and the pay band, online around your roster, with credit for what you have done.'
               : 'An ACA-accredited master\u2019s degree taught by practising counsellors, online around a working life. Any bachelor degree gets you in.'
           }
           image={isDan ? '/images/aipc/hero-home-study.png' : '/images/aipc/hero-evening-study.png'}
-          facts={[
-            { label: 'Accreditation', value: 'ACA accredited' },
-            { label: 'Study mode', value: 'Online, 5 in-person workshop days' },
-            { label: 'Length', value: '18 months, or 24 Advanced' },
-            { label: 'Payment', value: 'FEE-HELP, per trimester, or a mix' },
+          imageAlt={isDan ? 'A support worker studying at a kitchen table after a shift' : 'A woman in her forties reading course notes at home in the evening'}
+          pills={[
+            { icon: <BadgeCheck className="size-4" aria-hidden />, label: 'ACA accredited' },
+            { icon: <ShieldCheck className="size-4" aria-hidden />, label: 'Registered HE provider' },
+            { icon: <Landmark className="size-4" aria-hidden />, label: 'FEE-HELP approved' },
           ]}
           actions={
             isDan ? (
               <>
-                <HeroButton href="#credit" primary>
-                  <Search className="size-5" aria-hidden /> Check my credit
-                </HeroButton>
-                <HeroButton href="#enrol">Enrol online</HeroButton>
+                <PanelButton href="#credit" primary>
+                  <Search className="size-4" aria-hidden /> Check my credit
+                </PanelButton>
+                <PanelButton href="#enrol">Enrol online</PanelButton>
               </>
             ) : (
               <>
-                <HeroButton href="#talk" primary>
-                  <MessageCircle className="size-5" aria-hidden /> Talk to a tutor
-                </HeroButton>
-                <HeroButton href="#guide">
-                  <Download className="size-5" aria-hidden /> Course guide
-                </HeroButton>
+                <PanelButton href="#talk" primary>
+                  <MessageCircle className="size-4" aria-hidden /> Talk to a tutor
+                </PanelButton>
+                <PanelButton href="#guide">
+                  <Download className="size-4" aria-hidden /> Course guide
+                </PanelButton>
               </>
             )
           }
-          footnote={isDan ? 'Up to four subjects credited. Enrol without a call.' : 'No pressure to apply. Take the time you need.'}
-        />
-        <QuickAnswers
-          pairs={[
-            ['Next start', '1 Mar 2027'],
-            ['How long', '18 months'],
-            ['Where', 'Online'],
-            ['You need', 'Any degree'],
-            ['You get', 'ACA registration'],
+          note={isDan ? 'Up to four subjects credited. Enrol without a call.' : 'No pressure to apply. Take the time you need.'}
+          cards={[
+            {
+              label: 'Total tuition, 2027',
+              value: '$34,650',
+              placeholder: true,
+              sub: (
+                <>
+                  A university Master of Counselling is indicatively $62,000 to $78,000.{' '}
+                  <a href="#compare" className="text-primary underline underline-offset-4">
+                    Compare
+                  </a>
+                </>
+              ),
+            },
+            {
+              label: 'FEE-HELP approved',
+              value: '$0 upfront',
+              tone: 'success',
+              icon: <Landmark className="size-4" aria-hidden />,
+              sub: (
+                <>
+                  Defer all tuition if eligible and repay through tax.{' '}
+                  <a href="#cost" className="font-medium underline underline-offset-4 hover:no-underline">
+                    How it works
+                  </a>
+                </>
+              ),
+            },
+            {
+              label: 'Next start',
+              value: '1 March 2027',
+              icon: <CalendarClock className="size-4" aria-hidden />,
+              sub: 'Four intakes a year: March, May, July and November. Online, with five in-person workshop days.',
+            },
           ]}
         />
         <div className="hairline-t border-border bg-background">

@@ -29,7 +29,7 @@ import {
 } from '@/lib/personas/data/nzst'
 import { flightCostLines, flightLike, flightPay, flightPhases } from '@/lib/personas/data/real-terms'
 import { PERSONAS } from '@/lib/personas/registry'
-import { Billboard, HeroButton, QuickAnswers } from './billboard'
+import { Billboard, HeroButton } from './billboard'
 import { PersonaShell } from './shell'
 
 const NAV: [string, string][] = [
@@ -86,15 +86,6 @@ export function NzstFlightPage() {
           }
           footnote={`Next class starts ${FLIGHT.intakes[0]}. Morning or afternoon.`}
           videoLabel="Vertical video, graduates in uniform"
-        />
-        <QuickAnswers
-          pairs={[
-            ['Next start', '25 Jan 2027'],
-            ['How long', '16 weeks'],
-            ['Where', '5 campuses'],
-            ['You need', '16+, NCEA L2'],
-            ['You get', 'Level 4 certificate'],
-          ]}
         />
         <InPageNav items={NAV} />
 

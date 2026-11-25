@@ -15,7 +15,7 @@ import { animBreakdown, animFormal, animLinks } from '@/lib/personas/data/compli
 import { animCostLines, animLike } from '@/lib/personas/data/real-terms'
 import { ANIM, animDisciplines, animHoliday, animSpecialisms, animTutors, animVisitSlots, animWhereWent, animWorks } from '@/lib/personas/data/yoobee'
 import { PERSONAS } from '@/lib/personas/registry'
-import { Billboard, HeroButton, QuickAnswers } from './billboard'
+import { PanelButton, SplitHero } from './billboard'
 import { PersonaShell } from './shell'
 
 const tutorsStatic = animTutors.map(({ video: _video, ...t }) => t)
@@ -47,49 +47,63 @@ export function YoobeeAnimationPage() {
       mainAction={{ label: 'Visit the campus', href: '#visit' }}
     >
       <main className="pb-24 sm:pb-0">
-        <Billboard
-          eyebrow={`Yoobee · ${ANIM.title} · 1 year · On campus`}
+        <SplitHero
+          eyebrow="Animation · Yoobee College of Creative Innovation"
           title={
             <>
-              This is what last year&apos;s <span className="text-coral">class made.</span>
+              This is what last year&apos;s class made
             </>
           }
+          titleLine={`${ANIM.title} · 1 year · On campus`}
           sub="Characters, environments, 2D, 3D. Eighteen to a studio, tutors who still ship work, and nobody asking you to pick something sensible."
-          facts={[
-            { label: 'Length', value: '1 year, full-time' },
-            { label: 'Where', value: ANIM.campuses.join(', ') },
-            { label: 'You need', value: '17+, NCEA Level 2 or a portfolio' },
-            { label: 'Cost', value: 'Fees Free if eligible, or $8,990', placeholder: true },
-          ]}
+          image="/images/yoobee/mc-animation.png"
+          imageAlt="A student animating a character frame by frame on a drawing tablet"
           actions={
             <>
-              <HeroButton href="#visit" primary>
-                <MapPin className="size-5" aria-hidden /> Visit the campus
-              </HeroButton>
-              <HeroButton href="#holiday">
-                <CalendarClock className="size-5" aria-hidden /> Holiday programme
-              </HeroButton>
+              <PanelButton href="#visit" primary>
+                <MapPin className="size-4" aria-hidden /> Visit the campus
+              </PanelButton>
+              <PanelButton href="#holiday">
+                <CalendarClock className="size-4" aria-hidden /> Holiday programme
+              </PanelButton>
             </>
           }
-          videoLabel="Studio footage, filmed by students"
+          note={
+            <>
+              Want to see the work first?{' '}
+              <a href="#work" className="font-medium text-primary-foreground underline underline-offset-4 hover:no-underline">
+                Scroll to the wall
+              </a>
+            </>
+          }
+          cards={[
+            {
+              label: 'Total cost, 2027',
+              value: '$0',
+              tone: 'coral',
+              placeholder: true,
+              sub: 'Fees Free for eligible first-year students. Otherwise $8,990.',
+            },
+            {
+              label: 'Next start',
+              value: '15 Feb 2027',
+              icon: <CalendarClock className="size-4" aria-hidden />,
+              sub: `One year, four days a week, in ${ANIM.campuses.join(', ')}. You need to be 17+ with NCEA Level 2, or bring a portfolio.`,
+            },
+            {
+              label: 'Class size',
+              value: 'Max 18',
+              placeholder: true,
+              sub: 'One tutor per studio, and tutors who still work at Weta FX, PikPok and Mukpuddy.',
+            },
+          ]}
         />
-        <section id="work" aria-labelledby="work-title" className="scroll-mt-20">
+        <section id="work" aria-labelledby="work-title" className="scroll-mt-20 pb-2">
           <h2 id="work-title" className="sr-only">
             Student work
           </h2>
-          <div className="pt-4">
-            <StudentWorkWall disciplines={animDisciplines} works={animWorks} hero />
-          </div>
+          <StudentWorkWall disciplines={animDisciplines} works={animWorks} hero />
         </section>
-        <QuickAnswers
-          pairs={[
-            ['Next start', '15 Feb 2027'],
-            ['How long', '1 year'],
-            ['Where', '3 campuses'],
-            ['Class size', 'Max 18'],
-            ['You get', 'Level 5 diploma'],
-          ]}
-        />
         <InPageNav items={NAV} />
 
         <Section id="like" eyebrow="The course" title="What it's like">

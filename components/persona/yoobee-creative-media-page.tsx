@@ -1,6 +1,6 @@
 'use client'
 
-import { Play, Search } from 'lucide-react'
+import { CalendarClock, Play, Search, TrendingUp } from 'lucide-react'
 import { InPageNav } from '@/components/course/above-fold'
 import { CourseBreakdown, FormalDetails, FormalHeading } from '@/components/modules/compliance'
 import { CourseFinder } from '@/components/modules/course-finder'
@@ -16,7 +16,7 @@ import { cmBreakdown, cmFormal, cmLinks } from '@/lib/personas/data/compliance'
 import { cmCostLines, cmPay, cmPhases } from '@/lib/personas/data/real-terms'
 import { CM, cmAdvisor, cmAdvisorRoutes, cmEmployers, cmFinderCourses, cmFinderQuestions, cmNext, cmOutcomeStats, cmPay as cmPayBands, cmStories, cmWorks } from '@/lib/personas/data/yoobee'
 import { PERSONAS } from '@/lib/personas/registry'
-import { Billboard, HeroButton, QuickAnswers } from './billboard'
+import { PanelButton, SplitHero } from './billboard'
 import { PersonaShell } from './shell'
 
 const NAV: [string, string][] = [
@@ -46,40 +46,59 @@ export function YoobeeCreativeMediaPage() {
       mainAction={{ label: 'Find the right course', href: '#finder' }}
     >
       <main className="pb-24 sm:pb-0">
-        <Billboard
-          eyebrow={`Yoobee · ${CM.short} · ${CM.weeks} weeks · Online or on campus`}
-          title={
-            <>
-              Turn your passion <span className="text-coral">into a new path.</span>
-            </>
-          }
+        <SplitHero
+          eyebrow="Creative media · Yoobee College of Creative Innovation"
+          title="Turn your passion into a new path"
+          titleLine={CM.title}
           sub="You were the one who drew, filmed or made things, then got steered somewhere sensible. Nineteen weeks, online or on campus, around the job you have now."
           image="/images/yoobee/hero-home-studio.png"
-          facts={[
-            { label: 'Length', value: `${CM.weeks} weeks, or 38 part-time` },
-            { label: 'Where', value: 'Online, or Auckland, Wellington, Christchurch' },
-            { label: 'You need', value: '16+, NCEA Level 2' },
-            { label: 'Cost', value: 'Free for eligible students, or $4,753', placeholder: true },
-          ]}
+          imageAlt="A student at a kitchen table animating a 2D character on a laptop with a drawing tablet"
           actions={
             <>
-              <HeroButton href="#finder" primary>
-                <Search className="size-5" aria-hidden /> Find the right course
-              </HeroButton>
-              <HeroButton href="#taster">
-                <Play className="size-5" aria-hidden /> Try a free lesson
-              </HeroButton>
+              <PanelButton href="#finder" primary>
+                <Search className="size-4" aria-hidden /> Find the right course
+              </PanelButton>
+              <PanelButton href="#taster">
+                <Play className="size-4" aria-hidden /> Try a free lesson
+              </PanelButton>
             </>
           }
-          footnote="84% of last year's graduates were in creative work or further study within six months (placeholder)."
-        />
-        <QuickAnswers
-          pairs={[
-            ['Next start', '8 Feb 2027'],
-            ['How long', '19 weeks'],
-            ['Where', 'Online or campus'],
-            ['You need', '16+, NCEA L2'],
-            ['You get', 'Level 4 certificate'],
+          note={
+            <>
+              Not sure?{' '}
+              <a href="#advisor" className="font-medium text-primary-foreground underline underline-offset-4 hover:no-underline">
+                Talk it through with Sam, a course advisor
+              </a>
+            </>
+          }
+          cards={[
+            {
+              label: 'Total cost, 2027',
+              value: '$0',
+              tone: 'coral',
+              placeholder: true,
+              sub: 'Free for eligible domestic students under Fees Free. Otherwise $4,753 all-in.',
+            },
+            {
+              label: 'Next start',
+              value: '8 Feb 2027',
+              icon: <CalendarClock className="size-4" aria-hidden />,
+              sub: `${CM.weeks} weeks full-time or 38 part-time. Online, or Auckland, Wellington and Christchurch. You need to be 16+ with NCEA Level 2.`,
+            },
+            {
+              label: 'In creative work or further study within six months',
+              value: '84%',
+              placeholder: true,
+              icon: <TrendingUp className="size-4" aria-hidden />,
+              sub: (
+                <>
+                  2025 graduates.{' '}
+                  <a href="#outcomes" className="text-primary underline underline-offset-4">
+                    Where graduates work
+                  </a>
+                </>
+              ),
+            },
           ]}
         />
         <InPageNav items={NAV} />
