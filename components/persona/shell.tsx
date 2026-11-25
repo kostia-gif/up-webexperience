@@ -1,4 +1,6 @@
-import { Info, Plane } from 'lucide-react'
+'use client'
+
+import { ArrowLeft, Info, Plane } from 'lucide-react'
 import type { ReactNode } from 'react'
 import { BRAND_FONTS } from '@/lib/personas/fonts'
 import { BRANDS, type BrandKey } from '@/lib/personas/registry'
@@ -34,7 +36,14 @@ export function ReviewerPanel({ forWho, testing, note }: { forWho: string; testi
       <summary className="mx-auto flex max-w-5xl cursor-pointer list-none items-center gap-2 px-5 py-2 text-xs font-medium uppercase tracking-wide text-muted-foreground sm:px-8 [&::-webkit-details-marker]:hidden">
         <Info className="size-3.5" aria-hidden />
         For reviewers
-        <span className="ml-auto normal-case tracking-normal group-open:hidden">Who this page is for and what it tests</span>
+        <span className="ml-auto hidden normal-case tracking-normal group-open:hidden sm:inline">Who this page is for and what it tests</span>
+        <a
+          href="/"
+          onClick={(e) => e.stopPropagation()}
+          className="ml-auto inline-flex items-center gap-1 normal-case tracking-normal text-foreground underline underline-offset-4 hover:text-primary sm:ml-4"
+        >
+          <ArrowLeft className="size-3.5" aria-hidden /> Back to index
+        </a>
       </summary>
       <div className="mx-auto grid max-w-5xl gap-4 px-5 pb-4 sm:grid-cols-2 sm:px-8">
         <p className="leading-relaxed text-pretty">

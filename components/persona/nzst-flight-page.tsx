@@ -1,22 +1,23 @@
 'use client'
 
-import { ArrowDown, Play } from 'lucide-react'
-import { FactsStrip } from '@/components/modules/facts-strip'
+import { ArrowDown, MessageCircle } from 'lucide-react'
+import { InPageNav } from '@/components/course/above-fold'
+import { CourseBreakdown, FormalDetails, FormalHeading } from '@/components/modules/compliance'
 import { InstantCheck } from '@/components/modules/instant-check'
 import { MessageUs } from '@/components/modules/message-us'
 import { PathwayPicture } from '@/components/modules/pathway-picture'
 import { Callout, CostPlain, DateList, StoryCards, WhatYouDo } from '@/components/modules/real-terms'
 import { StartAndEnrol } from '@/components/modules/start-and-enrol'
-import { ButtonLink, Expander, Placeholder, Section } from '@/components/modules/ui'
+import { Expander, Placeholder, Section } from '@/components/modules/ui'
 import { VideoReel } from '@/components/modules/video-reel'
 import { WhatEmployersLookFor } from '@/components/modules/what-employers-look-for'
 import { WhereGraduatesWent } from '@/components/modules/where-graduates-went'
+import { flightBreakdown, flightFormal, flightLinks } from '@/lib/personas/data/compliance'
 import {
   FLIGHT,
   flightAirlines,
   flightClips,
   flightDropIns,
-  flightFacts,
   flightIntakes,
   flightPathway,
   flightQuestions,
@@ -28,7 +29,22 @@ import {
 } from '@/lib/personas/data/nzst'
 import { flightCostLines, flightLike, flightPay, flightPhases } from '@/lib/personas/data/real-terms'
 import { PERSONAS } from '@/lib/personas/registry'
+import { Billboard, HeroButton, QuickAnswers } from './billboard'
 import { PersonaShell } from './shell'
+
+const NAV: [string, string][] = [
+  ['#check', 'Can I get in'],
+  ['#like', "What it's like"],
+  ['#airlines', 'Airlines'],
+  ['#pathway', 'Pathway'],
+  ['#cost', 'Cost'],
+  ['#message', 'Message us'],
+  ['#start', 'Enrol'],
+  ['#structure', 'Modules'],
+  ['#formal', 'Details'],
+]
+
+const fee = `$${FLIGHT.fee.toLocaleString('en-NZ', { minimumFractionDigits: 2 })}`
 
 export function NzstFlightPage() {
   return (
@@ -39,68 +55,78 @@ export function NzstFlightPage() {
       reviewer={{
         forWho: `${PERSONAS.tailwinds.name} (41% of new enrolments). ${PERSONAS.tailwinds.oneLine} The "Start here" result also serves ${PERSONAS.confidence.name} (30%).`,
         testing: 'Whether one instant "Can I get in?" plus a short, readable page lifts enquiry to application on a phone, and whether "Start here" keeps people without Level 3.',
-        note: 'Three call-outs: the check, message us, enrol. Everything else scrolls. Fee, levy, dates and campuses are from the brief.',
+        note: 'Visual structure follows the original round. Three call-outs: the check, message us, enrol. Fee, levy, dates and campuses are from the brief.',
       }}
       mainAction={{ label: 'Can I get in?', href: '#check' }}
     >
       <main className="pb-24 sm:pb-0">
-        <section className="relative flex min-h-[88svh] flex-col justify-end overflow-hidden bg-primary text-primary-foreground">
-          <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/20 to-transparent" aria-hidden />
-          <button type="button" className="absolute inset-x-0 top-1/3 mx-auto flex size-16 items-center justify-center rounded-full bg-background/90 text-foreground" aria-label="Play graduates in uniform (placeholder video)">
-            <Play className="ml-1 size-7" aria-hidden />
-          </button>
-          <span className="absolute left-5 top-5 sm:left-8">
-            <Placeholder>Vertical video, graduates in uniform</Placeholder>
-          </span>
-          <div className="relative mx-auto flex w-full max-w-5xl flex-col gap-5 px-5 pb-10 sm:px-8 sm:pb-14">
-            <p className="text-xs font-medium uppercase tracking-wide opacity-90">{FLIGHT.short}</p>
-            <h1 className="font-display text-5xl font-bold uppercase leading-[0.95] tracking-tight text-balance sm:text-7xl">
-              Wake up in a different city. Start in {FLIGHT.weeks} weeks.
-            </h1>
-            <div className="flex flex-wrap gap-3">
-              <ButtonLink href="#check" size="lg">
-                Can I get in? <ArrowDown className="size-4" aria-hidden />
-              </ButtonLink>
-              <ButtonLink href="#message" size="lg" variant="secondary" className="border-primary-foreground/40 bg-primary-foreground/10 text-primary-foreground hover:border-primary-foreground">
-                Message us
-              </ButtonLink>
-            </div>
-          </div>
-        </section>
+        <Billboard
+          eyebrow={`NZST · ${FLIGHT.short} · ${FLIGHT.weeks} weeks · 5 campuses`}
+          title={
+            <>
+              Wake up in a different city. <span className="text-coral">Start in {FLIGHT.weeks} weeks.</span>
+            </>
+          }
+          sub="Sixteen weeks to cabin crew. Half of it in the simulator, three mock recruitment days, and airlines on campus in the final fortnight."
+          facts={[
+            { label: 'Length', value: `${FLIGHT.weeks} weeks` },
+            { label: 'Where', value: FLIGHT.campuses.join(', ') },
+            { label: 'You need', value: '16+, NCEA Level 2, or start with Level 3' },
+            { label: 'Cost', value: `${fee} plus $${FLIGHT.levy} levy` },
+          ]}
+          actions={
+            <>
+              <HeroButton href="#check" primary>
+                <ArrowDown className="size-5" aria-hidden /> Can I get in?
+              </HeroButton>
+              <HeroButton href="#message">
+                <MessageCircle className="size-5" aria-hidden /> Message us
+              </HeroButton>
+            </>
+          }
+          footnote={`Next class starts ${FLIGHT.intakes[0]}. Morning or afternoon.`}
+          videoLabel="Vertical video, graduates in uniform"
+        />
+        <QuickAnswers
+          pairs={[
+            ['Next start', '25 Jan 2027'],
+            ['How long', '16 weeks'],
+            ['Where', '5 campuses'],
+            ['You need', '16+, NCEA L2'],
+            ['You get', 'Level 4 certificate'],
+          ]}
+        />
+        <InPageNav items={NAV} />
 
         <Section id="check" eyebrow="Thirty seconds" title="Can I get in?" dense tone="muted">
           <Callout eyebrow="Instant check">
-            <InstantCheck title="Three questions. A yes and a start date, or the first step." questions={flightQuestions} resolve={resolveFlight} ctaLabel="Tell me" placeholderNote={null} />
+            <InstantCheck title="Three questions" intro="A yes and a start date, or the first step of the same journey. Never a no." questions={flightQuestions} resolve={resolveFlight} ctaLabel="Tell me" placeholderNote={null} />
           </Callout>
         </Section>
 
-        <section className="mx-auto w-full max-w-5xl px-5 sm:px-8">
-          <FactsStrip facts={flightFacts} />
-        </section>
-
-        <Section id="like" eyebrow="In real terms" title="What the sixteen weeks are actually like" dense>
-          <p className="max-w-3xl text-[17px] leading-relaxed text-pretty">{flightLike.text}</p>
+        <Section id="like" eyebrow="The course" title="What it's like" dense>
+          <p className="max-w-[720px] text-[17px] leading-relaxed text-pretty">{flightLike.text}</p>
           <WhatYouDo phases={flightPhases} />
         </Section>
 
-        <Section id="airlines" eyebrow="Recruiters" title="What airlines look for, and how we cover it" dense tone="muted">
+        <Section id="airlines" eyebrow="Recruiters" title="What airlines look for" dense tone="muted">
           <WhatEmployersLookFor rows={flightWants} who="airline recruiters" />
         </Section>
 
-        <Section id="hired" eyebrow="Who hires our graduates" title="The airlines, and the people they took" dense>
+        <Section id="hired" eyebrow="Graduates" title="Who hires our graduates" dense>
           <WhereGraduatesWent employers={flightAirlines} />
           <VideoReel clips={flightClips} />
         </Section>
 
-        <Section id="pathway" eyebrow="The journey" title="Level 3, then Flight, then your wings" intro="No Level 3? Start here. Same campuses, same tutors, and your place in Flight is held." dense tone="muted">
+        <Section id="pathway" eyebrow="Pathway" title="Level 3, then Flight, then your wings" intro="No Level 3? Start here. Same campuses, same tutors, and your place in Flight is held." dense tone="muted">
           <PathwayPicture steps={flightPathway} />
           <StoryCards stories={flightStories.slice(0, 3)} />
         </Section>
 
-        <Section id="cost" eyebrow="Cost and dates" title="No surprises" dense>
+        <Section id="cost" eyebrow="Fees" title="What it costs" dense>
           <CostPlain lines={flightCostLines} pay={flightPay} note="Kit and document costs are estimates." />
           <div className="flex flex-col gap-2">
-            <Expander title="What you need to know up front: swim test, passport, security check">
+            <Expander title="Before you start: swim test, passport, security check">
               <ul className="flex flex-col gap-3">
                 {flightUpFront.map((x) => (
                   <li key={x.h} className="flex flex-col gap-0.5">
@@ -130,17 +156,17 @@ export function NzstFlightPage() {
           </div>
         </Section>
 
-        <Section id="message" eyebrow="Talk to us" title="Message us. Reply in minutes." dense tone="muted">
+        <Section id="message" eyebrow="Talk to us" title="Message us" dense tone="muted">
           <Callout eyebrow="Message us">
             <MessageUs who="Aroha, Flight tutor" hours="8am to 8pm, seven days" />
           </Callout>
         </Section>
 
-        <Section id="dropin" eyebrow="Come and see" title="Drop-in days" intro="Bring someone with you. No booking needed." dense>
+        <Section id="dropin" eyebrow="Visit" title="Drop-in days" intro="Bring someone with you. No booking needed." dense>
           <DateList items={flightDropIns.map((d) => ({ when: d.date, detail: `${d.where}, ${d.time}` }))} />
         </Section>
 
-        <Section id="start" eyebrow="You're in" title="Pick your start date and campus" dense tone="muted">
+        <Section id="start" eyebrow="Enrol" title="Pick your start date and campus" dense tone="muted">
           <Callout eyebrow="Enrol online">
             <StartAndEnrol
               intakes={flightIntakes}
@@ -151,6 +177,16 @@ export function NzstFlightPage() {
             />
           </Callout>
         </Section>
+
+        <Section id="structure" eyebrow="Course structure" title={`6 modules, 60 credits, ${FLIGHT.weeks} weeks`} dense>
+          <CourseBreakdown breakdown={flightBreakdown} />
+        </Section>
+        <section id="formal" aria-labelledby="formal-title" className="hairline-t scroll-mt-20 border-border bg-muted">
+          <div className="mx-auto flex max-w-[960px] flex-col gap-6 px-6 py-8 md:py-12">
+            <FormalHeading />
+            <FormalDetails rows={flightFormal} links={flightLinks} />
+          </div>
+        </section>
       </main>
     </PersonaShell>
   )

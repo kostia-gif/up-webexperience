@@ -40,15 +40,18 @@ export function Section({
     <section
       id={id}
       aria-labelledby={id ? `${id}-title` : undefined}
-      className={cn('scroll-mt-20', tone === 'muted' ? 'bg-muted' : 'bg-background', className)}
+      className={cn('hairline-t scroll-mt-20 border-border', tone === 'muted' ? 'bg-muted' : 'bg-background', className)}
     >
-      <div className={cn('mx-auto flex max-w-5xl flex-col px-5 sm:px-8', dense ? 'gap-4 py-8 sm:py-10' : 'gap-6 py-12 sm:py-16')}>
-        <div className="flex max-w-2xl flex-col gap-2">
-          {eyebrow && <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">{eyebrow}</p>}
-          <h2 id={id ? `${id}-title` : undefined} className={cn('font-display leading-tight text-balance', dense ? 'text-2xl sm:text-3xl' : 'text-3xl sm:text-4xl')}>
+      <div className={cn('mx-auto flex max-w-[960px] flex-col px-6', dense ? 'gap-4 py-8 md:py-10' : 'gap-6 py-8 md:py-12')}>
+        <div className="flex max-w-[720px] flex-col gap-1">
+          {eyebrow && <p className="text-xs font-medium uppercase tracking-wide text-primary">{eyebrow}</p>}
+          <h2
+            id={id ? `${id}-title` : undefined}
+            className={cn('font-display font-bold uppercase leading-none tracking-tight text-balance', dense ? 'text-2xl md:text-3xl' : 'text-3xl md:text-4xl')}
+          >
             {title}
           </h2>
-          {intro && <p className="text-[15px] leading-relaxed text-muted-foreground text-pretty sm:text-base">{intro}</p>}
+          {intro && <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground text-pretty">{intro}</p>}
         </div>
         {children}
       </div>
