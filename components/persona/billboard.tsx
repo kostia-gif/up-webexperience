@@ -169,6 +169,77 @@ export function SplitHero({
   )
 }
 
+/**
+ * The bright, elegant split hero from AIPC's Option A: copy on the left, a
+ * rounded daylight photo on the right, accreditation pills, two actions. No
+ * fact strip or cards; the course name sits directly under the headline.
+ */
+export function LightHero({
+  eyebrow,
+  title,
+  courseName,
+  sub,
+  image,
+  imageAlt,
+  pills,
+  actions,
+  note,
+}: {
+  eyebrow: string
+  title: ReactNode
+  courseName: string
+  sub: ReactNode
+  image: string
+  imageAlt: string
+  pills?: string[]
+  actions: ReactNode
+  note?: ReactNode
+}) {
+  return (
+    <section aria-labelledby="hero-title" className="bg-background">
+      <div className="mx-auto grid max-w-6xl items-center gap-10 px-6 pb-14 pt-14 md:grid-cols-2 md:gap-12 md:pb-20 md:pt-20">
+        <div className="flex flex-col gap-6">
+          <p className="text-xs font-medium uppercase tracking-wide text-secondary-foreground">{eyebrow}</p>
+          <div className="flex flex-col gap-3">
+            <h1 id="hero-title" className="font-display text-4xl leading-[1.08] tracking-tight text-balance text-foreground sm:text-5xl">
+              {title}
+            </h1>
+            <p className="font-display text-2xl leading-tight text-primary">{courseName}</p>
+          </div>
+          <p className="max-w-lg text-lg leading-relaxed text-muted-foreground text-pretty">{sub}</p>
+          {pills && (
+            <ul aria-label="Accreditation and approvals" className="flex flex-wrap gap-2">
+              {pills.map((p) => (
+                <li key={p} className="inline-flex items-center rounded-full bg-secondary px-3 py-1 text-sm font-medium text-secondary-foreground">
+                  {p}
+                </li>
+              ))}
+            </ul>
+          )}
+          <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">{actions}</div>
+          {note && <p className="text-sm text-muted-foreground text-pretty">{note}</p>}
+        </div>
+        <div className="relative order-first md:order-last">
+          <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-secondary sm:aspect-[5/4] md:aspect-[4/5]">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={image} alt={imageAlt} className="absolute inset-0 size-full object-cover" />
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+const LIGHT_BTN = 'inline-flex min-h-14 items-center justify-center gap-2 rounded-md px-6 text-base font-medium leading-none transition-colors'
+
+export function LightButton({ href, variant = 'outline', children }: { href: string; variant?: 'coral' | 'outline'; children: ReactNode }) {
+  return (
+    <a href={href} className={cn(LIGHT_BTN, variant === 'coral' ? 'bg-coral text-coral-foreground hover:bg-coral-hover' : 'border border-input bg-background text-foreground hover:border-foreground')}>
+      {children}
+    </a>
+  )
+}
+
 const PANEL_BTN = 'inline-flex min-h-11 items-center justify-center gap-2 rounded-md px-4 text-[15px] font-medium leading-none transition-colors'
 
 export function PanelButton({ href, primary, children }: { href: string; primary?: boolean; children: ReactNode }) {
