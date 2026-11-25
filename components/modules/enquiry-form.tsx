@@ -67,7 +67,7 @@ export function EnquiryForm({
             setDone(true)
           }}
         >
-          <RoutingQuestion question="Which sounds most like you?" options={routes} value={route} onChange={setRoute} compact />
+          {routes.length > 1 && <RoutingQuestion question="Which sounds most like you?" options={routes} value={route} onChange={setRoute} compact />}
           <div className="grid gap-3 sm:grid-cols-2">
             <Field label="Your name" name="name" required autoComplete="name" />
             <Field label="Email" name="email" type="email" required autoComplete="email" />

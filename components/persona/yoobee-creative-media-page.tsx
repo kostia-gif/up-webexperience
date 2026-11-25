@@ -1,31 +1,32 @@
 'use client'
 
-import { CalendarClock, Play, Search, TrendingUp } from 'lucide-react'
+import { CalendarClock, MessageCircle, Play, TrendingUp } from 'lucide-react'
 import { InPageNav } from '@/components/course/above-fold'
 import { CourseBreakdown, FormalDetails, FormalHeading } from '@/components/modules/compliance'
-import { CourseFinder } from '@/components/modules/course-finder'
 import { EnquiryForm } from '@/components/modules/enquiry-form'
+import { CourseOutcomes, WaysToPay, WhyThisCourse } from '@/components/modules/framing'
 import { OutcomesPanel } from '@/components/modules/outcomes-panel'
 import { PathwayPicture } from '@/components/modules/pathway-picture'
-import { Callout, CostPlain, StoryCards, WhatItsLike, WhatYouDo } from '@/components/modules/real-terms'
+import { Callout, StoryCards, WhatItsLike, WhatYouDo } from '@/components/modules/real-terms'
 import { StudentWorkWall } from '@/components/modules/student-work-wall'
 import { TasterLesson } from '@/components/modules/taster-lesson'
 import { Section } from '@/components/modules/ui'
 import { creativeMediaLevel4 } from '@/lib/courses'
 import { cmBreakdown, cmFormal, cmLinks } from '@/lib/personas/data/compliance'
-import { cmCostLines, cmPay, cmPhases } from '@/lib/personas/data/real-terms'
-import { CM, cmAdvisor, cmAdvisorRoutes, cmEmployers, cmFinderCourses, cmFinderQuestions, cmNext, cmOutcomeStats, cmPay as cmPayBands, cmStories, cmWorks } from '@/lib/personas/data/yoobee'
+import { cmAdvisorRoute, cmOutcomes, cmReasons, cmWays } from '@/lib/personas/data/framing'
+import { cmPhases } from '@/lib/personas/data/real-terms'
+import { CM, cmAdvisor, cmEmployers, cmNext, cmOutcomeStats, cmPay as cmPayBands, cmStories, cmWorks } from '@/lib/personas/data/yoobee'
 import { PERSONAS } from '@/lib/personas/registry'
 import { PanelButton, SplitHero } from './billboard'
 import { PersonaShell } from './shell'
 
 const NAV: [string, string][] = [
+  ['#outcomes-card', 'Outcomes'],
   ['#like', "What it's like"],
   ['#journey', 'What you will make'],
   ['#work', 'Student work'],
-  ['#outcomes', 'Jobs'],
-  ['#finder', 'Which course'],
-  ['#cost', 'Cost'],
+  ['#why', 'Why this course'],
+  ['#cost', 'Fees'],
   ['#taster', 'Try it'],
   ['#structure', 'Modules'],
   ['#formal', 'Details'],
@@ -40,10 +41,10 @@ export function YoobeeCreativeMediaPage() {
       applyLabel="Enrol"
       reviewer={{
         forWho: `${PERSONAS['plan-b'].name} (64% of Yoobee students). ${PERSONAS['plan-b'].oneLine}`,
-        testing: 'Whether a readable page that shows what you make and what comes after, with a course finder and a taster as the call-outs, speeds up the decision for an adult with commitments.',
-        note: 'Visual structure follows the original round. Three call-outs: course finder, taster, advisor form. The 84% figure appears once.',
+        testing: 'Whether a readable course page framed around outcomes and "why this course", with a free taster as the main action, speeds up the decision for an adult with commitments.',
+        note: 'Two call-outs: taster lesson and advisor form. Course choice belongs on the course listing, not here.',
       }}
-      mainAction={{ label: 'Find the right course', href: '#finder' }}
+      mainAction={{ label: 'Try a free lesson', href: '#taster' }}
     >
       <main className="pb-24 sm:pb-0">
         <SplitHero
@@ -55,30 +56,16 @@ export function YoobeeCreativeMediaPage() {
           imageAlt="A student at a kitchen table animating a 2D character on a laptop with a drawing tablet"
           actions={
             <>
-              <PanelButton href="#finder" primary>
-                <Search className="size-4" aria-hidden /> Find the right course
-              </PanelButton>
-              <PanelButton href="#taster">
+              <PanelButton href="#taster" primary>
                 <Play className="size-4" aria-hidden /> Try a free lesson
               </PanelButton>
-            </>
-          }
-          note={
-            <>
-              Not sure?{' '}
-              <a href="#advisor" className="font-medium text-primary-foreground underline underline-offset-4 hover:no-underline">
-                Talk it through with Sam, a course advisor
-              </a>
+              <PanelButton href="#advisor">
+                <MessageCircle className="size-4" aria-hidden /> Talk to an advisor
+              </PanelButton>
             </>
           }
           cards={[
-            {
-              label: 'Total cost, 2027',
-              value: '$0',
-              tone: 'coral',
-              placeholder: true,
-              sub: 'Free for eligible domestic students under Fees Free. Otherwise $4,753 all-in.',
-            },
+            { label: 'Fee, 2027', value: '$0', tone: 'coral', placeholder: true, sub: 'Free for eligible domestic students under Fees Free. Otherwise $4,753, with split payments available.' },
             {
               label: 'Next start',
               value: '8 Feb 2027',
@@ -103,6 +90,8 @@ export function YoobeeCreativeMediaPage() {
         />
         <InPageNav items={NAV} />
 
+        <CourseOutcomes headline="Make a living from what you make" image="/images/yoobee/mc-design.png" imageAlt="A student reviewing a poster layout on screen" outcomes={cmOutcomes} />
+
         <Section id="like" eyebrow="The course" title="What it's like">
           <WhatItsLike text={like.text} schedule={like.schedule} poster={like.videoPoster} caption={like.videoCaption} />
         </Section>
@@ -122,22 +111,20 @@ export function YoobeeCreativeMediaPage() {
           <StudentWorkWall disciplines={[]} works={cmWorks} />
         </section>
 
-        <Section id="outcomes" eyebrow="Outcomes" title="Where graduates work" tone="muted">
+        <Section id="why" eyebrow="Why this course" title="Why Yoobee" tone="muted">
+          <WhyThisCourse reasons={cmReasons} />
+        </Section>
+
+        <Section id="outcomes" eyebrow="Why this course" title="Where graduates work">
           <OutcomesPanel stats={cmOutcomeStats} employers={cmEmployers} pay={cmPayBands} />
         </Section>
 
-        <Section id="stories" eyebrow="Graduates" title="People who switched">
+        <Section id="stories" eyebrow="Why this course" title="People who switched" tone="muted">
           <StoryCards stories={cmStories.slice(0, 3)} />
         </Section>
 
-        <Section id="finder" eyebrow="Not sure which course?" title="Find the right course" tone="muted">
-          <Callout eyebrow="Course finder">
-            <CourseFinder questions={cmFinderQuestions} courses={cmFinderCourses} advisor={cmAdvisor} talkHref="#advisor" />
-          </Callout>
-        </Section>
-
-        <Section id="cost" eyebrow="Fees" title="What it costs">
-          <CostPlain lines={cmCostLines} pay={cmPay} note="Fees Free conditions as published for 2027, to be confirmed." />
+        <Section id="cost" eyebrow="Fees" title="Fees and ways to pay">
+          <WaysToPay fee="$0" feeNote="For eligible domestic students under Fees Free in 2027. Otherwise $4,753, which covers tuition, levy and software with nothing added later." ways={cmWays} note="Fees Free conditions as published for 2027, to be confirmed." />
         </Section>
 
         <Section id="taster" eyebrow="Try it" title="A free lesson from week two" tone="muted">
@@ -157,7 +144,7 @@ export function YoobeeCreativeMediaPage() {
 
         <Section id="advisor" eyebrow="Advisor" title="Talk to a course advisor" tone="muted">
           <Callout eyebrow="Talk to an advisor">
-            <EnquiryForm title={`Talk to ${cmAdvisor.name}`} intro={cmAdvisor.line} routes={cmAdvisorRoutes} cta="Ask Sam to get in touch" />
+            <EnquiryForm title={`Talk to ${cmAdvisor.name}`} intro={cmAdvisor.line} routes={cmAdvisorRoute} cta="Ask Sam to get in touch" />
           </Callout>
         </Section>
 

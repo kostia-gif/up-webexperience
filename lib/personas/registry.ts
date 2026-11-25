@@ -70,7 +70,7 @@ export const PERSONAS: Record<PersonaKey, PersonaInfo> = {
     role: 'lead',
     oneLine: 'Around 43. HR manager, nurse or teacher, fifteen years into a career that pays but no longer means much.',
     evidence: 'Assumed',
-    mainAction: 'Talk to a tutor',
+    mainAction: 'Talk to a course specialist',
     secondAction: 'Download the course guide',
     question: 'Is this credible, and is it right for me at this stage of life?',
   },
@@ -145,7 +145,7 @@ export const SCHOOL_PAGES: SchoolPage[] = [
     course: 'Master of Counselling',
     personas: ['sarah', 'dan'],
     href: '/aipc/master-of-counselling',
-    testing: 'Whether a calm, proof-led page with "Talk to a tutor" as the main action earns a conversation from Sarah, and whether one routing question gives Dan a fast credit answer and a way to enrol without a call.',
+    testing: 'Whether a calm, readable page framed around outcomes and "why this course", with a course specialist as the main action, earns a conversation from Sarah, and whether a credit check on the same page serves Dan without a separate version.',
   },
   {
     brand: 'yoobee',
@@ -224,7 +224,7 @@ export const MODULES: ModuleDef[] = [
     whatItDoes: 'Three questions return subjects credited, months saved and dollars saved, with the rules behind the answer one tap away.',
     learn: 'Does a plain credit answer move frontliners straight to enrolment?',
     sits: 'Main action on the Dan version of the AIPC page.',
-    usedOn: ['/aipc/master-of-counselling?for=dan'],
+    usedOn: ['/aipc/master-of-counselling'],
   },
   {
     slug: 'cost-and-funding-checker',
@@ -322,7 +322,7 @@ export const MODULES: ModuleDef[] = [
     whatItDoes: 'One number, one meaning, one source. Example employers and pay bands by role.',
     learn: 'Do sourced outcomes speed up the Plan B decision?',
     sits: 'First proof section under the hero.',
-    usedOn: ['/yoobee/creative-media', '/aipc/master-of-counselling?for=dan'],
+    usedOn: ['/yoobee/creative-media', '/aipc/master-of-counselling'],
   },
   {
     slug: 'where-graduates-went',
@@ -535,7 +535,7 @@ export const MODULES: ModuleDef[] = [
     whatItDoes: 'Intake and campus picker, then a short form that confirms on the page.',
     learn: 'How many choose to enrol directly when offered?',
     sits: 'End of the page, or straight after a "You\u2019re in" result.',
-    usedOn: ['/aipc/master-of-counselling?for=dan', '/nzst/flight-attending'],
+    usedOn: ['/aipc/master-of-counselling', '/nzst/flight-attending'],
   },
   {
     slug: 'send-a-summary',
@@ -549,7 +549,7 @@ export const MODULES: ModuleDef[] = [
     whatItDoes: 'Builds a one-page summary of course, cost, time and recognition, to download or send.',
     learn: 'Does equipping the influencer shorten the decision?',
     sits: 'Late in the page, near the actions.',
-    usedOn: ['/aipc/master-of-counselling?for=dan', '/yoobee/diploma-in-animation', '/nzst/flight-attending'],
+    usedOn: ['/aipc/master-of-counselling', '/yoobee/diploma-in-animation', '/nzst/flight-attending'],
   },
   {
     slug: 'message-us',
@@ -578,7 +578,7 @@ export const MODULES: ModuleDef[] = [
     whatItDoes: 'A small chat with suggested questions, scripted answers and a visible handover to a named person.',
     learn: 'Which questions get asked, and how often is handover requested?',
     sits: 'Second action on the Dan version.',
-    usedOn: ['/aipc/master-of-counselling?for=dan'],
+    usedOn: ['/aipc/master-of-counselling'],
   },
   {
     slug: 'text-me-back',

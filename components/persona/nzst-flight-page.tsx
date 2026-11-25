@@ -6,7 +6,8 @@ import { CourseBreakdown, FormalDetails, FormalHeading } from '@/components/modu
 import { InstantCheck } from '@/components/modules/instant-check'
 import { MessageUs } from '@/components/modules/message-us'
 import { PathwayPicture } from '@/components/modules/pathway-picture'
-import { Callout, CostPlain, DateList, StoryCards, WhatYouDo } from '@/components/modules/real-terms'
+import { CourseOutcomes, WaysToPay, WhyThisCourse } from '@/components/modules/framing'
+import { Callout, DateList, StoryCards, WhatYouDo } from '@/components/modules/real-terms'
 import { StartAndEnrol } from '@/components/modules/start-and-enrol'
 import { Expander, Placeholder, Section } from '@/components/modules/ui'
 import { VideoReel } from '@/components/modules/video-reel'
@@ -27,14 +28,17 @@ import {
   flightWants,
   resolveFlight,
 } from '@/lib/personas/data/nzst'
-import { flightCostLines, flightLike, flightPay, flightPhases } from '@/lib/personas/data/real-terms'
+import { flightOutcomes, flightReasons, flightWays } from '@/lib/personas/data/framing'
+import { flightLike, flightPhases } from '@/lib/personas/data/real-terms'
 import { PERSONAS } from '@/lib/personas/registry'
 import { Billboard, HeroButton } from './billboard'
 import { PersonaShell } from './shell'
 
 const NAV: [string, string][] = [
   ['#check', 'Can I get in'],
+  ['#outcomes-card', 'Outcomes'],
   ['#like', "What it's like"],
+  ['#why', 'Why NZST'],
   ['#airlines', 'Airlines'],
   ['#pathway', 'Pathway'],
   ['#cost', 'Cost'],
@@ -95,27 +99,33 @@ export function NzstFlightPage() {
           </Callout>
         </Section>
 
+        <CourseOutcomes headline="Ready for the recruiters in sixteen weeks" image="/images/nzst/graduate-uniform.png" imageAlt="A recent graduate in cabin crew uniform at an airport terminal" outcomes={flightOutcomes} />
+
         <Section id="like" eyebrow="The course" title="What it's like" dense>
           <p className="max-w-[720px] text-[17px] leading-relaxed text-pretty">{flightLike.text}</p>
           <WhatYouDo phases={flightPhases} />
         </Section>
 
-        <Section id="airlines" eyebrow="Recruiters" title="What airlines look for" dense tone="muted">
+        <Section id="why" eyebrow="Why this course" title="Why NZST" dense tone="muted">
+          <WhyThisCourse reasons={flightReasons} />
+        </Section>
+
+        <Section id="airlines" eyebrow="Why this course" title="What airlines look for" dense>
           <WhatEmployersLookFor rows={flightWants} who="airline recruiters" />
         </Section>
 
-        <Section id="hired" eyebrow="Graduates" title="Who hires our graduates" dense>
+        <Section id="hired" eyebrow="Why this course" title="Who hires our graduates" dense tone="muted">
           <WhereGraduatesWent employers={flightAirlines} />
           <VideoReel clips={flightClips} />
         </Section>
 
-        <Section id="pathway" eyebrow="Pathway" title="Level 3, then Flight, then your wings" intro="No Level 3? Start here. Same campuses, same tutors, and your place in Flight is held." dense tone="muted">
+        <Section id="pathway" eyebrow="Pathway" title="Level 3, then Flight, then your wings" intro="No Level 3? Start here. Same campuses, same tutors, and your place in Flight is held." dense>
           <PathwayPicture steps={flightPathway} />
           <StoryCards stories={flightStories.slice(0, 3)} />
         </Section>
 
-        <Section id="cost" eyebrow="Fees" title="What it costs" dense>
-          <CostPlain lines={flightCostLines} pay={flightPay} note="Kit and document costs are estimates." />
+        <Section id="cost" eyebrow="Fees" title="Fees and ways to pay" dense tone="muted">
+          <WaysToPay fee={fee} feeNote={`Plus a $${FLIGHT.levy} student levy. Allow about $630 for the uniform kit, swim test, passport and security check.`} ways={flightWays} note="Kit and document costs are estimates." />
           <div className="flex flex-col gap-2">
             <Expander title="Before you start: swim test, passport, security check">
               <ul className="flex flex-col gap-3">

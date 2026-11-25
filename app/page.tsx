@@ -57,11 +57,6 @@ export default function Home() {
               </a>
             </li>
           ))}
-          <li>
-            <a href="/aipc/master-of-counselling?for=dan" className="flex items-center justify-between gap-4 rounded-lg border border-dashed border-border px-5 py-3 text-sm text-muted-foreground hover:border-foreground hover:text-foreground">
-              AIPC page opened straight on the Dan version <ArrowRight className="size-4" aria-hidden />
-            </a>
-          </li>
         </ul>
       </section>
 
