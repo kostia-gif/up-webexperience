@@ -2,24 +2,21 @@
 
 import { Download, MessageCircle } from 'lucide-react'
 import { InPageNav } from '@/components/course/above-fold'
-import { BookingSlots } from '@/components/modules/booking-slots'
 import { CourseBreakdown, FormalDetails, FormalHeading } from '@/components/modules/compliance'
 import { EnquiryForm } from '@/components/modules/enquiry-form'
 import { FeesSimple } from '@/components/modules/fees-simple'
 import { CourseOutcomes } from '@/components/modules/framing'
 import { InstantCheck } from '@/components/modules/instant-check'
-import { PeopleCards } from '@/components/modules/people-cards'
 import { Callout, DateList, WhatItsLike, WhatYouDo } from '@/components/modules/real-terms'
+import { SpecialistPanel } from '@/components/modules/specialist-panel'
 import { Expander, Section } from '@/components/modules/ui'
-import { AIPC_COURSE, aipcCreditQuestions, aipcQuestions, aipcSessions, aipcTutors, resolveCredit } from '@/lib/personas/data/aipc'
+import { AIPC_COURSE, aipcCreditQuestions, aipcQuestions, resolveCredit } from '@/lib/personas/data/aipc'
 import { aipcBreakdown, aipcFormal, aipcLinks } from '@/lib/personas/data/compliance'
 import { aipcGuideRoute, aipcOutcomes } from '@/lib/personas/data/framing'
 import { aipcLike, aipcPhases } from '@/lib/personas/data/real-terms'
 import { PERSONAS } from '@/lib/personas/registry'
 import { LightButton, LightHero } from './billboard'
 import { PersonaShell } from './shell'
-
-const tutorsStatic = aipcTutors.map(({ slots: _slots, video: _video, ...t }) => t)
 
 const NAV: [string, string][] = [
   ['#outcomes-card', 'Outcomes'],
@@ -97,21 +94,22 @@ export function AipcCounsellingPage() {
           id="talk"
           eyebrow="Let's talk"
           title="Talk to a course specialist"
-          intro="Our course specialists are practising counsellors who know the sector. Twenty minutes to work out whether this is right for you, how it fits your life, and what credit you might get. Not a sales call."
+          intro="Practising counsellors who know the sector and can help you work out whether and how to do this. Ask for a call back, or pick a time that suits you."
         >
-          <PeopleCards people={tutorsStatic} />
-          <Callout eyebrow="Book twenty minutes">
-            <div className="flex flex-col gap-4 rounded-xl border border-border bg-card p-5 sm:p-6">
-              <BookingSlots
-                days={[
-                  { day: 'Tue 2 Feb', times: ['12:00', '18:30', '19:00'] },
-                  { day: 'Wed 3 Feb', times: ['12:30', '17:30', '18:00'] },
-                  { day: 'Thu 4 Feb', times: ['08:30', '19:00', '19:30'] },
-                ]}
-                what="a 20-minute conversation with a course specialist"
-              />
-              <p className="text-xs text-muted-foreground">Prefer a group session? Online information sessions: {aipcSessions.map((s) => s.date).join(', ')}. Ask for the link when you book.</p>
-            </div>
+          <Callout eyebrow="Call me back, or pick a time">
+            <SpecialistPanel
+              specialists={[
+                { name: 'Dr Helen Whitmore', years: '30 years practising', expertise: 'Community mental health, clinical supervision', photo: '/images/aipc/program-director.png' },
+                { name: 'Daniel Okafor', years: '12 years practising', expertise: 'Youth and family counselling, credit for prior experience', photo: '/images/advisors/aipc-daniel.png' },
+                { name: 'Megan Hart', years: '9 years practising', expertise: 'Relationship counselling, career changers', photo: '/images/advisors/aipc-megan.png' },
+              ]}
+              days={[
+                { day: 'Tue 2 Feb', times: ['12:00', '18:30', '19:00'] },
+                { day: 'Wed 3 Feb', times: ['12:30', '17:30', '18:00'] },
+                { day: 'Thu 4 Feb', times: ['08:30', '19:00', '19:30'] },
+              ]}
+              what="a 20-minute conversation with a course specialist"
+            />
           </Callout>
         </Section>
 
