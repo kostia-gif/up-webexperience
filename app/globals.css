@@ -242,6 +242,45 @@
   letter-spacing: 0;
 }
 
+/* NZST, New Zealand School of Tourism: sky teal primary, sunrise orange action, condensed display for energy */
+[data-brand='nzst'] {
+  --display-font: var(--font-barlow), 'Barlow Condensed Fallback', 'Arial Narrow', sans-serif;
+  --display-xl: clamp(2.75rem, 12vw, 4.5rem);
+  --display-tracking: -0.01em;
+
+  --foreground: #0d1b2a;
+  --card-foreground: #0d1b2a;
+  --muted: #eef6f8;
+  --muted-foreground: #4b5d6b;
+  --border: #d5e3e8;
+  --input: #b7cbd3;
+
+  --primary: #0b6e8a;
+  --primary-hover: #085a71;
+  --primary-foreground: #ffffff;
+  --primary-tint: #e1f3f8;
+  --primary-tint-foreground: #084d61;
+
+  --secondary: #fff1e6;
+  --secondary-foreground: #8a3b00;
+
+  --coral: #ff6a13;
+  --coral-hover: #e85c0c;
+  --coral-foreground: #ffffff;
+
+  --success: #e6f6ef;
+  --success-foreground: #0f5132;
+  --success-border: #a8dcc0;
+
+  --ring: #0b6e8a;
+
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-xl: 20px;
+  --r-2xl: 28px;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
