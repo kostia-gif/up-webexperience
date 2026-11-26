@@ -21,7 +21,7 @@ import { PersonaShell } from './shell'
 const NAV: [string, string][] = [
   ['#outcomes-card', 'Outcomes'],
   ['#like', "What it's like"],
-  ['#journey', 'What you will do'],
+  ['#journey', 'Your 18 months'],
   ['#talk', "Let's talk"],
   ['#fees', 'Fees'],
   ['#credit', 'Credit'],
@@ -86,7 +86,7 @@ export function AipcCounsellingPage() {
           <WhatItsLike {...aipcLike} />
         </Section>
 
-        <Section id="journey" eyebrow="Month by month" title="What you will be doing" tone="muted">
+        <Section id="journey" eyebrow="Month by month" title="What your 18 months look like" tone="muted">
           <WhatYouDo phases={aipcPhases} />
         </Section>
 

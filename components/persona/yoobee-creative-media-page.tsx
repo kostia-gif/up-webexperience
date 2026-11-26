@@ -24,7 +24,7 @@ const NAV: [string, string][] = [
   ['#start', 'Start dates'],
   ['#outcomes-card', 'Outcomes'],
   ['#earn', 'Earnings'],
-  ['#journey', 'What you will make'],
+  ['#journey', 'Your 19 weeks'],
   ['#work', 'Student work'],
   ['#fees', 'Fees'],
   ['#advisor', 'Talk to someone'],
@@ -63,9 +63,7 @@ export function YoobeeCreativeMediaPage() {
           eyebrow={`Yoobee · ${CM.short} · ${CM.weeks} weeks · Online or on campus`}
           title={
             <>
-              Turn your passion into a new path.
-              <br />
-              <span className="text-coral">Earn $52,000</span> to start.
+              Turn your passion <span className="text-coral">into a new path.</span>
             </>
           }
           sub="Animation, film and design in one certificate, around the job you have now. Next class starts 8 February 2027."
@@ -118,7 +116,7 @@ export function YoobeeCreativeMediaPage() {
           <EarningPotential e={cmEarnings} />
         </Section>
 
-        <Section id="journey" eyebrow="Week by week" title="What you will be making" intro={like.text}>
+        <Section id="journey" eyebrow="Week by week" title="What your 19 weeks look like" intro={like.text}>
           <WhatYouDo phases={cmPhases} />
         </Section>
 

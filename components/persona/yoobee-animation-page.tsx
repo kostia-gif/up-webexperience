@@ -25,7 +25,7 @@ const tutorsStatic = animTutors.map(({ video: _video, ...t }) => t)
 const NAV: [string, string][] = [
   ['#outcomes-card', 'Outcomes'],
   ['#like', "What it's like"],
-  ['#journey', 'What you will make'],
+  ['#journey', 'Your year'],
   ['#work', 'Student work'],
   ['#why', 'Why this course'],
   ['#cost', 'Fees'],
@@ -97,7 +97,7 @@ export function YoobeeAnimationPage() {
           </div>
         </Section>
 
-        <Section id="journey" eyebrow="Term by term" title="What you will be making" tone="muted">
+        <Section id="journey" eyebrow="Term by term" title="What your year looks like" tone="muted">
           <WhatYouDo phases={animPhases} />
         </Section>
 
