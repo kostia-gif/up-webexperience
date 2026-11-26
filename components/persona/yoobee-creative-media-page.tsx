@@ -7,15 +7,16 @@ import { EarningPotential } from '@/components/modules/earning-potential'
 import { EnquiryForm } from '@/components/modules/enquiry-form'
 import { FeesSimple } from '@/components/modules/fees-simple'
 import { CourseOutcomes } from '@/components/modules/framing'
+import { InstantCheck } from '@/components/modules/instant-check'
 import { Callout, WhatYouDo } from '@/components/modules/real-terms'
 import { StartAndEnrol } from '@/components/modules/start-and-enrol'
 import { StudentWorkWall } from '@/components/modules/student-work-wall'
 import { Section } from '@/components/modules/ui'
 import { creativeMediaLevel4 } from '@/lib/courses'
 import { cmBreakdown, cmFormal, cmLinks } from '@/lib/personas/data/compliance'
-import { cmAdvisorRoute, cmOutcomes } from '@/lib/personas/data/framing'
-import { cmPhases } from '@/lib/personas/data/real-terms'
-import { CM, cmAdvisor, cmEarnings, cmWorks } from '@/lib/personas/data/yoobee'
+import { cmOutcomes } from '@/lib/personas/data/framing'
+import { cmLike, cmPhases } from '@/lib/personas/data/real-terms'
+import { CM, cmAdvisor, cmAdvisorRoutes, cmEarnings, cmFundingQuestions, cmWorks, resolveCmFunding } from '@/lib/personas/data/yoobee'
 import { PERSONAS } from '@/lib/personas/registry'
 import { Billboard, HeroButton } from './billboard'
 import { PersonaShell } from './shell'
@@ -45,7 +46,6 @@ export const CM_FEE_FACTS = [
 ]
 
 export function YoobeeCreativeMediaPage() {
-  const like = creativeMediaLevel4.like
   return (
     <PersonaShell
       brand="yoobee"
@@ -54,7 +54,7 @@ export function YoobeeCreativeMediaPage() {
       reviewer={{
         forWho: `${PERSONAS['plan-b'].name} (64% of Yoobee students). ${PERSONAS['plan-b'].oneLine}`,
         testing: 'Whether the Option A billboard leading straight to cost and a start date, followed by outcomes and what you will make, is enough for an adult with commitments to enrol. Compare with the online-only view.',
-        note: 'Two call-outs: start date and enrol, talk to an advisor. What it is like is folded into what you will make.',
+        note: 'Three call-outs: start date and enrol, the Fees Free check, talk to an advisor. The timetable is stated plainly: two live classes a day, 10am and 1pm; part-time over 38 weeks for people keeping a job.',
       }}
       mainAction={{ label: 'Start 8 Feb 2027', href: '#start' }}
     >
@@ -66,13 +66,13 @@ export function YoobeeCreativeMediaPage() {
               Turn your passion <span className="text-coral">into a new path.</span>
             </>
           }
-          sub="Animation, film and design in one certificate, around the job you have now. Next class starts 8 February 2027."
+          sub="Animation, film and design in one certificate. Full-time over 19 weeks, or part-time over 38 if you are keeping a job. Next class starts 8 February 2027."
           image="/images/yoobee/hero-home-studio.png"
           facts={[
             { label: 'Length', value: `${CM.weeks} weeks, or 38 part-time` },
             { label: 'Where', value: 'Online, or Auckland, Wellington, Christchurch' },
             { label: 'You need', value: '16+, NCEA Level 2' },
-            { label: 'Cost', value: 'Free for domestic students starting February 2027. Otherwise $4,753 total: tuition, levy and software', placeholder: true },
+            { label: 'Cost', value: '$4,753 total. Free if you qualify for Fees Free', placeholder: true },
           ]}
           actions={
             <>
@@ -97,7 +97,7 @@ export function YoobeeCreativeMediaPage() {
               times={['Online, full-time', 'Online, part-time', 'On campus']}
               timesLabel="How you will study"
               cta="Enrol now"
-              confirm="A confirmation is on its way with your Fees Free check and what to have ready for week one. Sam, a course advisor, will email within a day to say hello. No phone call unless you want one."
+              confirm="A confirmation is on its way with your Fees Free check and what to have ready for week one. Classes are 10am and 1pm; part-time students attend half of them. Sam, a course advisor, will email within a day."
             />
           </Callout>
         </Section>
@@ -116,7 +116,7 @@ export function YoobeeCreativeMediaPage() {
           <EarningPotential e={cmEarnings} />
         </Section>
 
-        <Section id="journey" eyebrow="Week by week" title="What your 19 weeks look like" intro={like.text}>
+        <Section id="journey" eyebrow="Week by week" title="What your 19 weeks look like" intro={cmLike}>
           <WhatYouDo phases={cmPhases} />
         </Section>
 
@@ -134,7 +134,7 @@ export function YoobeeCreativeMediaPage() {
         <Section id="fees" eyebrow="What it costs" title="Fees and ways to pay">
           <FeesSimple
             total={4753}
-            totalNote="Tuition $4,464.72, levy $102.50 and software $186. Nothing extra. Free for eligible domestic students under Fees Free in 2027."
+            totalNote="Tuition $4,464.72, levy $102.50 and software $186. Nothing extra. Free if you qualify for Fees Free: check below."
             currency="NZD"
             plans={[
               { id: 'ft', label: 'Full-time', note: '19 weeks', months: 4.5 },
@@ -144,11 +144,14 @@ export function YoobeeCreativeMediaPage() {
             talkHref="#advisor"
             talkLabel="a quick call with Sam"
           />
+          <Callout eyebrow="Is it free for me?">
+            <InstantCheck title="Is it free for me?" intro="Three questions. Fees Free covers the first year of tertiary study for New Zealand citizens and residents." questions={cmFundingQuestions} resolve={(a) => resolveCmFunding(a, { enrol: '#start', talk: '#advisor' })} ctaLabel="Show my answer" placeholderNote="Fees Free rules as published for 2027, to be confirmed." />
+          </Callout>
         </Section>
 
         <Section id="advisor" eyebrow="Talk to someone" title="Talk to a course advisor" tone="muted">
           <Callout eyebrow="Call or email back">
-            <EnquiryForm title={`Talk to ${cmAdvisor.name}`} intro={cmAdvisor.line} routes={cmAdvisorRoute} cta="Ask Sam to get in touch" />
+            <EnquiryForm title={`Talk to ${cmAdvisor.name}`} intro={cmAdvisor.line} routes={cmAdvisorRoutes} cta="Ask Sam to get in touch" />
           </Callout>
         </Section>
 

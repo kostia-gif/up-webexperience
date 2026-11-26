@@ -51,7 +51,7 @@ export const cmOutcomes: Outcome[] = [
 
 export const cmReasons: Reason[] = [
   { title: 'Graduates go on to work and study', text: '84% of last year\u2019s class were in creative work or further study within six months. One figure, one meaning, one source.', href: '#outcomes', linkLabel: 'Where graduates work' },
-  { title: 'Built for people with a job', text: 'Online part-time at about ten hours a week, with the live crit recorded. Most Plan B students keep working until the end.', href: '#like', linkLabel: 'What it\u2019s like' },
+  { title: 'A part-time option for people with a job', text: 'Part-time over 38 weeks is half the weekly load, with recordings to catch up on a missed class.', href: '#journey', linkLabel: 'What your weeks look like' },
   { title: 'Credit into every Level 5 diploma', text: 'The certificate takes a term off Design, Animation, Film and Web and UX.', href: '#next', linkLabel: 'Where this leads' },
   { title: 'Try a real lesson first', text: 'A week-two lesson for an email address. Do it on a Sunday before you decide anything.', href: '#taster', linkLabel: 'Free taster lesson' },
 ]

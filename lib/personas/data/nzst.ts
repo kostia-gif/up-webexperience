@@ -123,7 +123,7 @@ export const flightClips: Clip[] = [
 export const flightPathway: PathStep[] = [
   { label: 'Step 1, if you need it', title: FLIGHT.level3.title, time: `${FLIGHT.level3.weeks} weeks`, detail: 'No Level 3? Start here. Service skills, confidence, and guaranteed entry to Flight when you finish.' },
   { label: 'Step 2', title: FLIGHT.short, time: `${FLIGHT.weeks} weeks`, detail: 'Safety, service, grooming and three mock recruitment days. The course this page is about.', current: true, href: '#facts' },
-  { label: 'Step 3', title: 'Your wings', time: '3 to 6 months after', detail: 'Airline recruitment. Most graduates who apply are flying within six months, domestic first, then wherever you want.' },
+  { label: 'Step 3', title: 'Your wings', time: '3 to 6 months after', detail: 'Airline recruitment, with recruiters on campus in the final fortnight. Time to first flying role: placeholder until UP supplies graduate data.' },
 ]
 
 export const flightStoryFilters = [

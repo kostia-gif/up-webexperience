@@ -42,7 +42,7 @@ export function Billboard({
           <Placeholder>{videoLabel}</Placeholder>
         </span>
       )}
-      <div className="relative mx-auto flex min-h-[560px] max-w-[960px] flex-col justify-end gap-6 px-6 pb-10 pt-24 md:min-h-[640px] md:pb-14">
+      <div className="relative mx-auto flex min-h-[520px] max-w-[960px] flex-col justify-end gap-5 px-6 pb-8 pt-20 md:min-h-[640px] md:gap-6 md:pb-14 md:pt-24">
         <p className="text-xs font-medium uppercase tracking-wide text-background/80">{eyebrow}</p>
         <h1 id="hero-title" className="font-display text-5xl font-bold uppercase leading-[0.9] tracking-tight text-balance sm:text-6xl md:text-7xl">
           {title}

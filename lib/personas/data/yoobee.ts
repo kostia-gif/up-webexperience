@@ -30,7 +30,7 @@ export const cmFacts: Fact[] = [
   { label: 'Study mode', value: 'Online, or on campus in Auckland, Wellington and Christchurch' },
   { label: 'Next starts', value: CM.intakes.join(' and ') },
   { label: 'Cost', value: 'Free for eligible domestic students, or $4,753', placeholder: true },
-  { label: 'Weekly hours', value: 'About 20 full-time, 10 part-time', placeholder: true },
+  { label: 'Weekly hours', value: 'About 35 full-time (15 live, 20 project), half that part-time' },
 ]
 
 export const cmOutcomeStats: OutcomeStat[] = [
@@ -97,7 +97,7 @@ export const cmPlannerModes: PlannerMode[] = [
   {
     id: 'online-ft',
     label: 'Online, full-time',
-    hours: 'About 20 hours a week over 19 weeks',
+    hours: 'About 35 hours a week over 19 weeks: 15 of live classes, 20 of project work',
     note: 'Suits a part-time job of two or three days. Mornings for briefs, one live crit a week.',
     blocks: [
       { day: 3, start: 9, end: 17, kind: 'work' },
@@ -113,7 +113,7 @@ export const cmPlannerModes: PlannerMode[] = [
   {
     id: 'campus',
     label: 'On campus, full-time',
-    hours: 'About 20 hours a week over 19 weeks',
+    hours: 'About 35 hours a week over 19 weeks: 15 of live classes, 20 of project work',
     note: 'Four half days on campus and one at home. Evenings and weekends are yours.',
     blocks: [
       { day: 0, start: 9, end: 13, kind: 'live' },
@@ -153,31 +153,30 @@ export const cmFundingQuestions: CheckQuestion[] = [
   },
 ]
 
-export function resolveCmFunding(a: Answers): CheckResult {
+export function resolveCmFunding(a: Answers, hrefs: { enrol: string; talk: string } = { enrol: '#start', talk: '#advisor' }): CheckResult {
   if (a.res === 'no') {
     return {
       tone: 'info',
-      headline: 'Not free, but $4,753 all-in and clear.',
-      body: 'Fees Free is for New Zealand citizens and residents. The international fee covers tuition, levy and software, with nothing added later.',
-      action: { label: 'Talk to Sam about options', href: '#advisor' },
+      headline: 'Not free: $4,753 total, nothing added later.',
+      body: 'Fees Free is for New Zealand citizens and residents in their first year of tertiary study. The fee covers tuition, levy and software, and can be split across the course.',
+      action: { label: 'Pick a start date', href: hrefs.enrol },
     }
   }
   if (a.prior === 'none') {
     return {
       tone: 'yes',
-      headline: 'Yes. This course costs you nothing.',
-      body: 'Fees Free covers your first year of tertiary study. The certificate uses less than half of that, so the rest is still there for the next course.',
+      headline: 'Yes, you qualify. This course costs you nothing.',
+      body: 'Fees Free covers the first year of tertiary study for New Zealand citizens and residents. This is your first year, so tuition, levy and software are covered.',
       bullets: ['Tuition, levy and software are all covered.', a.mode === 'pt' ? 'Part-time study is covered too, pro rata.' : 'Full-time students can also apply for a living-costs loan or allowance.', 'You need a RealMe login and your NSN. We help with both.'],
-      action: { label: 'Find the right course for me', href: '#finder' },
-      secondary: { label: 'Try the free taster', href: '#taster' },
+      action: { label: 'Pick a start date', href: hrefs.enrol },
     }
   }
   return {
     tone: 'start',
-    headline: 'Likely free, with one thing to check.',
-    body: 'Fees Free is for your first year of tertiary study. If you used some of it before, what is left can cover this course. We check your entitlement for you in a day.',
-    bullets: ['If nothing is left, it is $4,753 all-in, with a student loan available.', 'Either way, nothing is added to what you owe without you agreeing first.'],
-    action: { label: 'Check my entitlement with Sam', href: '#advisor' },
+    headline: 'Possibly free. One thing to check.',
+    body: 'Fees Free covers the first year of tertiary study only. If you have studied before, what is left of that year can cover this course. We check your entitlement for you in a day.',
+    bullets: ['If nothing is left, it is $4,753 total, with split payments or a student loan.', 'Nothing is added to what you owe without you agreeing first.'],
+    action: { label: 'Ask us to check', href: hrefs.talk },
   }
 }
 

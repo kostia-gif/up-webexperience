@@ -7,12 +7,15 @@ import { EnquiryForm } from '@/components/modules/enquiry-form'
 import { FeesSimple } from '@/components/modules/fees-simple'
 import { CourseOutcomes } from '@/components/modules/framing'
 import { InstantCheck } from '@/components/modules/instant-check'
+import { PeopleCards } from '@/components/modules/people-cards'
 import { Callout, DateList, WhatItsLike, WhatYouDo } from '@/components/modules/real-terms'
+import { StoriesMatched } from '@/components/modules/stories-matched'
+import { CompareTable } from '@/components/modules/compare-table'
 import { SpecialistPanel } from '@/components/modules/specialist-panel'
 import { Expander, Section } from '@/components/modules/ui'
-import { AIPC_COURSE, aipcCreditQuestions, aipcQuestions, resolveCredit } from '@/lib/personas/data/aipc'
+import { AIPC_COURSE, aipcCompare, aipcCompareNote, aipcCreditQuestions, aipcGuideRoutes, aipcQuestions, aipcStories, aipcStoryFilters, aipcTeachers, resolveCredit } from '@/lib/personas/data/aipc'
 import { aipcBreakdown, aipcFormal, aipcLinks } from '@/lib/personas/data/compliance'
-import { aipcGuideRoute, aipcOutcomes } from '@/lib/personas/data/framing'
+import { aipcOutcomes } from '@/lib/personas/data/framing'
 import { aipcLike, aipcPhases } from '@/lib/personas/data/real-terms'
 import { PERSONAS } from '@/lib/personas/registry'
 import { LightButton, LightHero } from './billboard'
@@ -24,6 +27,8 @@ const NAV: [string, string][] = [
   ['#journey', 'Your 18 months'],
   ['#talk', "Let's talk"],
   ['#fees', 'Fees'],
+  ['#stories', 'Graduates'],
+  ['#compare', 'Compare'],
   ['#credit', 'Credit'],
   ['#structure', 'Subjects'],
   ['#formal', 'Details'],
@@ -37,7 +42,7 @@ export function AipcCounsellingPage() {
       reviewer={{
         forWho: `${PERSONAS.sarah.name} (lead) and ${PERSONAS.dan.name} (second), on one page. ${PERSONAS.sarah.oneLine}`,
         testing: 'Whether a short, calm course page in the Option A style, with a course specialist as the main action, earns more conversations than "Apply now".',
-        note: 'Three call-outs: talk to a course specialist, check your credit, course guide. Figures use the 2027 structure.',
+        note: 'Call-outs: talk to a course specialist, graduates like me, check your credit, course guide. Teaching staff, graduate stories and the university comparison are placeholders. Figures use the 2027 structure.',
       }}
       mainAction={{ label: 'Talk to a course specialist', href: '#talk' }}
     >
@@ -90,6 +95,10 @@ export function AipcCounsellingPage() {
           <WhatYouDo phases={aipcPhases} />
         </Section>
 
+        <Section id="tutors" eyebrow="Your teaching staff" title="Who teaches you" intro="Practising counsellors who teach on the degree. Distinct from the course specialists you can book below.">
+          <PeopleCards people={aipcTeachers} />
+        </Section>
+
         <Section
           id="talk"
           eyebrow="Let's talk"
@@ -132,7 +141,15 @@ export function AipcCounsellingPage() {
           />
         </Section>
 
-        <Section id="credit" eyebrow="Credit" title="Credit for prior study and experience" intro="Relevant study and work experience can count towards the degree. Three questions for an indication; the formal assessment is free after you enrol.">
+        <Section id="stories" eyebrow="Graduates like me" title="People who changed careers">
+          <StoriesMatched prompt="Before counselling, I was..." filters={aipcStoryFilters} stories={aipcStories} />
+        </Section>
+
+        <Section id="compare" eyebrow="Comparison" title="Compared with a university master's" tone="muted">
+          <CompareTable rows={aipcCompare} usLabel="AIPC Master of Counselling" themLabel="University Master of Counselling" note={aipcCompareNote} />
+        </Section>
+
+        <Section id="credit" eyebrow="Credit" title="Credit for prior study and experience" intro="Relevant study and work experience can count towards the degree. Three questions for an indication; the formal assessment is free after you enrol." tone="default">
           <Callout eyebrow="Check your credit">
             <InstantCheck title="Could your experience count?" questions={aipcCreditQuestions} resolve={resolveCredit} ctaLabel="Show me" />
           </Callout>
@@ -150,7 +167,7 @@ export function AipcCounsellingPage() {
 
         <Section id="guide" eyebrow="Course guide" title="Download the course guide">
           <Callout eyebrow="Course guide">
-            <EnquiryForm title="Everything on this page, as a PDF" intro="Subjects, placement, fees, credit and the pathway. An email address is all we ask for." routes={aipcGuideRoute} cta="Send me the guide" emailOnly />
+            <EnquiryForm title="Everything on this page, as a PDF" intro="Subjects, placement, fees, credit and the pathway. An email address is all we ask for." routes={aipcGuideRoutes} cta="Send me the guide" emailOnly />
           </Callout>
         </Section>
 

@@ -99,6 +99,12 @@ export const aipcTutors: Person[] = [
   },
 ]
 
+export const aipcTeachers: Person[] = [
+  { id: 't1', name: 'Dr Priya Raman', role: 'Senior lecturer, counselling theory and ethics', background: 'Twenty years in private practice and community health. Teaches the foundation subjects and supervises placements in Melbourne.', photo: '/images/advisors/aipc-sophie.png' },
+  { id: 't2', name: 'Tom Ngata', role: 'Lecturer, trauma and crisis counselling', background: 'Fifteen years at Lifeline and in regional mental health services. Teaches the crisis and trauma electives.' },
+  { id: 't3', name: 'Dr Sarah Lindqvist', role: 'Lecturer, family and relationship counselling', background: 'Family therapist in Brisbane for eighteen years. Leads the practical workshops.' },
+]
+
 export const aipcSessions: Session[] = [
   { id: 's1', date: 'Tue 2 Feb 2027', time: '7:00pm AEDT', where: 'Online, 45 minutes', left: 18 },
   { id: 's2', date: 'Thu 11 Feb 2027', time: '12:30pm AEDT', where: 'Online, 45 minutes', left: 24 },

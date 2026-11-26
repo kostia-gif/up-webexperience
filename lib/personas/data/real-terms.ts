@@ -55,6 +55,13 @@ export const aipcDanLike = {
 
 /* Yoobee Creative Media */
 
+export const CM_LOAD = 'About 15 hours a week of live online classes plus about 20 hours of project work full-time, roughly 35 in total. Part-time over 38 weeks is half that.'
+
+export const cmLike =
+  'Two live online classes a day, 10am and 1pm, Monday to Friday, with your tutor and your class on camera. ' +
+  CM_LOAD +
+  ' Full-time suits people who are not working, or working evenings and weekends. Part-time over 38 weeks is the option if you are keeping a job: the same classes, half the load, and a recording to catch up on if you miss one. You need a laptop or desktop that can run Adobe apps, and a webcam.'
+
 export const cmPhases: Phase[] = [
   {
     when: 'By week 5',
@@ -71,7 +78,7 @@ export const cmPhases: Phase[] = [
   {
     when: 'By week 19',
     title: 'You have a portfolio and a next step',
-    detail: 'A finished project, a portfolio site, and credit into a Level 5 diploma, or a start on junior work. Most people who were in a job keep it until here.',
+    detail: 'A finished project, a portfolio site, and credit into a Level 5 diploma, or a start on junior work.',
     can: ['Show six pieces to an employer or a diploma tutor', 'Explain your process in an interview', 'Price a small freelance job'],
   },
 ]
