@@ -109,7 +109,7 @@ export function PersonaShell({
           <p>Call {b.phone}</p>
           <p className="border-t border-border pt-4 text-xs leading-relaxed text-pretty">
             Illustrative prototype. Names, figures, stories, tutors and employers are placeholders until UP supplies real ones. Chat,
-            messaging, booking and enrolment are working-looking prototypes only and send nothing.
+            messaging, booking and enrolment are prototypes only and do not send anything.
           </p>
         </div>
       </footer>

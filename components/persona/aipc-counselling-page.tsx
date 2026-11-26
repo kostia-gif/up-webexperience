@@ -41,8 +41,8 @@ export function AipcCounsellingPage() {
       applyHref="#start"
       reviewer={{
         forWho: `${PERSONAS.sarah.name} (lead) and ${PERSONAS.dan.name} (second), on one page. ${PERSONAS.sarah.oneLine}`,
-        testing: 'Whether a short, calm course page in the Option A style, with a course specialist as the main action, earns more conversations than "Apply now".',
-        note: 'Call-outs: talk to a course specialist, graduates like me, check your credit, course guide. Teaching staff, graduate stories and the university comparison are placeholders. Figures use the 2027 structure.',
+        testing: 'Whether a short, plainly written course page with a course specialist as the main action leads to more conversations than an apply-first page.',
+        note: 'Copy written in a plain Australian register: no sales phrasing, outcomes stated as capabilities. Teaching staff, graduate stories and the university comparison are placeholders. Figures use the 2027 structure.',
       }}
       mainAction={{ label: 'Talk to a course specialist', href: '#talk' }}
     >
@@ -51,13 +51,13 @@ export function AipcCounsellingPage() {
           eyebrow="Counselling · Postgraduate · AQF Level 9"
           title={
             <>
-              Make helping people <span className="text-coral">your profession</span>.
+              Be ready to help others, <span className="text-coral">as a career</span>.
             </>
           }
           courseName="Master of Counselling"
           sub={
             <>
-              An industry-accredited master&rsquo;s degree from Australia&rsquo;s counselling specialists. Online, with any bachelor degree, taught by practising counsellors. Next intake starts{' '}
+              An ACA-accredited master&rsquo;s degree, studied online and taught by practising counsellors. A bachelor degree in any field meets the entry requirement. Next intake starts{' '}
               <span className="font-medium text-foreground">{AIPC_COURSE.intakes[0]}</span>.
             </>
           }
@@ -70,42 +70,42 @@ export function AipcCounsellingPage() {
                 <MessageCircle className="size-5" aria-hidden /> Talk to a course specialist
               </LightButton>
               <LightButton href="#guide">
-                <Download className="size-5" aria-hidden /> Download the guide
+                <Download className="size-5" aria-hidden /> Course guide (PDF)
               </LightButton>
             </>
           }
           note={
             <>
-              Any bachelor degree gets you in.{' '}
+              A bachelor degree in any field meets the entry requirement.{' '}
               <a href="#credit" className="font-medium text-foreground underline underline-offset-4 hover:no-underline">
-                Prior study or experience may count
+                Prior study or experience may count towards the degree
               </a>
             </>
           }
         />
         <InPageNav items={NAV} />
 
-        <CourseOutcomes headline="Become the person others turn to" image="/images/aipc/placement.png" imageAlt="A counselling student in a supervised placement session" outcomes={aipcOutcomes} />
+        <CourseOutcomes headline="What you will be able to do" image="/images/aipc/placement.png" imageAlt="A counselling student in a supervised placement session" outcomes={aipcOutcomes} />
 
-        <Section id="like" eyebrow="The course" title="What it's like">
+        <Section id="like" eyebrow="The course" title="How the course works">
           <WhatItsLike {...aipcLike} />
         </Section>
 
-        <Section id="journey" eyebrow="Month by month" title="What your 18 months look like" tone="muted">
+        <Section id="journey" eyebrow="Course overview" title="What your 18 months look like" tone="muted">
           <WhatYouDo phases={aipcPhases} />
         </Section>
 
-        <Section id="tutors" eyebrow="Your teaching staff" title="Who teaches you" intro="Practising counsellors who teach on the degree. Distinct from the course specialists you can book below.">
+        <Section id="tutors" eyebrow="Your teaching staff" title="Who teaches you" intro="Counsellors who teach on the degree and continue to practise.">
           <PeopleCards people={aipcTeachers} />
         </Section>
 
         <Section
           id="talk"
-          eyebrow="Let's talk"
+          eyebrow="Talk to us"
           title="Talk to a course specialist"
-          intro="Practising counsellors who know the sector and can help you work out whether and how to do this. Ask for a call back, or pick a time that suits you."
+          intro="Our course specialists are practising counsellors. A 20-minute conversation about the course, how it would fit your situation, and any credit for prior study. Request a call back, or choose a time."
         >
-          <Callout eyebrow="Call me back, or pick a time">
+          <Callout eyebrow="Request a call back, or choose a time">
             <SpecialistPanel
               specialists={[
                 { name: 'Dr Helen Whitmore', years: '30 years practising', expertise: 'Community mental health, clinical supervision', photo: '/images/aipc/program-director.png' },
@@ -122,7 +122,7 @@ export function AipcCounsellingPage() {
           </Callout>
         </Section>
 
-        <Section id="fees" eyebrow="What it costs" title="Fees and ways to pay" tone="muted">
+        <Section id="fees" eyebrow="Fees" title="Fees and payment options" tone="muted">
           <FeesSimple
             total={AIPC_COURSE.standard.tuition}
             totalNote="Master of Counselling, 10 subjects at $3,465 each, billed per subject. The 24-month Advanced is $47,250. Allow about $2,500 across the course for workshop travel, placement checks and books."
@@ -141,21 +141,21 @@ export function AipcCounsellingPage() {
           />
         </Section>
 
-        <Section id="stories" eyebrow="Graduates like me" title="People who changed careers">
+        <Section id="stories" eyebrow="Graduate stories" title="Graduates who changed careers">
           <StoriesMatched prompt="Before counselling, I was..." filters={aipcStoryFilters} stories={aipcStories} />
         </Section>
 
-        <Section id="compare" eyebrow="Comparison" title="Compared with a university master's" tone="muted">
+        <Section id="compare" eyebrow="Comparison" title="How AIPC compares with a university master's" tone="muted">
           <CompareTable rows={aipcCompare} usLabel="AIPC Master of Counselling" themLabel="University Master of Counselling" note={aipcCompareNote} />
         </Section>
 
-        <Section id="credit" eyebrow="Credit" title="Credit for prior study and experience" intro="Relevant study and work experience can count towards the degree. Three questions for an indication; the formal assessment is free after you enrol." tone="default">
+        <Section id="credit" eyebrow="Credit" title="Credit for prior study and experience" intro="Relevant prior study and work experience may count towards the degree. Answer three questions for an indication. The formal assessment is free once you enrol." tone="default">
           <Callout eyebrow="Check your credit">
-            <InstantCheck title="Could your experience count?" questions={aipcCreditQuestions} resolve={resolveCredit} ctaLabel="Show me" />
+            <InstantCheck title="Check if your experience may count" questions={aipcCreditQuestions} resolve={resolveCredit} ctaLabel="Check" />
           </Callout>
         </Section>
 
-        <Section id="questions" eyebrow="Questions" title="Common questions" tone="muted">
+        <Section id="questions" eyebrow="Questions" title="Frequently asked questions" tone="muted">
           <div className="flex flex-col gap-2">
             {aipcQuestions.slice(0, 4).map((q) => (
               <Expander key={q.q} title={q.q}>
@@ -167,7 +167,7 @@ export function AipcCounsellingPage() {
 
         <Section id="guide" eyebrow="Course guide" title="Download the course guide">
           <Callout eyebrow="Course guide">
-            <EnquiryForm title="Everything on this page, as a PDF" intro="Subjects, placement, fees, credit and the pathway. An email address is all we ask for." routes={aipcGuideRoutes} cta="Send me the guide" emailOnly />
+            <EnquiryForm title="Full course details to help you decide" intro="Subjects, placement, fees, credit and pathways, as a PDF. We only need an email address." routes={aipcGuideRoutes} cta="Email me the guide" emailOnly />
           </Callout>
         </Section>
 
@@ -176,7 +176,7 @@ export function AipcCounsellingPage() {
             items={AIPC_COURSE.intakes.map((d, i) => ({ when: d, detail: i === 0 ? 'Trimester 1, 2027' : 'Applications open' }))}
             action={
               <p className="text-sm text-muted-foreground">
-                Four a year. Apply when it suits you.{' '}
+                Four intakes a year.{' '}
                 <a href="#start" className="underline underline-offset-4">
                   Apply (not in prototype)
                 </a>

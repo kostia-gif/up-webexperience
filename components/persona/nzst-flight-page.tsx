@@ -71,7 +71,7 @@ export function NzstFlightPage() {
               Wake up in a different city. <span className="text-coral">Start in {FLIGHT.weeks} weeks.</span>
             </>
           }
-          sub="Sixteen weeks to cabin crew. Half of it in the simulator, three mock recruitment days, and airlines on campus in the final fortnight."
+          sub="A sixteen-week course for people who want to work as cabin crew. About half the course is in the cabin simulator, with three mock recruitment days and airline recruiters on campus in the final fortnight."
           facts={[
             { label: 'Length', value: `${FLIGHT.weeks} weeks` },
             { label: 'Where', value: FLIGHT.campuses.join(', ') },
@@ -88,27 +88,27 @@ export function NzstFlightPage() {
               </HeroButton>
             </>
           }
-          footnote={`Next class starts ${FLIGHT.intakes[0]}. Morning or afternoon.`}
+          footnote={`Next intake starts ${FLIGHT.intakes[0]}. Morning or afternoon classes.`}
           videoLabel="Vertical video, graduates in uniform"
         />
         <InPageNav items={NAV} />
 
-        <Section id="check" eyebrow="Thirty seconds" title="Can I get in?" dense tone="muted">
-          <Callout eyebrow="Instant check">
-            <InstantCheck title="Three questions" intro="A yes and a start date, or the first step of the same journey. Never a no." questions={flightQuestions} resolve={resolveFlight} ctaLabel="Tell me" placeholderNote={null} />
+        <Section id="check" eyebrow="Entry check" title="Can I get in?" dense tone="muted">
+          <Callout eyebrow="Three questions">
+            <InstantCheck title="Check your entry point" intro="Find out whether you can enrol in Level 4 Flight Attending now, or start with Level 3 Tourism." questions={flightQuestions} resolve={resolveFlight} ctaLabel="Tell me" placeholderNote={null} />
           </Callout>
         </Section>
 
-        <CourseOutcomes headline="Ready for the recruiters in sixteen weeks" image="/images/nzst/graduate-uniform.png" imageAlt="A recent graduate in cabin crew uniform at an airport terminal" outcomes={flightOutcomes} compact />
+        <CourseOutcomes headline="What you will be able to do" image="/images/nzst/graduate-uniform.png" imageAlt="A recent graduate in cabin crew uniform at an airport terminal" outcomes={flightOutcomes} compact />
 
-        <Section id="like" eyebrow="The course" title="What it's like" dense>
+        <Section id="like" eyebrow="The course" title="How the course works" dense>
           <p className="max-w-[720px] text-[15px] leading-relaxed text-pretty md:text-[17px]">{flightLike.text}</p>
-          <Expander title="Week by week: what the sixteen weeks look like">
+          <Expander title="Week by week: the sixteen-week course outline">
             <WhatYouDo phases={flightPhases} />
           </Expander>
         </Section>
 
-        <Section id="why" eyebrow="Why this course" title="Why NZST" dense tone="muted">
+        <Section id="why" eyebrow="Why this course" title="Why study with NZST" dense tone="muted">
           <WhyThisCourse reasons={flightReasons} compact />
         </Section>
 
@@ -122,20 +122,20 @@ export function NzstFlightPage() {
                 <WhereGraduatesWent employers={flightAirlines} />
               </div>
             </Expander>
-            <Expander title="Graduates in uniform, in their words">
+            <Expander title="Graduate videos">
               <VideoReel clips={flightClips} />
             </Expander>
           </div>
         </Section>
 
-        <Section id="pathway" eyebrow="Pathway" title="Level 3, then Flight, then your wings" intro="No Level 3? Start here. Same campuses, same tutors, and your place in Flight is held." dense>
+        <Section id="pathway" eyebrow="Pathway" title="Level 3 Tourism, then Flight Attending, then airline recruitment" intro="If you do not have NCEA Level 3, Level 3 Tourism leads directly into this course at the same campus." dense>
           <PathwayPicture steps={flightPathway} />
-          <Expander title="People who started without Level 3">
+          <Expander title="Graduates who started without Level 3">
             <StoryCards stories={flightStories.slice(0, 3)} />
           </Expander>
         </Section>
 
-        <Section id="cost" eyebrow="What it costs" title="Fees and ways to pay" dense tone="muted">
+        <Section id="cost" eyebrow="Fees" title="Fees and payment options" dense tone="muted">
           <FeesSimple
             total={FLIGHT.fee + FLIGHT.levy}
             totalNote={`${fee} course fee plus a $${FLIGHT.levy} student levy. Allow about $630 for the uniform kit, swim test, passport and security check.`}
@@ -151,7 +151,7 @@ export function NzstFlightPage() {
             talkLabel="WhatsApp or Instagram"
           />
           <div className="flex flex-col gap-2">
-            <Expander title="Before you start: swim test, passport, security check">
+            <Expander title="Requirements before you start: swim test, passport, security check">
               <ul className="flex flex-col gap-3">
                 {flightUpFront.map((x) => (
                   <li key={x.h} className="flex flex-col gap-0.5">
@@ -181,16 +181,16 @@ export function NzstFlightPage() {
           </div>
         </Section>
 
-        <Section id="message" eyebrow="Talk to us" title="Message us" dense tone="muted">
+        <Section id="message" eyebrow="Contact" title="Message us" dense tone="muted">
           <Callout eyebrow="Message us">
             <MessageUs who="Aroha, Flight tutor" hours="8am to 8pm, seven days" />
           </Callout>
-          <Expander title="Drop-in days: come and see a campus, bring someone with you">
+          <Expander title="Drop-in days at each campus">
             <DateList items={flightDropIns.map((d) => ({ when: d.date, detail: `${d.where}, ${d.time}` }))} />
           </Expander>
         </Section>
 
-        <Section id="start" eyebrow="Enrol" title="Pick your start date and campus" dense tone="muted">
+        <Section id="start" eyebrow="Enrol" title="Choose a start date and campus" dense tone="muted">
           <Callout eyebrow="Enrol online">
             <Expander title={`Start ${FLIGHT.intakes[0]} or ${FLIGHT.intakes[1]}, at one of five campuses`}>
               <StartAndEnrol
@@ -198,18 +198,18 @@ export function NzstFlightPage() {
                 campuses={FLIGHT.campuses}
                 times={FLIGHT.times}
                 cta="Enrol now"
-                confirm="Aroha will text you within the hour with the three things to sort before day one, and the Fees Free form. No phone call unless you want one."
+                confirm="Aroha will text you within the hour with the three requirements to arrange before you start, and the Fees Free form. We will not phone unless you ask us to."
               />
             </Expander>
           </Callout>
         </Section>
 
-        <Section id="structure" eyebrow="The detail" title="Course structure and the formal bit" dense>
+        <Section id="structure" eyebrow="Course details" title="Course structure and formal details" dense>
           <div className="flex flex-col gap-2">
             <Expander title={`Course structure: 6 modules, 60 credits, ${FLIGHT.weeks} weeks`}>
               <CourseBreakdown breakdown={flightBreakdown} />
             </Expander>
-            <Expander title="The formal bit: qualification, entry, fees, funding and policies">
+            <Expander title="Formal details: qualification, entry, fees, funding and policies">
               <div id="formal" className="scroll-mt-20">
                 <FormalDetails rows={flightFormal} links={flightLinks} />
               </div>

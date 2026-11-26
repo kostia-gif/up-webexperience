@@ -24,11 +24,11 @@ import { PersonaShell } from './shell'
 const NAV: [string, string][] = [
   ['#start', 'Start dates'],
   ['#outcomes-card', 'Outcomes'],
-  ['#earn', 'Earnings'],
+  ['#earn', 'Outcomes and earnings'],
   ['#journey', 'Your 19 weeks'],
   ['#work', 'Student work'],
   ['#fees', 'Fees'],
-  ['#advisor', 'Talk to someone'],
+  ['#advisor', 'Advisor'],
   ['#structure', 'Modules'],
   ['#formal', 'Details'],
 ]
@@ -83,21 +83,21 @@ export function YoobeeCreativeMediaPage() {
                 <CalendarClock className="size-5" aria-hidden /> Start later
               </HeroButton>
               <HeroButton href="#advisor">
-                <MessageCircle className="size-5" aria-hidden /> Talk to someone
+                <MessageCircle className="size-5" aria-hidden /> Talk to an advisor
               </HeroButton>
             </>
           }
-          footnote="84% of last year's class were in creative work or further study within six months (placeholder). You need to be 16+. That's about it."
+          footnote="84% of last year's graduates were in creative work or further study within six months (placeholder). Entry is open from 16 with NCEA Level 2."
         />
 
-        <Section id="start" eyebrow="Get started" title="Pick a start date" dense tone="muted">
+        <Section id="start" eyebrow="Enrol" title="Choose a start date" dense tone="muted">
           <Callout eyebrow="Enrol now">
             <StartAndEnrol
               intakes={CM_INTAKES}
               times={['Online, full-time', 'Online, part-time', 'On campus']}
               timesLabel="How you will study"
               cta="Enrol now"
-              confirm="A confirmation is on its way with your Fees Free check and what to have ready for week one. Classes are 10am and 1pm; part-time students attend half of them. Sam, a course advisor, will email within a day."
+              confirm="A confirmation has been emailed to you with your Fees Free check and what to have ready for week one. Classes are at 10am and 1pm; part-time students attend half of them. Sam, a course advisor, will email you within a day."
             />
           </Callout>
         </Section>
@@ -105,18 +105,18 @@ export function YoobeeCreativeMediaPage() {
         <InPageNav items={NAV} />
 
         <CourseOutcomes
-          headline="Make a living from what you make"
+          headline="What you will be able to do"
           image="/images/yoobee/mc-design.png"
           imageAlt="A student reviewing a poster layout on screen"
           outcomes={cmOutcomes}
           link={{ label: 'View student portfolios', href: '#work' }}
         />
 
-        <Section id="earn" eyebrow="Where this takes you" title="What you could earn" tone="muted">
+        <Section id="earn" eyebrow="Career outcomes" title="Graduate outcomes and earnings" tone="muted">
           <EarningPotential e={cmEarnings} />
         </Section>
 
-        <Section id="journey" eyebrow="Week by week" title="What your 19 weeks look like" intro={cmLike}>
+        <Section id="journey" eyebrow="Course overview" title="What your 19 weeks look like" intro={cmLike}>
           <WhatYouDo phases={cmPhases} />
         </Section>
 
@@ -126,12 +126,12 @@ export function YoobeeCreativeMediaPage() {
             <h2 id="work-title" className="font-display text-3xl font-bold uppercase leading-none tracking-tight text-balance md:text-4xl">
               Work from the last class
             </h2>
-            <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground text-pretty">Credited to the students who made it. This is the standard you will reach.</p>
+            <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground text-pretty">Work by recent students, credited to each student. It shows the standard you can expect to reach.</p>
           </div>
           <StudentWorkWall disciplines={[]} works={cmWorks} />
         </section>
 
-        <Section id="fees" eyebrow="What it costs" title="Fees and ways to pay">
+        <Section id="fees" eyebrow="What it costs" title="Fees and payment options">
           <FeesSimple
             total={4753}
             totalNote="Tuition $4,464.72, levy $102.50 and software $186. Nothing extra. Free if you qualify for Fees Free: check below."
@@ -144,14 +144,14 @@ export function YoobeeCreativeMediaPage() {
             talkHref="#advisor"
             talkLabel="a quick call with Sam"
           />
-          <Callout eyebrow="Is it free for me?">
-            <InstantCheck title="Is it free for me?" intro="Three questions. Fees Free covers the first year of tertiary study for New Zealand citizens and residents." questions={cmFundingQuestions} resolve={(a) => resolveCmFunding(a, { enrol: '#start', talk: '#advisor' })} ctaLabel="Show my answer" placeholderNote="Fees Free rules as published for 2027, to be confirmed." />
+          <Callout eyebrow="Fees Free eligibility">
+            <InstantCheck title="Am I eligible for Fees Free?" intro="Three questions. Fees Free covers the first year of tertiary study for New Zealand citizens and residents." questions={cmFundingQuestions} resolve={(a) => resolveCmFunding(a, { enrol: '#start', talk: '#advisor' })} ctaLabel="Check" placeholderNote="Fees Free rules as published for 2027, to be confirmed." />
           </Callout>
         </Section>
 
-        <Section id="advisor" eyebrow="Talk to someone" title="Talk to a course advisor" tone="muted">
-          <Callout eyebrow="Call or email back">
-            <EnquiryForm title={`Talk to ${cmAdvisor.name}`} intro={cmAdvisor.line} routes={cmAdvisorRoutes} cta="Ask Sam to get in touch" />
+        <Section id="advisor" eyebrow="Contact" title="Talk to a course advisor" tone="muted">
+          <Callout eyebrow="Request a call or email">
+            <EnquiryForm title={`Talk to ${cmAdvisor.name}`} intro={cmAdvisor.line} routes={cmAdvisorRoutes} cta="Request contact" />
           </Callout>
         </Section>
 

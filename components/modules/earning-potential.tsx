@@ -26,7 +26,7 @@ export function EarningPotential({ e }: { e: Earnings }) {
           <p className="text-xs font-medium">Starting salary</p>
           <p className="font-display text-4xl font-bold leading-none">{money(e.start, e.currency)}</p>
           <p className="mt-1 text-sm">
-            Typical first role, {e.year}. <Placeholder className="ml-1 align-middle" />
+            Typical starting salary, {e.year}. <Placeholder className="ml-1 align-middle" />
           </p>
         </div>
         <div className="flex flex-col gap-1 rounded-lg border border-border bg-card p-4">
@@ -53,7 +53,7 @@ export function EarningPotential({ e }: { e: Earnings }) {
           </li>
         ))}
         <li className="rounded-full bg-primary-tint px-3.5 py-2 text-sm font-medium text-primary-tint-foreground">
-          + {e.employersMore} more hired our {e.employersYear} grads
+          + {e.employersMore} more employers of {e.employersYear} graduates
         </li>
       </ul>
     </div>

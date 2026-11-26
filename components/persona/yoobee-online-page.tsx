@@ -24,7 +24,7 @@ import { CM_FEE_FACTS } from './yoobee-creative-media-page'
 const NAV: [string, string][] = [
   ['#start', 'Enrol'],
   ['#outcomes-card', 'Outcomes'],
-  ['#earn', 'Earnings'],
+  ['#earn', 'Outcomes and earnings'],
   ['#journey', 'Your 19 weeks'],
   ['#work', 'Student work'],
   ['#fees', 'Fees'],
@@ -81,17 +81,17 @@ export function YoobeeOnlinePage() {
               <HeroButton href="#fees">See pricing</HeroButton>
             </>
           }
-          footnote="Enrolling takes about three minutes. Full refund if you withdraw in the first two weeks. You need to be 16+ with NCEA Level 2."
+          footnote="Enrolment takes about three minutes. Full refund if you withdraw within the first two weeks. Entry is open from 16 with NCEA Level 2."
         />
 
-        <Section id="start" eyebrow="Enrol" title="Pick a start date and enrol" dense tone="muted">
-          <Callout eyebrow="About three minutes">
+        <Section id="start" eyebrow="Enrol" title="Choose a start date and enrol" dense tone="muted">
+          <Callout eyebrow="Enrolment takes about three minutes">
             <StartAndEnrol
               intakes={ONLINE_INTAKES}
               times={['Full-time, 19 weeks', 'Part-time, 38 weeks']}
               timesLabel="Pace"
               cta="Enrol now"
-              confirm="You are in. A confirmation is on its way with your Fees Free check, your login, and the week-one brief. Your tutor will say hello by email tomorrow."
+              confirm="You are enrolled. A confirmation has been emailed to you with your Fees Free check, your login and the week-one brief. Your tutor will email you tomorrow."
             />
           </Callout>
           <div className="grid gap-3 rounded-xl border border-border bg-card p-5 sm:grid-cols-2">
@@ -110,18 +110,18 @@ export function YoobeeOnlinePage() {
         <InPageNav items={NAV} />
 
         <CourseOutcomes
-          headline="Make a living from what you make"
+          headline="What you will be able to do"
           image="/images/yoobee/mc-design.png"
           imageAlt="A student reviewing a poster layout on screen"
           outcomes={cmOutcomes}
           link={{ label: 'View student portfolios', href: '#work' }}
         />
 
-        <Section id="earn" eyebrow="Where this takes you" title="What you could earn" tone="muted">
+        <Section id="earn" eyebrow="Career outcomes" title="Graduate outcomes and earnings" tone="muted">
           <EarningPotential e={cmEarnings} />
         </Section>
 
-        <Section id="journey" eyebrow="Week by week" title="What your 19 weeks look like" intro={cmLike}>
+        <Section id="journey" eyebrow="Course overview" title="What your 19 weeks look like" intro={cmLike}>
           <WhatYouDo phases={cmPhases} />
         </Section>
 
@@ -129,14 +129,14 @@ export function YoobeeOnlinePage() {
           <div className="mx-auto flex max-w-[960px] flex-col gap-1 px-6 pb-6">
             <p className="text-xs font-medium uppercase tracking-wide text-primary">Student portfolios</p>
             <h2 id="work-title" className="font-display text-3xl font-bold uppercase leading-none tracking-tight text-balance md:text-4xl">
-              Made online, from kitchen tables
+              Work from the online class
             </h2>
-            <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground text-pretty">Work from last year&apos;s online class, credited to the students who made it.</p>
+            <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground text-pretty">Work by last year&apos;s online students, credited to each student.</p>
           </div>
           <StudentWorkWall disciplines={[]} works={cmWorks} />
         </section>
 
-        <Section id="fees" eyebrow="What it costs" title="Fees and ways to pay">
+        <Section id="fees" eyebrow="What it costs" title="Fees and payment options">
           <FeesSimple
             total={4753}
             totalNote="Tuition $4,464.72, levy $102.50 and software $186. Nothing extra. Free if you qualify for Fees Free: check below."
@@ -147,10 +147,10 @@ export function YoobeeOnlinePage() {
             ]}
             facts={CM_FEE_FACTS}
             talkHref="#start"
-            talkLabel="the enrolment form, and we will check Fees Free for you"
+            talkLabel="the enrolment form, and we will check your Fees Free eligibility"
           />
-          <Callout eyebrow="Is it free for me?">
-            <InstantCheck title="Is it free for me?" intro="Three questions. Fees Free covers the first year of tertiary study for New Zealand citizens and residents." questions={cmFundingQuestions} resolve={(a) => resolveCmFunding(a, { enrol: '#start', talk: '#start' })} ctaLabel="Show my answer" placeholderNote="Fees Free rules as published for 2027, to be confirmed." />
+          <Callout eyebrow="Fees Free eligibility">
+            <InstantCheck title="Am I eligible for Fees Free?" intro="Three questions. Fees Free covers the first year of tertiary study for New Zealand citizens and residents." questions={cmFundingQuestions} resolve={(a) => resolveCmFunding(a, { enrol: '#start', talk: '#start' })} ctaLabel="Check" placeholderNote="Fees Free rules as published for 2027, to be confirmed." />
           </Callout>
         </Section>
 

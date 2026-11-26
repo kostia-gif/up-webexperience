@@ -209,13 +209,13 @@ export const aipcPathway: PathStep[] = [
     label: 'Step 2, if you have no degree',
     title: 'Bachelor of Counselling',
     time: '3 years, or less with credit',
-    detail: 'Or skip both steps: any bachelor degree, in any field, gets you into the Master.',
+    detail: 'Or skip both steps: a bachelor degree in any field meets the entry requirement for the Master.',
   },
   {
     label: 'You are here',
     title: 'Master of Counselling',
     time: '18 or 24 months',
-    detail: 'Any bachelor degree gets you in. Finish with ACA registration and 200 hours of supervised client work behind you.',
+    detail: 'A bachelor degree in any field meets the entry requirement. Graduate eligible for ACA registration with 200 hours of supervised client work.',
     current: true,
     href: '#facts',
   },
@@ -290,24 +290,24 @@ export const aipcCompareNote =
 export const aipcGuideRoutes: EnquiryRoute[] = [
   {
     id: 'new',
-    label: 'I am new to counselling',
+    label: 'New to counselling',
     hint: 'Changing from another career',
-    confirmation: 'The course guide is on its way. We have put the chapters on placement, the weekly load and the pathway first, because they are the ones career changers ask about most.',
+    confirmation: 'The course guide has been emailed to you. The sections on placement, weekly study load and pathways are first, as these are the most common questions from people changing careers.',
     next: [
-      'Today: the guide, as a PDF, from Megan Hart. No phone call.',
-      'In a week: one email with two graduate stories from people who changed careers in their forties.',
-      'In three weeks: a reminder of the next information session. Then nothing more unless you ask.',
+      'Today: the guide as a PDF, from Megan Hart.',
+      'In a week: one email with two graduate stories.',
+      'In three weeks: a reminder of the next information session. No further emails unless you ask.',
     ],
   },
   {
     id: 'field',
-    label: 'I already work in the field',
+    label: 'Already working in the field',
     hint: 'Youth, support or community work',
-    confirmation: 'The course guide is on its way, with the credit and recognition of prior learning section first, and the one-page employer summary attached.',
+    confirmation: 'The course guide has been emailed to you, with the recognition of prior learning section first and a one-page summary for your employer attached.',
     next: [
-      'Today: the guide and the employer summary, from Daniel Okafor.',
-      'In three days: a short note on how to claim credit, and the enrol-online link.',
-      'That is all, unless you reply.',
+      'Today: the guide and employer summary, from Daniel Okafor.',
+      'In three days: how to apply for credit, and the enrolment link.',
+      'No further emails unless you reply.',
     ],
   },
 ]
@@ -362,8 +362,8 @@ export function resolveCredit(a: Answers): CheckResult {
   if (credits === 0) {
     return {
       tone: 'start',
-      headline: 'Your experience counts in placement.',
-      body: 'Credit for subjects is unlikely from that study, but your work counts where it matters most, and any bachelor degree meets entry.',
+      headline: 'Your experience can count towards placement.',
+      body: 'Subject credit is unlikely from that study. Your work experience can count towards placement hours, and a bachelor degree in any field meets the entry requirement.',
       bullets: [placementNote, '10 subjects over 18 months part-time, around your shifts.', 'Formal assessment happens after you enrol and costs nothing.'],
       action: { label: 'Talk to a course specialist', href: '#talk' },
       secondary: { label: 'Download the guide', href: '#guide' },
@@ -371,8 +371,8 @@ export function resolveCredit(a: Answers): CheckResult {
   }
   return {
     tone: 'yes',
-    headline: 'Your experience is likely to count.',
-    body: `Based on what you have told us, credit for up to ${credits} subject${credits > 1 ? 's' : ''} is likely, which shortens the course and lowers the fee. A formal assessment confirms it after you enrol, free.`,
+    headline: 'Your experience is likely to count towards the degree.',
+    body: `Based on your answers, credit for up to ${credits} subject${credits > 1 ? 's' : ''} is likely. That shortens the course and reduces the fee. A formal assessment after enrolment confirms it, at no cost.`,
     bullets: [placementNote, 'Maximum credit is 4 of the 10 subjects.'],
     action: { label: 'Talk to a course specialist', href: '#talk' },
     secondary: { label: 'Download the guide', href: '#guide' },
@@ -415,8 +415,8 @@ export const aipcQuestions = [
     a: `A placement coordinator works with you from your second trimester to find a service near you. You complete ${AIPC_COURSE.placementHours} hours, at least ${AIPC_COURSE.directClientHours} of them with clients, with fortnightly supervision from a practising counsellor.`,
   },
   {
-    q: 'I came to counselling through my own experience. Is that a problem?',
-    a: 'No. Many counsellors did. We never ask you to disclose it in a form or an application. If you want to talk about it, a tutor is the right place, not a sales conversation.',
+    q: 'I came to counselling through my own experience. Does that matter?',
+    a: 'No. Many counsellors did. You are not asked to disclose it in an application. If you would like to discuss it, a course specialist or tutor is the right person.',
   },
   {
     q: 'Who can use FEE-HELP?',
@@ -424,7 +424,7 @@ export const aipcQuestions = [
   },
   {
     q: 'Can I pause if life gets in the way?',
-    a: 'Yes. You can take a trimester off and come back to the same course. Withdrawing before the census date for a trimester means no fee for that trimester.',
+    a: 'Yes. You can take a trimester off and return to the same course. If you withdraw before the census date, no fee is charged for that trimester.',
   },
   {
     q: 'What is the difference between the Master and the Master Advanced?',
