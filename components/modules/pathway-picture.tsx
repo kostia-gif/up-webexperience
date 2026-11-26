@@ -3,14 +3,15 @@ import { cn } from '@/lib/utils'
 export type PathStep = { label: string; title: string; time: string; detail: string; current?: boolean; href?: string }
 
 /** The steps from first course to final goal on one screen, with time for each. */
-export function PathwayPicture({ steps, id }: { steps: PathStep[]; id?: string }) {
+export function PathwayPicture({ steps, id, compact }: { steps: PathStep[]; id?: string; compact?: boolean }) {
   return (
-    <ol id={id} className="grid scroll-mt-20 gap-3 md:grid-cols-3">
+    <ol id={id} className={cn('grid scroll-mt-20 md:grid-cols-3', compact ? 'gap-2 md:gap-3' : 'gap-3')}>
       {steps.map((s, i) => (
         <li
           key={s.title}
           className={cn(
-            'relative flex flex-col gap-2 rounded-xl border p-5',
+            'relative flex flex-col rounded-xl border',
+            compact ? 'gap-1 p-3 md:gap-2 md:p-5' : 'gap-2 p-5',
             s.current ? 'border-primary bg-primary-tint text-primary-tint-foreground' : 'border-border bg-card',
           )}
         >
@@ -19,7 +20,7 @@ export function PathwayPicture({ steps, id }: { steps: PathStep[]; id?: string }
             <span className="tabular-nums">{s.time}</span>
           </p>
           <p className="font-display text-xl leading-tight">{s.title}</p>
-          <p className={cn('text-sm leading-relaxed text-pretty', s.current ? '' : 'text-muted-foreground')}>{s.detail}</p>
+          <p className={cn('text-sm leading-relaxed text-pretty', s.current ? '' : 'text-muted-foreground', compact && 'hidden md:block')}>{s.detail}</p>
           {s.href && (
             <a href={s.href} className="mt-1 text-sm font-medium underline underline-offset-4">
               {s.current ? 'You are here' : 'See this step'}

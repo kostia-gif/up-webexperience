@@ -9,7 +9,7 @@ import { PathwayPicture } from '@/components/modules/pathway-picture'
 import { FeesSimple } from '@/components/modules/fees-simple'
 import { CourseOutcomes, WhyThisCourse } from '@/components/modules/framing'
 import { Callout, DateList, StoryCards, WhatYouDo } from '@/components/modules/real-terms'
-import { StartAndEnrol } from '@/components/modules/start-and-enrol'
+import { StartSection } from '@/components/modules/start-section'
 import { Expander, Placeholder, Section } from '@/components/modules/ui'
 import { VideoReel } from '@/components/modules/video-reel'
 import { WhatEmployersLookFor } from '@/components/modules/what-employers-look-for'
@@ -37,6 +37,7 @@ import { PersonaShell } from './shell'
 
 const NAV: [string, string][] = [
   ['#check', 'Can I get in'],
+  ['#start', 'Start dates'],
   ['#outcomes-card', 'Outcomes'],
   ['#like', "What it's like"],
   ['#why', 'Why NZST'],
@@ -44,7 +45,6 @@ const NAV: [string, string][] = [
   ['#pathway', 'Pathway'],
   ['#cost', 'Cost'],
   ['#message', 'Message us'],
-  ['#start', 'Enrol'],
   ['#structure', 'Details'],
 ]
 
@@ -99,11 +99,28 @@ export function NzstFlightPage() {
           </Callout>
         </Section>
 
+        <StartSection
+          dense
+          intakes={[
+            { label: '25 Jan 2027', tag: 'Next intake', status: 'open' },
+            { label: '19 Jul 2027', tag: 'Mid-year', status: 'open' },
+          ]}
+          groups={[
+            { legend: 'Which campus is closest?', items: FLIGHT.campuses.map((c) => ({ name: c })) },
+            { legend: 'Morning or afternoon classes?', icon: 'none', items: FLIGHT.times.map((t) => ({ name: t.replace(' classes', '') })) },
+          ]}
+          advisor={{ name: 'Aroha', role: 'Flight Attending tutor', href: '#message' }}
+          holdLabel="Hold my place for"
+          intro="Choose a date, a campus and a class time, then leave your name and number. We hold your place for 7 days and text you. No payment or application yet."
+          confirmHold="Your place is held for 7 days. This is not an enrolment and nothing is decided until you confirm. Aroha will text you within the hour with the three requirements to arrange before you start, and the Fees Free form."
+          journeyHref="#like"
+        />
+
         <CourseOutcomes headline="What you will be able to do" image="/images/nzst/graduate-uniform.png" imageAlt="A recent graduate in cabin crew uniform at an airport terminal" outcomes={flightOutcomes} compact />
 
         <Section id="like" eyebrow="The course" title="How the course works" dense>
-          <p className="max-w-[720px] text-[15px] leading-relaxed text-pretty md:text-[17px]">{flightLike.text}</p>
-          <Expander title="Week by week: the sixteen-week course outline">
+          <Expander title="How the course is taught, and the sixteen-week outline">
+            <p className="text-foreground text-pretty">{flightLike.text}</p>
             <WhatYouDo phases={flightPhases} />
           </Expander>
         </Section>
@@ -129,7 +146,7 @@ export function NzstFlightPage() {
         </Section>
 
         <Section id="pathway" eyebrow="Pathway" title="Level 3 Tourism, then Flight Attending, then airline recruitment" intro="If you do not have NCEA Level 3, Level 3 Tourism leads directly into this course at the same campus." dense>
-          <PathwayPicture steps={flightPathway} />
+          <PathwayPicture steps={flightPathway} compact />
           <Expander title="Graduates who started without Level 3">
             <StoryCards stories={flightStories.slice(0, 3)} />
           </Expander>
@@ -188,20 +205,6 @@ export function NzstFlightPage() {
           <Expander title="Drop-in days at each campus">
             <DateList items={flightDropIns.map((d) => ({ when: d.date, detail: `${d.where}, ${d.time}` }))} />
           </Expander>
-        </Section>
-
-        <Section id="start" eyebrow="Enrol" title="Choose a start date and campus" dense tone="muted">
-          <Callout eyebrow="Enrol online">
-            <Expander title={`Start ${FLIGHT.intakes[0]} or ${FLIGHT.intakes[1]}, at one of five campuses`}>
-              <StartAndEnrol
-                intakes={flightIntakes}
-                campuses={FLIGHT.campuses}
-                times={FLIGHT.times}
-                cta="Enrol now"
-                confirm="Aroha will text you within the hour with the three requirements to arrange before you start, and the Fees Free form. We will not phone unless you ask us to."
-              />
-            </Expander>
-          </Callout>
         </Section>
 
         <Section id="structure" eyebrow="Course details" title="Course structure and formal details" dense>

@@ -8,14 +8,14 @@ import { FeesSimple } from '@/components/modules/fees-simple'
 import { CourseOutcomes } from '@/components/modules/framing'
 import { InstantCheck } from '@/components/modules/instant-check'
 import { Callout, WhatYouDo } from '@/components/modules/real-terms'
-import { StartAndEnrol } from '@/components/modules/start-and-enrol'
+import { StartSection } from '@/components/modules/start-section'
 import { StudentWorkWall } from '@/components/modules/student-work-wall'
 import { Section } from '@/components/modules/ui'
 import { creativeMediaLevel4 } from '@/lib/courses'
 import { cmBreakdown, cmFormal, cmLinks } from '@/lib/personas/data/compliance'
 import { cmOutcomes } from '@/lib/personas/data/framing'
 import { CM_LOAD, cmLike, cmPhases } from '@/lib/personas/data/real-terms'
-import { CM, cmEarnings, cmFundingQuestions, cmWorks, resolveCmFunding } from '@/lib/personas/data/yoobee'
+import { CM, cmAdvisorRoutes, cmEarnings, cmFundingQuestions, cmWorks, resolveCmFunding } from '@/lib/personas/data/yoobee'
 import { PERSONAS } from '@/lib/personas/registry'
 import { Billboard, HeroButton } from './billboard'
 import { PersonaShell } from './shell'
@@ -32,10 +32,6 @@ const NAV: [string, string][] = [
   ['#formal', 'Details'],
 ]
 
-const ONLINE_INTAKES = [
-  { id: 'feb', date: '8 Feb 2027', label: 'Next start' },
-  { id: 'jul', date: '12 Jul 2027' },
-]
 
 const NEED = ['A laptop or desktop that runs Adobe apps, and a webcam', CM_LOAD, 'Two live online classes a day, 10am and 1pm, Monday to Friday. Part-time students attend half of them; a missed class is recorded for catch-up', 'Nothing else. Software is included in the fee']
 
@@ -53,7 +49,7 @@ export function YoobeeOnlinePage() {
       reviewer={{
         forWho: `${PERSONAS['plan-b'].name}, studying online from anywhere in New Zealand.`,
         testing: 'A comparison with the blended page: online is about buying and signing up. Enrol at the top, outcomes and portfolios as the proof, simple pricing, and nothing that needs a conversation. Same February and July intakes as the blended page.',
-        note: 'Two call-outs: enrol and the Fees Free check. No advisor section; the page is built to be completed alone. Weekly load stated once: about 15 hours live plus 20 of project work full-time, half that part-time.',
+        note: 'Hero leads straight into the Option A start-date band. Enrol or enquire in one place; no separate advisor section. Weekly load stated once: about 15 hours live plus 20 of project work full-time, half that part-time.',
       }}
       mainAction={{ label: 'Enrol now', href: '#start' }}
     >
@@ -84,17 +80,20 @@ export function YoobeeOnlinePage() {
           footnote="Enrolment takes about three minutes. Full refund if you withdraw within the first two weeks. Entry is open from 16 with NCEA Level 2."
         />
 
-        <Section id="start" eyebrow="Enrol" title="Choose a start date and enrol" dense tone="muted">
-          <Callout eyebrow="Enrolment takes about three minutes">
-            <StartAndEnrol
-              intakes={ONLINE_INTAKES}
-              times={['Full-time, 19 weeks', 'Part-time, 38 weeks']}
-              timesLabel="Pace"
-              cta="Enrol now"
-              confirm="You are enrolled. A confirmation has been emailed to you with your Fees Free check, your login and the week-one brief. Your tutor will email you tomorrow."
-            />
-          </Callout>
-          <div className="grid gap-3 rounded-xl border border-border bg-card p-5 sm:grid-cols-2">
+        <StartSection
+          intakes={[
+            { label: '8 Feb 2027', tag: 'Next intake', status: 'open' },
+            { label: '12 Jul 2027', tag: 'Mid-year', status: 'open' },
+          ]}
+          groups={[{ legend: 'Pace', icon: 'none', items: [{ name: 'Full-time', note: '19 weeks' }, { name: 'Part-time', note: '38 weeks' }] }]}
+          advisor={{ name: 'Sam', role: 'course advisor', photo: '/images/advisors/yoobee-sam.png', href: '#start' }}
+          enquiryRoutes={cmAdvisorRoutes}
+          holdLabel="Enrol for"
+          intro="Choose a date and a pace, then leave your name and number. Enrolment takes about three minutes and you can withdraw within two weeks for a full refund. Or enquire first."
+          confirmHold="You are enrolled. A confirmation has been emailed to you with your Fees Free check, your login and the week-one brief. Your tutor will email you tomorrow."
+        />
+        <div className="hairline-t border-border bg-background">
+          <div className="mx-auto grid max-w-[960px] gap-3 px-6 py-6 sm:grid-cols-2">
             <p className="flex items-center gap-2 text-sm font-medium sm:col-span-2">
               <Laptop className="size-4 text-primary" aria-hidden /> What you need
             </p>
@@ -105,7 +104,7 @@ export function YoobeeOnlinePage() {
               </p>
             ))}
           </div>
-        </Section>
+        </div>
 
         <InPageNav items={NAV} />
 

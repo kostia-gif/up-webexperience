@@ -45,7 +45,7 @@ export function FeesSimple({
           <p className="text-sm leading-relaxed text-muted-foreground text-pretty">{totalNote}</p>
         </div>
 
-        <div className="flex flex-col gap-3 border-t border-border pt-5">
+        <div className={cn('flex flex-col gap-3 border-t border-border pt-5', plans.length === 1 && 'hidden md:flex')}>
           <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Spread over the course</p>
           {plans.length > 1 && (
             <div role="tablist" aria-label="Study load" className={cn('grid gap-1 rounded-lg bg-muted p-1', plans.length === 2 ? 'grid-cols-2' : 'grid-cols-3')}>

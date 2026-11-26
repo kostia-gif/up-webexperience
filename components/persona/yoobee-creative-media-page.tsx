@@ -9,7 +9,7 @@ import { FeesSimple } from '@/components/modules/fees-simple'
 import { CourseOutcomes } from '@/components/modules/framing'
 import { InstantCheck } from '@/components/modules/instant-check'
 import { Callout, WhatYouDo } from '@/components/modules/real-terms'
-import { StartAndEnrol } from '@/components/modules/start-and-enrol'
+import { StartSection } from '@/components/modules/start-section'
 import { StudentWorkWall } from '@/components/modules/student-work-wall'
 import { Section } from '@/components/modules/ui'
 import { creativeMediaLevel4 } from '@/lib/courses'
@@ -33,10 +33,6 @@ const NAV: [string, string][] = [
   ['#formal', 'Details'],
 ]
 
-export const CM_INTAKES = [
-  { id: 'feb', date: '8 Feb 2027', label: 'Online and campus' },
-  { id: 'jul', date: '12 Jul 2027', label: 'Online and campus' },
-]
 
 export const CM_FEE_FACTS = [
   'Fees Free: eligible domestic students pay nothing in their first year of tertiary study',
@@ -54,7 +50,7 @@ export function YoobeeCreativeMediaPage() {
       reviewer={{
         forWho: `${PERSONAS['plan-b'].name} (64% of Yoobee students). ${PERSONAS['plan-b'].oneLine}`,
         testing: 'Whether the Option A billboard leading straight to cost and a start date, followed by outcomes and what you will make, is enough for an adult with commitments to enrol. Compare with the online-only view.',
-        note: 'Three call-outs: start date and enrol, the Fees Free check, talk to an advisor. The timetable is stated plainly: two live classes a day, 10am and 1pm; part-time over 38 weeks for people keeping a job.',
+        note: 'Hero leads straight into the Option A start-date band, with enrol or enquire in one place. The timetable is stated plainly: two live classes a day, 10am and 1pm; part-time over 38 weeks for people keeping a job.',
       }}
       mainAction={{ label: 'Start 8 Feb 2027', href: '#start' }}
     >
@@ -90,17 +86,19 @@ export function YoobeeCreativeMediaPage() {
           footnote="84% of last year's graduates were in creative work or further study within six months (placeholder). Entry is open from 16 with NCEA Level 2."
         />
 
-        <Section id="start" eyebrow="Enrol" title="Choose a start date" dense tone="muted">
-          <Callout eyebrow="Enrol now">
-            <StartAndEnrol
-              intakes={CM_INTAKES}
-              times={['Online, full-time', 'Online, part-time', 'On campus']}
-              timesLabel="How you will study"
-              cta="Enrol now"
-              confirm="A confirmation has been emailed to you with your Fees Free check and what to have ready for week one. Classes are at 10am and 1pm; part-time students attend half of them. Sam, a course advisor, will email you within a day."
-            />
-          </Callout>
-        </Section>
+        <StartSection
+          intakes={[
+            { label: '8 Feb 2027', tag: 'Next intake', status: 'open' },
+            { label: '12 Jul 2027', tag: 'Mid-year', status: 'open' },
+          ]}
+          groups={[
+            { legend: 'How will you study?', icon: 'none', items: [{ name: 'Online, full-time', note: '19 weeks' }, { name: 'Online, part-time', note: '38 weeks' }, { name: 'On campus', note: 'Auckland, Wellington, Christchurch' }] },
+          ]}
+          advisor={{ name: cmAdvisor.name, role: 'course advisor', photo: cmAdvisor.photo, href: '#advisor' }}
+          enquiryRoutes={cmAdvisorRoutes}
+          intro="Choose a date and how you will study, then leave your name and number. We hold your place for 7 days and text you. No payment or application yet. Or enquire first if you have questions."
+          confirmHold="Your place is held for 7 days. This is not an enrolment and nothing is decided until you confirm. We have texted you, and Sam will call to talk through Fees Free and your start."
+        />
 
         <InPageNav items={NAV} />
 
