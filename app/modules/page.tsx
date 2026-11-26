@@ -18,8 +18,9 @@ export default function Page() {
           <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Module library</p>
           <h1 className="font-display text-4xl font-bold uppercase leading-none tracking-tight text-balance">Modules we want to test</h1>
           <p className="max-w-2xl text-[15px] leading-relaxed text-muted-foreground text-pretty">
-            Built once in a neutral style, re-skinned per brand. Each module is tagged with the brands and personas it serves, the job it does
-            (Check, Prove, Fit, Act, Talk and share) and its status against the old POC. School pages and this library use the same components.
+            Grouped into new modules and enhanced existing ones, with the modules parked after review kept for reference. Each one carries the
+            research or exemplars behind it, the pages it is used on, and a live demo with a brand switcher. School pages and this library
+            use the same components.
           </p>
         </header>
         <Gallery />

@@ -5,7 +5,7 @@ import { DemoFrame } from '@/components/library/demo-frame'
 import { StatusBadge } from '@/components/library/gallery'
 import { LearnNote } from '@/components/library/learn-note'
 import { ALL_BRAND_FONTS } from '@/lib/personas/fonts'
-import { BRANDS, MODULES, PERSONAS, SCHOOL_PAGES, findModule, moduleBrands, modulePersonas, pageLabel } from '@/lib/personas/registry'
+import { BRANDS, GROUP_LABEL, MODULES, PERSONAS, SCHOOL_PAGES, findModule, moduleBrands, modulePersonas, pageLabel } from '@/lib/personas/registry'
 
 export function generateStaticParams() {
   return MODULES.map((m) => ({ slug: m.slug }))
@@ -26,7 +26,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
     const base = href.split('?')[0]
     const page = SCHOOL_PAGES.find((p) => p.href === base)
     const label = page ? pageLabel(page) : href
-    return { href, label: href.includes('for=dan') ? `${label} (Dan version)` : label }
+    return { href, label }
   })
 
   return (
@@ -37,7 +37,9 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
             &larr; Module library
           </a>
           <div className="flex flex-wrap items-center gap-3">
-            <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">{m.job}</p>
+            <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+              {GROUP_LABEL[m.group]} &middot; {m.job}
+            </p>
             <StatusBadge status={m.status} />
           </div>
           <h1 className="font-display text-4xl font-bold leading-none tracking-tight text-balance">{m.name}</h1>
@@ -71,6 +73,43 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
           ))}
           <LearnNote slug={m.slug} initial={m.learn} />
         </div>
+
+        <section aria-labelledby="evidence-title" className="flex flex-col gap-5 rounded-xl border border-border bg-muted p-6">
+          <div className="flex flex-col gap-2">
+            <h2 id="evidence-title" className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Why this module</h2>
+            <p className="max-w-3xl text-[17px] leading-relaxed text-pretty">{m.evidence.why}</p>
+          </div>
+          <div className="grid gap-6 md:grid-cols-[1.3fr_1fr]">
+            <div className="flex flex-col gap-3">
+              <h3 className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Evidence</h3>
+              <ul className="flex flex-col gap-3">
+                {m.evidence.sources.map((src) => (
+                  <li key={src.label} className="flex flex-col gap-1 rounded-lg border border-border bg-card p-4 text-sm">
+                    {src.href ? (
+                      <a href={src.href} target="_blank" rel="noreferrer" className="font-medium underline underline-offset-4 hover:text-primary">
+                        {src.label}
+                      </a>
+                    ) : (
+                      <span className="font-medium">{src.label}</span>
+                    )}
+                    <p className="leading-relaxed text-muted-foreground text-pretty">{src.note}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="flex flex-col gap-3">
+              <h3 className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Exemplars we trust</h3>
+              <ul className="flex flex-col gap-2 text-sm">
+                {m.evidence.exemplars.map((e) => (
+                  <li key={e} className="rounded-lg border border-border bg-card px-4 py-3">
+                    {e}
+                  </li>
+                ))}
+              </ul>
+              <p className="text-xs leading-relaxed text-muted-foreground text-pretty">Figures from vendor case studies are directional. Confirm with UP data before quoting externally.</p>
+            </div>
+          </div>
+        </section>
 
         <section className="flex flex-col gap-3">
           <h2 className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Used on these school pages</h2>

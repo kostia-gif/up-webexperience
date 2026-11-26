@@ -3,6 +3,15 @@
 import { Lightbulb } from 'lucide-react'
 import { useState } from 'react'
 import { AccreditationPanel } from '@/components/modules/accreditation-panel'
+import { CourseBreakdown, FormalDetails } from '@/components/modules/compliance'
+import { EarningPotential } from '@/components/modules/earning-potential'
+import { FeesSimple } from '@/components/modules/fees-simple'
+import { CourseOutcomes, WhyThisCourse } from '@/components/modules/framing'
+import { StoryCards, WhatYouDo } from '@/components/modules/real-terms'
+import { SpecialistPanel } from '@/components/modules/specialist-panel'
+import * as C from '@/lib/personas/data/compliance'
+import * as F from '@/lib/personas/data/framing'
+import * as R from '@/lib/personas/data/real-terms'
 import { BookingSlots } from '@/components/modules/booking-slots'
 import { ChatNow } from '@/components/modules/chat-now'
 import { CompareTable } from '@/components/modules/compare-table'
@@ -82,6 +91,53 @@ function resolveNzstFunding(a: Answers): CheckResult {
 
 export function ModuleDemo({ slug, brand }: { slug: string; brand: BrandKey }) {
   switch (slug) {
+    case 'course-outcomes':
+      return brand === 'aipc' ? (
+        <CourseOutcomes headline="Become the person others turn to" image="/images/aipc/placement.png" imageAlt="" outcomes={F.aipcOutcomes} />
+      ) : brand === 'yoobee' ? (
+        <CourseOutcomes headline="Make a living from what you make" image="/images/yoobee/mc-design.png" imageAlt="" outcomes={F.cmOutcomes} link={{ label: 'View student portfolios', href: '#' }} />
+      ) : (
+        <CourseOutcomes headline="Ready for the recruiters in sixteen weeks" image="/images/nzst/graduate-uniform.png" imageAlt="" outcomes={F.flightOutcomes} />
+      )
+    case 'earning-potential':
+      return brand === 'nzst' ? (
+        <EarningPotential e={{ currency: 'NZD', start: 48000, threeYear: 62000, source: 'Careers NZ, placeholder', year: 2025, stat: { value: '8 in 10', label: 'Flying or in an airline role within six months', cohort: 2025 }, employers: ['Air New Zealand', 'Jetstar', 'Qantas', 'Emirates', 'Fiji Airways'], employersMore: 12, employersYear: 2025 }} />
+      ) : (
+        <EarningPotential e={Y.cmEarnings} />
+      )
+    case 'course-timeline':
+      return <WhatYouDo phases={brand === 'aipc' ? R.aipcPhases : brand === 'yoobee' ? R.cmPhases : R.flightPhases} />
+    case 'fees-total-and-spread':
+      return brand === 'aipc' ? (
+        <FeesSimple total={A.AIPC_COURSE.standard.tuition} totalNote="Master of Counselling, 10 subjects at $3,465 each, billed per subject." currency="AUD" plans={[{ id: 'pt', label: 'Part-time', note: '18 months', months: 18 }, { id: 'ft', label: 'Full-time', note: '12 months', months: 12 }]} facts={['FEE-HELP: $0 upfront, defer the lot if eligible', 'Pay as you study, trimester by trimester', 'Pay up front, or mix the two', 'Withdraw before census and pay nothing for that subject']} talkHref="#" />
+      ) : brand === 'yoobee' ? (
+        <FeesSimple total={4753} totalNote="Tuition, levy and software. Free for eligible domestic students under Fees Free in 2027." currency="NZD" plans={[{ id: 'ft', label: 'Full-time', note: '19 weeks', months: 4.5 }, { id: 'pt', label: 'Part-time', note: '38 weeks', months: 9 }]} facts={['Fees Free for eligible first-year students', 'Pay up front, in full', 'Split payments, interest free', 'StudyLink loan if Fees Free is used up']} talkHref="#" />
+      ) : (
+        <FeesSimple total={N.FLIGHT.fee + N.FLIGHT.levy} totalNote="Course fee plus the student levy." currency="NZD" plans={[{ id: 'ft', label: 'Full-time', note: '16 weeks', months: 4 }]} facts={['Fees Free for most first-time students', 'Split payments across the sixteen weeks', 'StudyLink loan and living costs', 'Pay up front, in full']} talkHref="#" />
+      )
+    case 'specialist-panel':
+      return (
+        <SpecialistPanel
+          specialists={[
+            { name: 'Dr Helen Whitmore', years: '30 years practising', expertise: 'Community mental health, clinical supervision', photo: '/images/aipc/program-director.png' },
+            { name: 'Daniel Okafor', years: '12 years practising', expertise: 'Youth and family counselling', photo: '/images/advisors/aipc-daniel.png' },
+          ]}
+          days={A.aipcTutors[0].slots!}
+          what="a 20-minute conversation with a course specialist"
+        />
+      )
+    case 'course-guide':
+      return <EnquiryForm title="Download the course guide" intro="Everything on the page, as a PDF. An email address is all we ask for." routes={F.aipcGuideRoute} cta="Send me the guide" emailOnly />
+    case 'course-structure':
+      return <CourseBreakdown breakdown={brand === 'aipc' ? C.aipcBreakdown : brand === 'yoobee' ? C.cmBreakdown : C.flightBreakdown} />
+    case 'formal-details':
+      return <FormalDetails rows={brand === 'aipc' ? C.aipcFormal : brand === 'yoobee' ? C.cmFormal : C.flightFormal} links={brand === 'aipc' ? C.aipcLinks : brand === 'yoobee' ? C.cmLinks : C.flightLinks} />
+    case 'why-this-course':
+      return <WhyThisCourse reasons={F.flightReasons} />
+    case 'graduate-stories':
+      return <StoryCards stories={N.flightStories.slice(0, 3)} />
+    case 'talk-to-an-advisor':
+      return <EnquiryForm title={`Talk to ${Y.cmAdvisor.name}`} intro={Y.cmAdvisor.line} routes={F.cmAdvisorRoute} cta="Ask Sam to get in touch" />
     case 'instant-check':
       return brand === 'nzst' ? (
         <InstantCheck title="Can I get in?" questions={N.flightQuestions} resolve={N.resolveFlight} ctaLabel="Tell me" placeholderNote={null} />
