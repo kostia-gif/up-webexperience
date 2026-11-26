@@ -18,9 +18,9 @@ const barlow = Barlow_Condensed({
 })
 
 export const metadata: Metadata = {
-  title: 'Course page prototypes | UP Education',
+  title: 'UP web experience prototype | Persona-led school pages and module library',
   description:
-    'Prototype course pages for NZMA Cookery, Elite Beauty Therapy and Yoobee Creative Media: one structure, three brands, built around what a prospective student actually needs to decide.',
+    'Prototype course pages for AIPC, Yoobee and NZST, each designed for a lead and a second persona, plus a library of reusable modules to test across UP school websites.',
   generator: 'v0.app',
 }
 
