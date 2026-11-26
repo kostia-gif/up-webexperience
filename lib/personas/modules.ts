@@ -89,6 +89,16 @@ const BRIEF: Source = {
   label: 'UP Personas: Priorities and Deep Dives (internal, 26 Nov 2026)',
   note: 'NZST research: students decide fast, arrive from social, and leave if the process slows down. Yoobee research: Plan B students weigh outcomes and need to test the water. AIPC personas are assumed.',
 }
+const EDU_COUNTS: Source = {
+  label: 'Ministry of Education, Education Counts: What young graduates earn when they leave study',
+  href: 'https://www.educationcounts.govt.nz/publications/80898/what-young-graduates-earn-when-they-leave-study',
+  note: 'Five years after study, Level 5 to 7 diploma graduates earned 14% more than Level 1 to 3 certificate holders and 19% above the national median. The qualification premium stat on NZ pages comes from here.',
+}
+const ABS_EARN: Source = {
+  label: 'Australian Bureau of Statistics, Characteristics of Employment (August 2024)',
+  href: 'https://www.abs.gov.au/statistics/labour/earnings-and-working-conditions/characteristics-employment-australia/latest-release',
+  note: 'Median weekly earnings of $1,925 for employees with a postgraduate degree against $1,000 for those with no post-school qualification. The premium stat on the AIPC page comes from here.',
+}
 const PORTFOLIO: Source = {
   label: 'Creative hiring surveys (Adobe, Creative Group)',
   note: 'Around 72% of creative hiring managers prefer candidates who show their skills through a portfolio over qualifications alone. Showing the standard of student work answers the question employers will ask.',
@@ -119,21 +129,21 @@ export const MODULES: ModuleDef[] = [
   {
     slug: 'earning-potential',
     name: 'Earning potential',
-    blurb: 'Starting salary, three-year goal salary, the outcome stat, and who hired recent graduates.',
+    blurb: 'Starting salary, career pathway salary, the qualification premium from national statistics, the outcome stat, and who employs recent graduates. A source on every figure.',
     group: 'enhanced',
     job: 'Prove',
-    brands: ['yoobee', 'nzst'],
-    personas: ['plan-b', 'tailwinds', 'dreams'],
+    brands: 'all',
+    personas: ['plan-b', 'dreams', 'sarah', 'dan'],
     status: 'Adapted',
     whoFor: 'People giving up a wage to study, and anyone whose family will ask "but what will you earn?"',
-    whatItDoes: 'Three sourced numbers and a row of employer pills. Keeps the salary out of the headline so the page does not read as a sales pitch.',
+    whatItDoes: 'Four sourced figures and a row of employer pills. The premium comes from Education Counts (NZ) or the ABS (AU); the salaries from Careers NZ, Seek or industry surveys. Keeps the salary out of the headline.',
     learn: 'Does a sourced earnings module lift enquiry quality without attracting the wrong people?',
     sits: 'After the course outcomes.',
-    usedOn: [CM, CMO, NZST],
+    usedOn: [AIPC, CM, CMO, NZST],
     evidence: {
       why: 'Outcome and salary data is what Plan B students weigh (UP personas brief) and what AI assistants quote when they recommend a provider. Google Career Certificates lead with a sourced outcome rate and median salary. It has to be sourced, or it costs trust.',
-      sources: [COURSERA, BRIEF],
-      exemplars: ['Google Career Certificates (median salary with Lightcast source)', 'Open Universities Australia career pages', 'Seek Career Advice salary bands'],
+      sources: [EDU_COUNTS, ABS_EARN, COURSERA, BRIEF],
+      exemplars: ['Google Career Certificates (median salary with Lightcast source)', 'Careers New Zealand pay ranges', 'Open Universities Australia career pages', 'Seek Career Advice salary bands'],
     },
   },
   {

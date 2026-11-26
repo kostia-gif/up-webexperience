@@ -10,6 +10,7 @@ import { CourseOutcomes, WhyThisCourse } from '@/components/modules/framing'
 import { StoryCards, WhatYouDo } from '@/components/modules/real-terms'
 import { SpecialistPanel } from '@/components/modules/specialist-panel'
 import * as C from '@/lib/personas/data/compliance'
+import * as D from '@/lib/personas/data/nzst-diploma'
 import * as F from '@/lib/personas/data/framing'
 import * as R from '@/lib/personas/data/real-terms'
 import { BookingSlots } from '@/components/modules/booking-slots'
@@ -100,8 +101,10 @@ export function ModuleDemo({ slug, brand }: { slug: string; brand: BrandKey }) {
         <CourseOutcomes headline="Ready for the recruiters in sixteen weeks" image="/images/nzst/graduate-uniform.png" imageAlt="" outcomes={F.flightOutcomes} />
       )
     case 'earning-potential':
-      return brand === 'nzst' ? (
-        <EarningPotential e={{ currency: 'NZD', start: 48000, threeYear: 62000, source: 'Careers NZ, placeholder', year: 2025, stat: { value: '8 in 10', label: 'Flying or in an airline role within six months', cohort: 2025 }, employers: ['Air New Zealand', 'Jetstar', 'Qantas', 'Emirates', 'Fiji Airways'], employersMore: 12, employersYear: 2025 }} />
+      return brand === 'aipc' ? (
+        <EarningPotential e={A.aipcEarnings} />
+      ) : brand === 'nzst' ? (
+        <EarningPotential e={D.dipEarnings} />
       ) : (
         <EarningPotential e={Y.cmEarnings} />
       )

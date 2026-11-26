@@ -45,10 +45,14 @@ export const cmPay: PayRow[] = [
 
 export const cmEarnings: Earnings = {
   currency: 'NZD',
-  start: 52000,
-  threeYear: 68000,
-  source: 'Designers Institute of NZ salary survey',
-  year: 2025,
+  start: { value: 52000, role: 'Junior designer or content creator', source: 'Designers Institute of NZ salary survey', year: 2025 },
+  pathway: { value: 85000, role: 'Designer or motion designer', when: 'three to five years in', source: 'Hays Creative Salary Guide', year: 2025 },
+  premium: {
+    value: '+14%',
+    label: 'Level 5 to 7 diploma graduates earn 14% more than Level 1 to 3 certificate holders five years after study. This certificate credits into a Level 5 diploma.',
+    source: 'Ministry of Education, Education Counts, What young graduates earn when they leave study',
+    href: 'https://www.educationcounts.govt.nz/publications/80898/what-young-graduates-earn-when-they-leave-study',
+  },
   stat: { value: '84%', label: 'In a creative job or further study within 6 months', cohort: 2025 },
   employers: ['Weta Workshop', 'Mukpuddy Animation', 'DDB Aotearoa', 'Trade Me', 'Sky', 'Watermark Creative'],
   employersMore: 40,

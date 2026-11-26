@@ -3,6 +3,7 @@
 import { Download, MessageCircle } from 'lucide-react'
 import { InPageNav } from '@/components/course/above-fold'
 import { CourseBreakdown, FormalDetails, FormalHeading } from '@/components/modules/compliance'
+import { EarningPotential } from '@/components/modules/earning-potential'
 import { EnquiryForm } from '@/components/modules/enquiry-form'
 import { FeesSimple } from '@/components/modules/fees-simple'
 import { CourseOutcomes } from '@/components/modules/framing'
@@ -13,7 +14,7 @@ import { StoriesMatched } from '@/components/modules/stories-matched'
 import { CompareTable } from '@/components/modules/compare-table'
 import { SpecialistPanel } from '@/components/modules/specialist-panel'
 import { Expander, Section } from '@/components/modules/ui'
-import { AIPC_COURSE, aipcCompare, aipcCompareNote, aipcCreditQuestions, aipcGuideRoutes, aipcQuestions, aipcStories, aipcStoryFilters, aipcTeachers, resolveCredit } from '@/lib/personas/data/aipc'
+import { AIPC_COURSE, aipcCompare, aipcCompareNote, aipcCreditQuestions, aipcEarnings, aipcGuideRoutes, aipcQuestions, aipcStories, aipcStoryFilters, aipcTeachers, resolveCredit } from '@/lib/personas/data/aipc'
 import { aipcBreakdown, aipcFormal, aipcLinks } from '@/lib/personas/data/compliance'
 import { aipcOutcomes } from '@/lib/personas/data/framing'
 import { aipcLike, aipcPhases } from '@/lib/personas/data/real-terms'
@@ -23,7 +24,8 @@ import { PersonaShell } from './shell'
 
 const NAV: [string, string][] = [
   ['#outcomes-card', 'Outcomes'],
-  ['#like', "What it's like"],
+  ['#earn', 'Earnings'],
+  ['#like', 'How it works'],
   ['#journey', 'Your 18 months'],
   ['#talk', "Let's talk"],
   ['#fees', 'Fees'],
@@ -87,11 +89,15 @@ export function AipcCounsellingPage() {
 
         <CourseOutcomes headline="What you will be able to do" image="/images/aipc/placement.png" imageAlt="A counselling student in a supervised placement session" outcomes={aipcOutcomes} />
 
+        <Section id="earn" eyebrow="Career outcomes" title="Graduate outcomes and earnings" tone="muted">
+          <EarningPotential e={aipcEarnings} />
+        </Section>
+
         <Section id="like" eyebrow="The course" title="How the course works">
           <WhatItsLike {...aipcLike} />
         </Section>
 
-        <Section id="journey" eyebrow="Course overview" title="What your 18 months look like" tone="muted">
+        <Section id="journey" eyebrow="Course overview" title="What your 18 months look like">
           <WhatYouDo phases={aipcPhases} />
         </Section>
 

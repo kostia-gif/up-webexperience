@@ -54,10 +54,14 @@ export const dipPhases: Phase[] = [
 
 export const dipEarnings: Earnings = {
   currency: 'NZD',
-  start: 50000,
-  threeYear: 62000,
-  source: 'Careers New Zealand pay ranges for travel and tourism roles',
-  year: 2025,
+  start: { value: 50000, role: 'Travel consultant, front desk or tour guide', source: 'Careers New Zealand pay ranges', year: 2025 },
+  pathway: { value: 75000, role: 'Tourism operations or duty manager', when: 'three to five years in', source: 'Careers New Zealand pay ranges', year: 2025 },
+  premium: {
+    value: '+14%',
+    label: 'Level 5 to 7 diploma graduates earn 14% more than Level 1 to 3 certificate holders five years after study, and 19% above the national median.',
+    source: 'Ministry of Education, Education Counts, What young graduates earn when they leave study',
+    href: 'https://www.educationcounts.govt.nz/publications/80898/what-young-graduates-earn-when-they-leave-study',
+  },
   stat: { value: '8 in 10', label: 'In tourism, travel or hospitality work, or further study, within six months', cohort: 2025 },
   employers: ['Air New Zealand', 'Flight Centre', 'House of Travel', 'Auckland Airport', 'RealNZ', 'Skyline Queenstown'],
   employersMore: 30,

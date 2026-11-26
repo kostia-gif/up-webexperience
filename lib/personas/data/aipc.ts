@@ -13,6 +13,7 @@ import type { Session } from '@/components/modules/session-picker'
 import type { IntakeOption } from '@/components/modules/start-and-enrol'
 import type { Story } from '@/components/modules/stories-matched'
 import type { PlannerMode } from '@/components/modules/week-planner'
+import type { Earnings } from '@/components/modules/earning-potential'
 
 /** 2027 structure. Stated once here and read everywhere else. */
 export const AIPC_COURSE = {
@@ -431,3 +432,20 @@ export const aipcQuestions = [
     a: 'The Advanced adds four subjects and six months, with a specialisation stream and a research project. Most career changers take the 18-month Master and add the Advanced subjects later if they want them.',
   },
 ]
+
+export const aipcEarnings: Earnings = {
+  currency: 'AUD',
+  start: { value: 72000, role: 'Provisional or registered counsellor', source: 'Seek job advertisements', year: 2026 },
+  pathway: { value: 100000, role: 'Senior counsellor or private practice', when: 'five years and beyond', source: 'Australian Counselling Association member survey', year: 2025 },
+  premium: {
+    value: '+93%',
+    label: 'Employees with a postgraduate degree earned a median $1,925 a week in August 2024, against $1,000 for those with no post-school qualification.',
+    source: 'Australian Bureau of Statistics, Characteristics of Employment',
+    year: 2024,
+    href: 'https://www.abs.gov.au/statistics/labour/earnings-and-working-conditions/characteristics-employment-australia/latest-release',
+  },
+  stat: { value: '9 in 10', label: 'In counselling-related work within six months', cohort: 2025 },
+  employers: ['headspace', 'Relationships Australia', 'Anglicare', 'Lifeline', 'Uniting', 'Mission Australia'],
+  employersMore: 25,
+  employersYear: 2025,
+}
