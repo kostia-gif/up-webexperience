@@ -6,15 +6,16 @@ import { CourseBreakdown, FormalDetails, FormalHeading } from '@/components/modu
 import { EarningPotential } from '@/components/modules/earning-potential'
 import { FeesSimple } from '@/components/modules/fees-simple'
 import { CourseOutcomes } from '@/components/modules/framing'
+import { InstantCheck } from '@/components/modules/instant-check'
 import { Callout, WhatYouDo } from '@/components/modules/real-terms'
-import { StartAndEnrol } from '@/components/modules/start-and-enrol'
+import { StartSection } from '@/components/modules/start-section'
 import { StudentWorkWall } from '@/components/modules/student-work-wall'
 import { Section } from '@/components/modules/ui'
 import { creativeMediaLevel4 } from '@/lib/courses'
 import { cmBreakdown, cmFormal, cmLinks } from '@/lib/personas/data/compliance'
 import { cmOutcomes } from '@/lib/personas/data/framing'
-import { cmPhases } from '@/lib/personas/data/real-terms'
-import { CM, cmEarnings, cmWorks } from '@/lib/personas/data/yoobee'
+import { CM_LOAD, cmLike, cmPhases } from '@/lib/personas/data/real-terms'
+import { CM, cmAdvisorRoutes, cmEarnings, cmFundingQuestions, cmWorks, resolveCmFunding } from '@/lib/personas/data/yoobee'
 import { PERSONAS } from '@/lib/personas/registry'
 import { Billboard, HeroButton } from './billboard'
 import { PersonaShell } from './shell'
@@ -23,7 +24,7 @@ import { CM_FEE_FACTS } from './yoobee-creative-media-page'
 const NAV: [string, string][] = [
   ['#start', 'Enrol'],
   ['#outcomes-card', 'Outcomes'],
-  ['#earn', 'Earnings'],
+  ['#earn', 'Outcomes and earnings'],
   ['#journey', 'Your 19 weeks'],
   ['#work', 'Student work'],
   ['#fees', 'Fees'],
@@ -31,19 +32,13 @@ const NAV: [string, string][] = [
   ['#formal', 'Details'],
 ]
 
-const ONLINE_INTAKES = [
-  { id: 'feb', date: '8 Feb 2027', label: 'Next start' },
-  { id: 'mar', date: '8 Mar 2027' },
-  { id: 'apr', date: '12 Apr 2027' },
-  { id: 'may', date: '10 May 2027' },
-]
 
-const NEED = ['A laptop or desktop that runs Adobe apps, and a webcam', 'About 20 hours a week full-time, or 10 part-time', 'Two live online classes a day, 10am and 1pm, recorded if you miss one', 'Nothing else. Software is included in the fee']
+const NEED = ['A laptop or desktop that runs Adobe apps, and a webcam', CM_LOAD, 'Two live online classes a day, 10am and 1pm, Monday to Friday. Part-time students attend half of them; a missed class is recorded for catch-up', 'Nothing else. Software is included in the fee']
 
 /**
  * Comparison view: the same course sold as an online-only product. The page is
- * about signing up: start now, see what you get, pay simply. Shorter than the
- * blended page and with monthly starts.
+ * about signing up: see what you get, pick a date, pay simply. Shorter than the
+ * blended page. Same February and July intakes.
  */
 export function YoobeeOnlinePage() {
   return (
@@ -53,8 +48,8 @@ export function YoobeeOnlinePage() {
       applyLabel="Enrol"
       reviewer={{
         forWho: `${PERSONAS['plan-b'].name}, studying online from anywhere in New Zealand.`,
-        testing: 'A comparison with the blended page: online is about buying and signing up. Monthly starts, enrol at the top, outcomes and portfolios as the proof, simple pricing, and nothing that needs a conversation.',
-        note: 'One call-out: enrol. No advisor section; the page is built to be completed alone.',
+        testing: 'A comparison with the blended page: online is about buying and signing up. Enrol at the top, outcomes and portfolios as the proof, simple pricing, and nothing that needs a conversation. Same February and July intakes as the blended page.',
+        note: 'Hero leads straight into the Option A start-date band. Enrol or enquire in one place; no separate advisor section. Weekly load stated once: about 15 hours live plus 20 of project work full-time, half that part-time.',
       }}
       mainAction={{ label: 'Enrol now', href: '#start' }}
     >
@@ -66,13 +61,13 @@ export function YoobeeOnlinePage() {
               Make a living <span className="text-coral">off creative media.</span>
             </>
           }
-          sub="Animation, film and design in one online certificate, taught live around the job you have now. Starts every month, from anywhere in New Zealand."
+          sub="Animation, film and design in one online certificate, taught live from anywhere in New Zealand. Full-time over 19 weeks, or part-time over 38 if you are keeping a job. Next class starts 8 February 2027."
           image="/images/yoobee/hero-home-studio.png"
           facts={[
             { label: 'Length', value: `${CM.weeks} weeks, or 38 part-time` },
             { label: 'Where', value: 'Online, anywhere in New Zealand' },
             { label: 'You need', value: '16+, NCEA Level 2, a laptop' },
-            { label: 'Cost', value: 'Free for domestic students starting February 2027. Otherwise $4,753 total: tuition, levy and software', placeholder: true },
+            { label: 'Cost', value: '$4,753 total. Free if you qualify for Fees Free', placeholder: true },
           ]}
           actions={
             <>
@@ -82,20 +77,23 @@ export function YoobeeOnlinePage() {
               <HeroButton href="#fees">See pricing</HeroButton>
             </>
           }
-          footnote="Enrolling takes about three minutes. Full refund if you withdraw in the first two weeks."
+          footnote="Enrolment takes about three minutes. Full refund if you withdraw within the first two weeks. Entry is open from 16 with NCEA Level 2."
         />
 
-        <Section id="start" eyebrow="Enrol" title="Pick a start date and enrol" dense tone="muted">
-          <Callout eyebrow="About three minutes">
-            <StartAndEnrol
-              intakes={ONLINE_INTAKES}
-              times={['Full-time, 19 weeks', 'Part-time, 38 weeks']}
-              timesLabel="Pace"
-              cta="Enrol now"
-              confirm="You are in. A confirmation is on its way with your Fees Free check, your login, and the week-one brief. Your tutor will say hello by email tomorrow."
-            />
-          </Callout>
-          <div className="grid gap-3 rounded-xl border border-border bg-card p-5 sm:grid-cols-2">
+        <StartSection
+          intakes={[
+            { label: '8 Feb 2027', tag: 'Next intake', status: 'open' },
+            { label: '12 Jul 2027', tag: 'Mid-year', status: 'open' },
+          ]}
+          groups={[{ legend: 'Pace', icon: 'none', items: [{ name: 'Full-time', note: '19 weeks' }, { name: 'Part-time', note: '38 weeks' }] }]}
+          advisor={{ name: 'Sam', role: 'course advisor', photo: '/images/advisors/yoobee-sam.png', href: '#start' }}
+          enquiryRoutes={cmAdvisorRoutes}
+          holdLabel="Enrol for"
+          intro="Choose a date and a pace, then leave your name and number. Enrolment takes about three minutes and you can withdraw within two weeks for a full refund. Or enquire first."
+          confirmHold="You are enrolled. A confirmation has been emailed to you with your Fees Free check, your login and the week-one brief. Your tutor will email you tomorrow."
+        />
+        <div className="hairline-t border-border bg-background">
+          <div className="mx-auto grid max-w-[960px] gap-3 px-6 py-6 sm:grid-cols-2">
             <p className="flex items-center gap-2 text-sm font-medium sm:col-span-2">
               <Laptop className="size-4 text-primary" aria-hidden /> What you need
             </p>
@@ -106,23 +104,23 @@ export function YoobeeOnlinePage() {
               </p>
             ))}
           </div>
-        </Section>
+        </div>
 
         <InPageNav items={NAV} />
 
         <CourseOutcomes
-          headline="Make a living from what you make"
+          headline="What you will be able to do"
           image="/images/yoobee/mc-design.png"
           imageAlt="A student reviewing a poster layout on screen"
           outcomes={cmOutcomes}
           link={{ label: 'View student portfolios', href: '#work' }}
         />
 
-        <Section id="earn" eyebrow="Where this takes you" title="What you could earn" tone="muted">
+        <Section id="earn" eyebrow="Career outcomes" title="Graduate outcomes and earnings" tone="muted">
           <EarningPotential e={cmEarnings} />
         </Section>
 
-        <Section id="journey" eyebrow="Week by week" title="What your 19 weeks look like" intro={creativeMediaLevel4.like.text}>
+        <Section id="journey" eyebrow="Course overview" title="What your 19 weeks look like" intro={cmLike}>
           <WhatYouDo phases={cmPhases} />
         </Section>
 
@@ -130,17 +128,17 @@ export function YoobeeOnlinePage() {
           <div className="mx-auto flex max-w-[960px] flex-col gap-1 px-6 pb-6">
             <p className="text-xs font-medium uppercase tracking-wide text-primary">Student portfolios</p>
             <h2 id="work-title" className="font-display text-3xl font-bold uppercase leading-none tracking-tight text-balance md:text-4xl">
-              Made online, from kitchen tables
+              Work from the online class
             </h2>
-            <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground text-pretty">Work from last year&apos;s online class, credited to the students who made it.</p>
+            <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground text-pretty">Work by last year&apos;s online students, credited to each student.</p>
           </div>
           <StudentWorkWall disciplines={[]} works={cmWorks} />
         </section>
 
-        <Section id="fees" eyebrow="What it costs" title="Fees and ways to pay">
+        <Section id="fees" eyebrow="What it costs" title="Fees and payment options">
           <FeesSimple
             total={4753}
-            totalNote="Tuition $4,464.72, levy $102.50 and software $186. Nothing extra. Free for eligible domestic students under Fees Free in 2027."
+            totalNote="Tuition $4,464.72, levy $102.50 and software $186. Nothing extra. Free if you qualify for Fees Free: check below."
             currency="NZD"
             plans={[
               { id: 'ft', label: 'Full-time', note: '19 weeks', months: 4.5 },
@@ -148,8 +146,11 @@ export function YoobeeOnlinePage() {
             ]}
             facts={CM_FEE_FACTS}
             talkHref="#start"
-            talkLabel="the enrolment form, and we will check Fees Free for you"
+            talkLabel="the enrolment form, and we will check your Fees Free eligibility"
           />
+          <Callout eyebrow="Fees Free eligibility">
+            <InstantCheck title="Am I eligible for Fees Free?" intro="Three questions. Fees Free covers the first year of tertiary study for New Zealand citizens and residents." questions={cmFundingQuestions} resolve={(a) => resolveCmFunding(a, { enrol: '#start', talk: '#start' })} ctaLabel="Check" placeholderNote="Fees Free rules as published for 2027, to be confirmed." />
+          </Callout>
         </Section>
 
         <Section id="structure" eyebrow="Course structure" title={`4 modules, ${creativeMediaLevel4.formal.credits} credits, ${CM.weeks} weeks`} tone="muted">

@@ -7,15 +7,16 @@ import { EarningPotential } from '@/components/modules/earning-potential'
 import { EnquiryForm } from '@/components/modules/enquiry-form'
 import { FeesSimple } from '@/components/modules/fees-simple'
 import { CourseOutcomes } from '@/components/modules/framing'
+import { InstantCheck } from '@/components/modules/instant-check'
 import { Callout, WhatYouDo } from '@/components/modules/real-terms'
-import { StartAndEnrol } from '@/components/modules/start-and-enrol'
+import { StartSection } from '@/components/modules/start-section'
 import { StudentWorkWall } from '@/components/modules/student-work-wall'
 import { Section } from '@/components/modules/ui'
 import { creativeMediaLevel4 } from '@/lib/courses'
 import { cmBreakdown, cmFormal, cmLinks } from '@/lib/personas/data/compliance'
-import { cmAdvisorRoute, cmOutcomes } from '@/lib/personas/data/framing'
-import { cmPhases } from '@/lib/personas/data/real-terms'
-import { CM, cmAdvisor, cmEarnings, cmWorks } from '@/lib/personas/data/yoobee'
+import { cmOutcomes } from '@/lib/personas/data/framing'
+import { cmLike, cmPhases } from '@/lib/personas/data/real-terms'
+import { CM, cmAdvisor, cmAdvisorRoutes, cmEarnings, cmFundingQuestions, cmWorks, resolveCmFunding } from '@/lib/personas/data/yoobee'
 import { PERSONAS } from '@/lib/personas/registry'
 import { Billboard, HeroButton } from './billboard'
 import { PersonaShell } from './shell'
@@ -23,19 +24,15 @@ import { PersonaShell } from './shell'
 const NAV: [string, string][] = [
   ['#start', 'Start dates'],
   ['#outcomes-card', 'Outcomes'],
-  ['#earn', 'Earnings'],
+  ['#earn', 'Outcomes and earnings'],
   ['#journey', 'Your 19 weeks'],
   ['#work', 'Student work'],
   ['#fees', 'Fees'],
-  ['#advisor', 'Talk to someone'],
+  ['#advisor', 'Advisor'],
   ['#structure', 'Modules'],
   ['#formal', 'Details'],
 ]
 
-export const CM_INTAKES = [
-  { id: 'feb', date: '8 Feb 2027', label: 'Online and campus' },
-  { id: 'jul', date: '12 Jul 2027', label: 'Online and campus' },
-]
 
 export const CM_FEE_FACTS = [
   'Fees Free: eligible domestic students pay nothing in their first year of tertiary study',
@@ -45,7 +42,6 @@ export const CM_FEE_FACTS = [
 ]
 
 export function YoobeeCreativeMediaPage() {
-  const like = creativeMediaLevel4.like
   return (
     <PersonaShell
       brand="yoobee"
@@ -54,7 +50,7 @@ export function YoobeeCreativeMediaPage() {
       reviewer={{
         forWho: `${PERSONAS['plan-b'].name} (64% of Yoobee students). ${PERSONAS['plan-b'].oneLine}`,
         testing: 'Whether the Option A billboard leading straight to cost and a start date, followed by outcomes and what you will make, is enough for an adult with commitments to enrol. Compare with the online-only view.',
-        note: 'Two call-outs: start date and enrol, talk to an advisor. What it is like is folded into what you will make.',
+        note: 'Hero leads straight into the Option A start-date band, with enrol or enquire in one place. The timetable is stated plainly: two live classes a day, 10am and 1pm; part-time over 38 weeks for people keeping a job.',
       }}
       mainAction={{ label: 'Start 8 Feb 2027', href: '#start' }}
     >
@@ -66,13 +62,13 @@ export function YoobeeCreativeMediaPage() {
               Turn your passion <span className="text-coral">into a new path.</span>
             </>
           }
-          sub="Animation, film and design in one certificate, around the job you have now. Next class starts 8 February 2027."
+          sub="Animation, film and design in one certificate. Full-time over 19 weeks, or part-time over 38 if you are keeping a job. Next class starts 8 February 2027."
           image="/images/yoobee/hero-home-studio.png"
           facts={[
             { label: 'Length', value: `${CM.weeks} weeks, or 38 part-time` },
             { label: 'Where', value: 'Online, or Auckland, Wellington, Christchurch' },
             { label: 'You need', value: '16+, NCEA Level 2' },
-            { label: 'Cost', value: 'Free for domestic students starting February 2027. Otherwise $4,753 total: tuition, levy and software', placeholder: true },
+            { label: 'Cost', value: '$4,753 total. Free if you qualify for Fees Free', placeholder: true },
           ]}
           actions={
             <>
@@ -83,40 +79,42 @@ export function YoobeeCreativeMediaPage() {
                 <CalendarClock className="size-5" aria-hidden /> Start later
               </HeroButton>
               <HeroButton href="#advisor">
-                <MessageCircle className="size-5" aria-hidden /> Talk to someone
+                <MessageCircle className="size-5" aria-hidden /> Talk to an advisor
               </HeroButton>
             </>
           }
-          footnote="84% of last year's class were in creative work or further study within six months (placeholder). You need to be 16+. That's about it."
+          footnote="84% of last year's graduates were in creative work or further study within six months (placeholder). Entry is open from 16 with NCEA Level 2."
         />
 
-        <Section id="start" eyebrow="Get started" title="Pick a start date" dense tone="muted">
-          <Callout eyebrow="Enrol now">
-            <StartAndEnrol
-              intakes={CM_INTAKES}
-              times={['Online, full-time', 'Online, part-time', 'On campus']}
-              timesLabel="How you will study"
-              cta="Enrol now"
-              confirm="A confirmation is on its way with your Fees Free check and what to have ready for week one. Sam, a course advisor, will email within a day to say hello. No phone call unless you want one."
-            />
-          </Callout>
-        </Section>
+        <StartSection
+          intakes={[
+            { label: '8 Feb 2027', tag: 'Next intake', status: 'open' },
+            { label: '12 Jul 2027', tag: 'Mid-year', status: 'open' },
+          ]}
+          groups={[
+            { legend: 'How will you study?', icon: 'none', items: [{ name: 'Online, full-time', note: '19 weeks' }, { name: 'Online, part-time', note: '38 weeks' }, { name: 'On campus', note: 'Auckland, Wellington, Christchurch' }] },
+          ]}
+          advisor={{ name: cmAdvisor.name, role: 'course advisor', photo: cmAdvisor.photo, href: '#advisor' }}
+          enquiryRoutes={cmAdvisorRoutes}
+          intro="Choose a date and how you will study, then leave your name and number. We hold your place for 7 days and text you. No payment or application yet. Or enquire first if you have questions."
+          confirmHold="Your place is held for 7 days. This is not an enrolment and nothing is decided until you confirm. We have texted you, and Sam will call to talk through Fees Free and your start."
+        />
 
         <InPageNav items={NAV} />
 
         <CourseOutcomes
-          headline="Make a living from what you make"
+          headline="What you will be able to do"
           image="/images/yoobee/mc-design.png"
           imageAlt="A student reviewing a poster layout on screen"
           outcomes={cmOutcomes}
           link={{ label: 'View student portfolios', href: '#work' }}
         />
 
-        <Section id="earn" eyebrow="Where this takes you" title="What you could earn" tone="muted">
+        <Section id="earn" eyebrow="Career outcomes" title="Graduate outcomes and earnings" tone="muted">
           <EarningPotential e={cmEarnings} />
         </Section>
 
-        <Section id="journey" eyebrow="Week by week" title="What your 19 weeks look like" intro={like.text}>
+        <Section id="journey" eyebrow="Course overview" title="What your 19 weeks look like" intro={cmLike}>
           <WhatYouDo phases={cmPhases} />
         </Section>
 
@@ -126,15 +124,15 @@ export function YoobeeCreativeMediaPage() {
             <h2 id="work-title" className="font-display text-3xl font-bold uppercase leading-none tracking-tight text-balance md:text-4xl">
               Work from the last class
             </h2>
-            <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground text-pretty">Credited to the students who made it. This is the standard you will reach.</p>
+            <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground text-pretty">Work by recent students, credited to each student. It shows the standard you can expect to reach.</p>
           </div>
           <StudentWorkWall disciplines={[]} works={cmWorks} />
         </section>
 
-        <Section id="fees" eyebrow="What it costs" title="Fees and ways to pay">
+        <Section id="fees" eyebrow="What it costs" title="Fees and payment options">
           <FeesSimple
             total={4753}
-            totalNote="Tuition $4,464.72, levy $102.50 and software $186. Nothing extra. Free for eligible domestic students under Fees Free in 2027."
+            totalNote="Tuition $4,464.72, levy $102.50 and software $186. Nothing extra. Free if you qualify for Fees Free: check below."
             currency="NZD"
             plans={[
               { id: 'ft', label: 'Full-time', note: '19 weeks', months: 4.5 },
@@ -144,11 +142,14 @@ export function YoobeeCreativeMediaPage() {
             talkHref="#advisor"
             talkLabel="a quick call with Sam"
           />
+          <Callout eyebrow="Fees Free eligibility">
+            <InstantCheck title="Am I eligible for Fees Free?" intro="Three questions. Fees Free covers the first year of tertiary study for New Zealand citizens and residents." questions={cmFundingQuestions} resolve={(a) => resolveCmFunding(a, { enrol: '#start', talk: '#advisor' })} ctaLabel="Check" placeholderNote="Fees Free rules as published for 2027, to be confirmed." />
+          </Callout>
         </Section>
 
-        <Section id="advisor" eyebrow="Talk to someone" title="Talk to a course advisor" tone="muted">
-          <Callout eyebrow="Call or email back">
-            <EnquiryForm title={`Talk to ${cmAdvisor.name}`} intro={cmAdvisor.line} routes={cmAdvisorRoute} cta="Ask Sam to get in touch" />
+        <Section id="advisor" eyebrow="Contact" title="Talk to a course advisor" tone="muted">
+          <Callout eyebrow="Request a call or email">
+            <EnquiryForm title={`Talk to ${cmAdvisor.name}`} intro={cmAdvisor.line} routes={cmAdvisorRoutes} cta="Request contact" />
           </Callout>
         </Section>
 

@@ -8,9 +8,9 @@ export function MessageUs({ who, hours, id }: { who: string; hours: string; id?:
   return (
     <div id={id} className="flex scroll-mt-20 flex-col gap-4 rounded-xl border border-border bg-card p-5 sm:p-6">
       <div className="flex flex-col gap-1">
-        <h3 className="font-display text-2xl leading-tight">Message us. Reply in minutes.</h3>
+        <h3 className="font-display text-2xl leading-tight">Message us</h3>
         <p className="text-sm text-muted-foreground">
-          {who} answers {hours}. <Placeholder className="ml-1 align-middle" />
+          {who} replies within minutes, {hours}. <Placeholder className="ml-1 align-middle" />
         </p>
       </div>
       <div className="grid gap-2 sm:grid-cols-2">

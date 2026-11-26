@@ -13,6 +13,9 @@ export type Work = {
   /** Tailwind background class for the placeholder tile. */
   tone: string
   tall?: boolean
+  /** Optional photo; falls back to the tone tile. */
+  image?: string
+  imageAlt?: string
 }
 
 /** Edge-to-edge wall of credited student work, filterable by discipline. Tiles are placeholders until UP supplies work. */
@@ -21,11 +24,13 @@ export function StudentWorkWall({
   works,
   id,
   hero,
+  countNoun = 'pieces',
 }: {
   disciplines: string[]
   works: Work[]
   id?: string
   hero?: boolean
+  countNoun?: string
 }) {
   const [d, setD] = useState('All')
   const shown = d === 'All' ? works : works.filter((w) => w.discipline === d)
@@ -39,14 +44,19 @@ export function StudentWorkWall({
             </Pill>
           ))}
           <span className="ml-auto text-xs text-muted-foreground">
-            {shown.length} pieces <Placeholder className="ml-1" />
+            {shown.length} {countNoun} <Placeholder className="ml-1" />
           </span>
         </div>
       )}
       <ul className={cn('grid grid-flow-dense gap-1', hero ? 'grid-cols-2 sm:grid-cols-4 lg:grid-cols-6' : 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-4')}>
         {shown.map((w) => (
           <li key={w.id} className={cn('group relative aspect-square overflow-hidden', w.tall && 'row-span-2 aspect-auto')}>
-            <div className={cn('absolute inset-0', w.tone)} aria-hidden />
+            {w.image ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={w.image} alt={w.imageAlt ?? ''} className="absolute inset-0 size-full object-cover" />
+            ) : (
+              <div className={cn('absolute inset-0', w.tone)} aria-hidden />
+            )}
             <figure className="absolute inset-0 flex flex-col justify-end p-3 text-primary-foreground">
               <figcaption className="flex flex-col gap-0.5 rounded-md bg-foreground/70 p-2 text-xs backdrop-blur-sm">
                 <span className="font-medium leading-snug">{w.title}</span>

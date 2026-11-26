@@ -37,7 +37,7 @@ export function BookingSlots({
               Booked: {what}, {pick.day} at {pick.time}
               {withWho ? ` with ${withWho}` : ''}.
             </p>
-            <p className="text-pretty">{confirmLine ?? 'You will get a calendar invite and a reminder the day before. Nothing else, and no follow-up calls.'}</p>
+            <p className="text-pretty">{confirmLine ?? 'You will receive a calendar invitation and a reminder the day before.'}</p>
           </div>
         </div>
       </ResultCard>

@@ -15,6 +15,7 @@ export function CourseOutcomes({
   imageAlt,
   outcomes,
   link,
+  compact,
 }: {
   id?: string
   headline: ReactNode
@@ -22,21 +23,22 @@ export function CourseOutcomes({
   imageAlt: string
   outcomes: Outcome[]
   link?: { label: string; href: string }
+  compact?: boolean
 }) {
   return (
     <section id={id} aria-labelledby={`${id}-title`} className="hairline-t scroll-mt-20 border-border bg-muted">
-      <div className="mx-auto flex max-w-[1100px] flex-col gap-8 px-6 py-12 md:gap-10 md:py-16">
-        <h2 id={`${id}-title`} className="mx-auto max-w-3xl text-center font-display text-4xl font-bold uppercase leading-none tracking-tight text-balance md:text-5xl">
+      <div className={compact ? 'mx-auto flex max-w-[1100px] flex-col gap-5 px-6 py-8 md:gap-8 md:py-12' : 'mx-auto flex max-w-[1100px] flex-col gap-8 px-6 py-12 md:gap-10 md:py-16'}>
+        <h2 id={`${id}-title`} className={compact ? 'mx-auto max-w-3xl text-center font-display text-3xl font-bold uppercase leading-none tracking-tight text-balance md:text-5xl' : 'mx-auto max-w-3xl text-center font-display text-4xl font-bold uppercase leading-none tracking-tight text-balance md:text-5xl'}>
           {headline}
         </h2>
         <div className="grid gap-4 md:grid-cols-2 md:items-stretch">
-          <figure className="relative min-h-[320px] overflow-hidden rounded-xl">
+          <figure className={compact ? 'relative hidden min-h-[320px] overflow-hidden rounded-xl md:block' : 'relative min-h-[320px] overflow-hidden rounded-xl'}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={image} alt={imageAlt} className="absolute inset-0 size-full object-cover" />
           </figure>
-          <div className="flex flex-col gap-5 rounded-xl border border-border bg-card p-6 md:p-8">
+          <div className={compact ? 'flex flex-col gap-3 rounded-xl border border-border bg-card p-4 md:gap-5 md:p-8' : 'flex flex-col gap-5 rounded-xl border border-border bg-card p-6 md:p-8'}>
             <h3 className="text-lg font-medium text-muted-foreground">Course outcomes</h3>
-            <ul className="flex flex-col gap-4 border-t border-dashed border-border pt-5">
+            <ul className={compact ? 'flex flex-col gap-2.5 border-t border-dashed border-border pt-3 md:gap-4 md:pt-5' : 'flex flex-col gap-4 border-t border-dashed border-border pt-5'}>
               {outcomes.map((o) => (
                 <li key={o.lead} className="flex gap-3">
                   <span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-md bg-success text-success-foreground">
@@ -63,13 +65,13 @@ export function CourseOutcomes({
 export type Reason = { title: string; text: string; href?: string; linkLabel?: string }
 
 /** "Why this course": the reasons in one place, each linking to its proof further down. */
-export function WhyThisCourse({ reasons }: { reasons: Reason[] }) {
+export function WhyThisCourse({ reasons, compact }: { reasons: Reason[]; compact?: boolean }) {
   return (
-    <ul className="grid gap-4 sm:grid-cols-2">
+    <ul className={compact ? 'grid grid-cols-2 gap-2 sm:gap-4' : 'grid gap-4 sm:grid-cols-2'}>
       {reasons.map((r) => (
-        <li key={r.title} className="flex flex-col gap-2 rounded-xl border border-border bg-card p-5">
-          <h3 className="text-lg font-medium leading-snug">{r.title}</h3>
-          <p className="text-sm leading-relaxed text-muted-foreground text-pretty">{r.text}</p>
+        <li key={r.title} className={compact ? 'flex flex-col gap-1.5 rounded-xl border border-border bg-card p-3 sm:p-5' : 'flex flex-col gap-2 rounded-xl border border-border bg-card p-5'}>
+          <h3 className={compact ? 'text-sm font-medium leading-snug sm:text-lg' : 'text-lg font-medium leading-snug'}>{r.title}</h3>
+          <p className={compact ? 'hidden text-sm leading-relaxed text-muted-foreground text-pretty sm:block' : 'text-sm leading-relaxed text-muted-foreground text-pretty'}>{r.text}</p>
           {r.href && (
             <a href={r.href} className="mt-auto inline-flex items-center gap-1 pt-1 text-sm font-medium text-primary hover:underline hover:underline-offset-4">
               {r.linkLabel ?? 'More'} <ArrowRight className="size-4" aria-hidden />

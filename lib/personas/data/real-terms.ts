@@ -7,7 +7,7 @@ import { FLIGHT } from './nzst'
 /* AIPC */
 
 export const aipcLike = {
-  text: `Most students take two subjects at a time around a job. That is roughly 12 to 15 hours a week: recorded lectures you watch when it suits, one live online tutorial in the evening (recorded if you miss it), readings, and recorded role-plays you submit for feedback from your lecturer within a week. Five days across the whole degree are in person, at practical workshops in ${AIPC_COURSE.workshopCities.join(', ')}. Placement in your final stretch is ${AIPC_COURSE.placementHours} hours, usually a day or two a week, arranged with you by our placement team near where you live.`,
+  text: `Most students take two subjects at a time while working. That is roughly 12 to 15 hours a week: recorded lectures you watch when it suits, one live online tutorial in the evening (recorded if you miss it), readings, and recorded role-plays you submit for feedback from your lecturer within a week. Five days across the whole degree are in person, at practical workshops in ${AIPC_COURSE.workshopCities.join(', ')}. Placement in your final stretch is ${AIPC_COURSE.placementHours} hours, usually a day or two a week, arranged with you by our placement team near where you live.`,
   schedule: `about 12 to 15 hours a week part-time or 25 to 30 full-time, mostly on your own time with one live evening tutorial, five in-person workshop days across the degree, and a ${AIPC_COURSE.placementHours}-hour placement at the end`,
   poster: '/images/aipc/video-poster.png',
   caption: 'Priya, 41, on a practical workshop in Brisbane and what her study week looks like. 1:48, captioned.',
@@ -16,21 +16,21 @@ export const aipcLike = {
 export const aipcPhases: Phase[] = [
   {
     when: 'First six months',
-    title: 'Hold a room',
-    detail: 'The foundations: how to listen, how to structure a session, ethics and the law, and your own reflective practice. Your first recorded role-plays go to your lecturer in week four.',
-    can: ['Run a 50-minute first session', 'Write clinical notes a supervisor can use', 'Spot risk and know what to do with it', 'Explain what counselling is and is not'],
+    title: 'Foundations of counselling',
+    detail: 'Listening skills, structuring a session, ethics and the law, and reflective practice. Your first recorded role-plays are submitted to your lecturer in week four.',
+    can: ['Run a 50-minute first session', 'Write clinical notes to a professional standard', 'Recognise risk and respond appropriately', 'Explain the scope of counselling'],
   },
   {
     when: 'Middle six months',
-    title: 'Choose your approach',
-    detail: 'The major therapeutic approaches, then the one that suits you. Your first practical workshop is in this stretch: two and a half days with your cohort and tutors.',
+    title: 'Therapeutic approaches',
+    detail: 'The major therapeutic approaches, and the one that suits your practice. The first in-person workshop falls in this period: two and a half days with your cohort and tutors.',
     can: ['Work in person-centred, CBT and solution-focused ways', 'Adapt to grief, trauma and relationship work', 'Hold a group', 'Assess your own practice honestly'],
   },
   {
     when: 'Final six months',
-    title: 'Practise for real',
+    title: 'Supervised placement',
     detail: `${AIPC_COURSE.placementHours} supervised hours in a real service, at least ${AIPC_COURSE.directClientHours} with clients, with fortnightly supervision from a practising counsellor. You finish qualified for ACA registration.`,
-    can: ['Carry a small caseload', 'Use supervision well', 'Work inside an agency', 'Register with the ACA on graduation'],
+    can: ['Carry a small caseload', 'Make good use of supervision', 'Work within an agency', 'Register with the ACA on graduation'],
   },
 ]
 
@@ -55,30 +55,37 @@ export const aipcDanLike = {
 
 /* Yoobee Creative Media */
 
+export const CM_LOAD = 'About 15 hours a week of live online classes plus about 20 hours of project work full-time, roughly 35 in total. Part-time over 38 weeks is half that.'
+
+export const cmLike =
+  'Two live online classes a day, 10am and 1pm, Monday to Friday, with your tutor and your class on camera. ' +
+  CM_LOAD +
+  ' Full-time suits people who are not working during the day, or who work evenings and weekends. Part-time over 38 weeks is the option if you are keeping a job: the same classes, half the load, and a recording available if you miss one. You need a laptop or desktop that can run Adobe apps, and a webcam.'
+
 export const cmPhases: Phase[] = [
   {
     when: 'By week 5',
-    title: 'You have made three things',
-    detail: 'A short frame-by-frame animation, a poster set and a one-shot film. Small, finished and yours. The point is to find out which one you could not put down.',
-    can: ['Animate a character frame by frame', 'Set type and build a layout from a brief', 'Shoot and cut a 60-second film on a phone'],
+    title: 'Three finished pieces',
+    detail: 'A short frame-by-frame animation, a poster set and a one-shot film. Three small, finished pieces that help you find out which area you enjoy most.',
+    can: ['Animate a character frame by frame', 'Set type and build a layout from a brief', 'Shoot and edit a 60-second film on a phone'],
   },
   {
     when: 'By week 12',
-    title: 'You have picked a lane',
-    detail: 'Design, motion or film. A bigger brief with real constraints, weekly crits with your tutor and your class, and work that starts to look like a portfolio.',
-    can: ['Take a brief from a client to a finished piece', 'Give and take feedback in a crit', 'Use the Adobe tools your lane runs on'],
+    title: 'Choose your direction',
+    detail: 'Design, motion or film. A larger brief with real constraints, weekly critiques with your tutor and class, and work that begins to form a portfolio.',
+    can: ['Take a brief through to a finished piece', 'Give and receive feedback in a critique', 'Use the Adobe tools for your direction'],
   },
   {
     when: 'By week 19',
-    title: 'You have a portfolio and a next step',
-    detail: 'A finished project, a portfolio site, and credit into a Level 5 diploma, or a start on junior work. Most people who were in a job keep it until here.',
-    can: ['Show six pieces to an employer or a diploma tutor', 'Explain your process in an interview', 'Price a small freelance job'],
+    title: 'Portfolio and next steps',
+    detail: 'A finished project, a portfolio website, and credit towards a Level 5 diploma or a start in junior creative work.',
+    can: ['Present six pieces to an employer or diploma tutor', 'Explain your process in an interview', 'Quote for a small freelance job'],
   },
 ]
 
 export const cmCostLines: CostLine[] = [
   { label: 'Eligible domestic students, 2027', value: 'Free', note: 'Fees Free covers your first year of tertiary study. The certificate uses less than half of it.' },
-  { label: 'Otherwise', value: '$4,753', note: 'Tuition $4,464.72, levy $102.50, software $186. Nothing else.' },
+  { label: 'Otherwise', value: '$4,753', note: 'Tuition $4,464.72, levy $102.50, software $186. No other charges.' },
   { label: 'Laptop', value: 'Your own', note: 'Anything that runs Adobe apps and has a webcam. We can lend one for the course if you need it.' },
 ]
 
@@ -103,14 +110,14 @@ export const animCostLines: CostLine[] = [
 /* NZST Flight */
 
 export const flightLike = {
-  text: `Sixteen weeks, Monday to Thursday, mornings or afternoons so you can keep a job. Half the time is in the cabin simulator: boarding, service, turbulence, a sick passenger, an evacuation, until it is calm and automatic. The rest is grooming and presentation, first aid, the swim test, and three mock recruitment days run the way airlines run them, with feedback from people who used to recruit. You finish with a Level 4 certificate, a service placement on your CV and a photoshoot you can use for applications.`,
+  text: `Sixteen weeks, Monday to Thursday, with morning or afternoon classes so you can keep a part-time job. About half the course hours are in the cabin simulator: boarding, service, turbulence, an unwell passenger, an evacuation, practised until they are routine. The rest is grooming and presentation, first aid, the swim test, and three mock recruitment days run the way airlines run them, with feedback from people who used to recruit. You finish with a Level 4 certificate, a service placement on your CV and a photoshoot you can use for applications.`,
   schedule: `${FLIGHT.weeks} weeks, four half-days a week, half of it in the simulator, with three mock recruitment days and a service placement`,
 }
 
 export const flightPhases: Phase[] = [
-  { when: 'Weeks 1 to 4', title: 'Look and sound like crew', detail: 'Grooming, uniform standards, announcements, and your first simulator sessions. Swim test booked in week two, passport and security check started.' },
-  { when: 'Weeks 5 to 12', title: 'Handle anything', detail: 'Safety and emergency procedures, first aid, service under pressure, difficult passengers. Your service placement runs through this stretch.' },
-  { when: 'Weeks 13 to 16', title: 'Get recruited', detail: 'Three mock recruitment days, group assessments, one-on-one interview practice, and your graduation photoshoot. Airline recruiters visit campus in the final fortnight.' },
+  { when: 'Weeks 1 to 4', title: 'Presentation and the basics', detail: 'Grooming, uniform standards, announcements, and your first simulator sessions. Swim test booked in week two, passport and security check started.' },
+  { when: 'Weeks 5 to 12', title: 'Safety and service', detail: 'Safety and emergency procedures, first aid, service under pressure, difficult passengers. Your service placement runs through this stretch.' },
+  { when: 'Weeks 13 to 16', title: 'Recruitment preparation', detail: 'Three mock recruitment days, group assessments, interview practice and your graduation photoshoot. Airline recruiters visit campus in the final fortnight (placeholder).' },
 ]
 
 export const flightCostLines: CostLine[] = [

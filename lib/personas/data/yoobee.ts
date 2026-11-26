@@ -30,7 +30,7 @@ export const cmFacts: Fact[] = [
   { label: 'Study mode', value: 'Online, or on campus in Auckland, Wellington and Christchurch' },
   { label: 'Next starts', value: CM.intakes.join(' and ') },
   { label: 'Cost', value: 'Free for eligible domestic students, or $4,753', placeholder: true },
-  { label: 'Weekly hours', value: 'About 20 full-time, 10 part-time', placeholder: true },
+  { label: 'Weekly hours', value: 'About 35 full-time (15 live, 20 project), half that part-time' },
 ]
 
 export const cmOutcomeStats: OutcomeStat[] = [
@@ -45,10 +45,14 @@ export const cmPay: PayRow[] = [
 
 export const cmEarnings: Earnings = {
   currency: 'NZD',
-  start: 52000,
-  threeYear: 68000,
-  source: 'Designers Institute of NZ salary survey',
-  year: 2025,
+  start: { value: 52000, role: 'Junior designer or content creator', source: 'Designers Institute of NZ salary survey', year: 2025 },
+  pathway: { value: 85000, role: 'Designer or motion designer', when: 'three to five years in', source: 'Hays Creative Salary Guide', year: 2025 },
+  premium: {
+    value: '+14%',
+    label: 'Level 5 to 7 diploma graduates earn 14% more than Level 1 to 3 certificate holders five years after study. This certificate credits into a Level 5 diploma.',
+    source: 'Ministry of Education, Education Counts, What young graduates earn when they leave study',
+    href: 'https://www.educationcounts.govt.nz/publications/80898/what-young-graduates-earn-when-they-leave-study',
+  },
   stat: { value: '84%', label: 'In a creative job or further study within 6 months', cohort: 2025 },
   employers: ['Weta Workshop', 'Mukpuddy Animation', 'DDB Aotearoa', 'Trade Me', 'Sky', 'Watermark Creative'],
   employersMore: 40,
@@ -97,7 +101,7 @@ export const cmPlannerModes: PlannerMode[] = [
   {
     id: 'online-ft',
     label: 'Online, full-time',
-    hours: 'About 20 hours a week over 19 weeks',
+    hours: 'About 35 hours a week over 19 weeks: 15 of live classes, 20 of project work',
     note: 'Suits a part-time job of two or three days. Mornings for briefs, one live crit a week.',
     blocks: [
       { day: 3, start: 9, end: 17, kind: 'work' },
@@ -113,7 +117,7 @@ export const cmPlannerModes: PlannerMode[] = [
   {
     id: 'campus',
     label: 'On campus, full-time',
-    hours: 'About 20 hours a week over 19 weeks',
+    hours: 'About 35 hours a week over 19 weeks: 15 of live classes, 20 of project work',
     note: 'Four half days on campus and one at home. Evenings and weekends are yours.',
     blocks: [
       { day: 0, start: 9, end: 13, kind: 'live' },
@@ -153,31 +157,30 @@ export const cmFundingQuestions: CheckQuestion[] = [
   },
 ]
 
-export function resolveCmFunding(a: Answers): CheckResult {
+export function resolveCmFunding(a: Answers, hrefs: { enrol: string; talk: string } = { enrol: '#start', talk: '#advisor' }): CheckResult {
   if (a.res === 'no') {
     return {
       tone: 'info',
-      headline: 'Not free, but $4,753 all-in and clear.',
-      body: 'Fees Free is for New Zealand citizens and residents. The international fee covers tuition, levy and software, with nothing added later.',
-      action: { label: 'Talk to Sam about options', href: '#advisor' },
+      headline: 'Not eligible for Fees Free. The fee is $4,753 total.',
+      body: 'Fees Free is for New Zealand citizens and residents in their first year of tertiary study. The fee covers tuition, levy and software, and can be split across the course.',
+      action: { label: 'Choose a start date', href: hrefs.enrol },
     }
   }
   if (a.prior === 'none') {
     return {
       tone: 'yes',
-      headline: 'Yes. This course costs you nothing.',
-      body: 'Fees Free covers your first year of tertiary study. The certificate uses less than half of that, so the rest is still there for the next course.',
-      bullets: ['Tuition, levy and software are all covered.', a.mode === 'pt' ? 'Part-time study is covered too, pro rata.' : 'Full-time students can also apply for a living-costs loan or allowance.', 'You need a RealMe login and your NSN. We help with both.'],
-      action: { label: 'Find the right course for me', href: '#finder' },
-      secondary: { label: 'Try the free taster', href: '#taster' },
+      headline: 'You are eligible for Fees Free.',
+      body: 'Fees Free covers the first year of tertiary study for New Zealand citizens and residents. As this is your first year, tuition, levy and software are covered.',
+      bullets: [a.mode === 'pt' ? 'Part-time study is covered on a pro-rata basis.' : 'Full-time students can also apply to StudyLink for living costs.', 'You will need a RealMe login and your NSN. We can help with both.'],
+      action: { label: 'Choose a start date', href: hrefs.enrol },
     }
   }
   return {
     tone: 'start',
-    headline: 'Likely free, with one thing to check.',
-    body: 'Fees Free is for your first year of tertiary study. If you used some of it before, what is left can cover this course. We check your entitlement for you in a day.',
-    bullets: ['If nothing is left, it is $4,753 all-in, with a student loan available.', 'Either way, nothing is added to what you owe without you agreeing first.'],
-    action: { label: 'Check my entitlement with Sam', href: '#advisor' },
+    headline: 'You may be eligible. One thing to check.',
+    body: 'Fees Free covers the first year of tertiary study only. If you have studied before, any remaining entitlement can be applied to this course. We can check your entitlement within a day.',
+    bullets: ['If no entitlement remains, the fee is $4,753 total, with split payments or a student loan available.', 'No fee is charged without your agreement.'],
+    action: { label: 'Ask us to check your entitlement', href: hrefs.talk },
   }
 }
 
@@ -233,7 +236,7 @@ export const cmAdvisor: Advisor = {
   name: 'Sam',
   role: 'Student advisor, Yoobee',
   photo: '/images/advisors/yoobee-sam.png',
-  line: 'I did the certificate at 28 after six years in retail. I will tell you honestly whether the course fits, and what the first month is like.',
+  line: 'I completed this certificate at 28 after six years in retail. I can talk you through whether the course is a good fit and what the first month involves.',
 }
 
 export const cmNext: PathStep[] = [
@@ -246,23 +249,23 @@ export const cmAdvisorRoutes: EnquiryRoute[] = [
   {
     id: 'working',
     label: 'Working or studying something else',
-    hint: 'Weighing it up',
-    confirmation: 'Sam will call or email at the time you picked, with the outcomes for the course you were looking at and the part-time option laid out.',
-    next: ['At your chosen time: Sam, by phone or email, your call.', 'Afterwards: a one-page summary of what you discussed. No further calls unless you ask.', 'Two weeks before the intake: one reminder.'],
+    hint: 'Considering a change',
+    confirmation: 'Sam will call or email at the time you chose, with graduate outcomes for the course and details of the part-time option.',
+    next: ['At your chosen time: Sam, by phone or email as you prefer.', 'Afterwards: a one-page summary of what you discussed.', 'Two weeks before the intake: one reminder.'],
   },
   {
     id: 'school',
     label: 'Finishing school',
     hint: 'This year or last',
-    confirmation: 'Sam will call at your chosen time, with campus visit dates and the holiday programme list ready.',
-    next: ['At your chosen time: a call from Sam.', 'Afterwards: a message you can forward to a parent.', 'Before the intake: one reminder.'],
+    confirmation: 'Sam will call at your chosen time with campus visit dates and holiday programme details.',
+    next: ['At your chosen time: a call from Sam.', 'Afterwards: a summary you can forward to a parent.', 'Before the intake: one reminder.'],
   },
   {
     id: 'parent',
     label: 'A parent',
     hint: 'Looking on behalf of someone',
-    confirmation: 'Sam will email you the outcomes, cost and support summary first, then call at your chosen time if you still want to talk.',
-    next: ['Today: the parent summary, as a PDF.', 'At your chosen time: a call, only if you want it.', 'Nothing else.'],
+    confirmation: 'Sam will email a summary of outcomes, fees and student support first, then call at your chosen time if you would like to talk.',
+    next: ['Today: the summary for parents, as a PDF.', 'At your chosen time: a call, if you would like one.'],
   },
 ]
 

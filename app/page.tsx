@@ -13,6 +13,7 @@ const PARKED = [
   { label: 'AIPC, Master of Counselling, Options B and C, and the international edition', hrefs: ['/courses/counselling/master-of-counselling/b', '/courses/counselling/master-of-counselling', '/courses/counselling/master-of-counselling/international'] },
   { label: 'Yoobee, Creative Media, Options B and C', hrefs: ['/courses/design/creative-media-certificate/b', '/courses/design/creative-media-certificate'] },
   { label: 'Yoobee, Diploma in Animation, for Meta Kids (parked while we focus on Plan B)', hrefs: ['/yoobee/diploma-in-animation'] },
+  { label: 'NZST, Level 4 Flight Attending, for Riding the Tailwinds (parked; replaced by the Level 5 Diploma on the Yoobee template)', hrefs: ['/nzst/flight-attending-parked'] },
   { label: 'Yoobee, international edition (simulated country)', hrefs: ['/international/yoobee?from=CN', '/international/yoobee?from=IN', '/international/yoobee?from=OTHER'] },
 ]
 

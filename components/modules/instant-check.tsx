@@ -34,7 +34,7 @@ export function InstantCheck({
   questions,
   resolve,
   ctaLabel = 'Show my answer',
-  placeholderNote = 'Rules and figures are placeholders until UP confirms them.',
+  placeholderNote = 'Rules and figures are placeholders until confirmed by UP.',
   className,
 }: {
   id?: string

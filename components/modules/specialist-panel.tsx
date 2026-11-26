@@ -35,11 +35,11 @@ export function SpecialistPanel({ specialists, days, what }: { specialists: Spec
       </ul>
 
       <div className="flex flex-col gap-4 border-t border-border pt-5 md:border-l md:border-t-0 md:pl-8 md:pt-0">
-        <div role="tablist" aria-label="How would you like to talk?" className="grid grid-cols-2 gap-1 rounded-lg bg-muted p-1">
+        <div role="tablist" aria-label="How would you like us to contact you?" className="grid grid-cols-2 gap-1 rounded-lg bg-muted p-1">
           {(
             [
-              ['callback', 'Call me back'],
-              ['time', 'Pick a time'],
+              ['callback', 'Request a call back'],
+              ['time', 'Choose a time'],
             ] as const
           ).map(([id, label]) => (
             <button
@@ -61,7 +61,7 @@ export function SpecialistPanel({ specialists, days, what }: { specialists: Spec
               <div className="flex items-start gap-3 text-sm">
                 <PhoneCall className="mt-0.5 size-5 shrink-0" aria-hidden />
                 <p className="text-pretty">
-                  <span className="font-medium">We will call you back within one working day.</span> One call from a specialist, not a sales team. If we miss you, we email instead.
+                  <span className="font-medium">A course specialist will call you within one working day.</span> If we cannot reach you, we will email instead.
                 </p>
               </div>
             </ResultCard>
@@ -79,7 +79,7 @@ export function SpecialistPanel({ specialists, days, what }: { specialists: Spec
               </div>
               <Field label="Email" name="email" type="email" required autoComplete="email" />
               <Button type="submit" size="lg" className="self-start">
-                <PhoneCall className="size-4" aria-hidden /> Call me back
+                <PhoneCall className="size-4" aria-hidden /> Request a call back
               </Button>
             </form>
           )

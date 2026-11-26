@@ -122,7 +122,7 @@ export function FormalHeading() {
     <header className="flex items-center gap-2">
       <FileText className="size-5 text-muted-foreground" aria-hidden />
       <h2 id="formal-title" className="text-lg font-medium">
-        The formal bit
+        Formal details
       </h2>
     </header>
   )

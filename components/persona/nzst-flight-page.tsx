@@ -2,14 +2,14 @@
 
 import { ArrowDown, MessageCircle } from 'lucide-react'
 import { InPageNav } from '@/components/course/above-fold'
-import { CourseBreakdown, FormalDetails, FormalHeading } from '@/components/modules/compliance'
+import { CourseBreakdown, FormalDetails } from '@/components/modules/compliance'
 import { InstantCheck } from '@/components/modules/instant-check'
 import { MessageUs } from '@/components/modules/message-us'
 import { PathwayPicture } from '@/components/modules/pathway-picture'
 import { FeesSimple } from '@/components/modules/fees-simple'
 import { CourseOutcomes, WhyThisCourse } from '@/components/modules/framing'
 import { Callout, DateList, StoryCards, WhatYouDo } from '@/components/modules/real-terms'
-import { StartAndEnrol } from '@/components/modules/start-and-enrol'
+import { StartSection } from '@/components/modules/start-section'
 import { Expander, Placeholder, Section } from '@/components/modules/ui'
 import { VideoReel } from '@/components/modules/video-reel'
 import { WhatEmployersLookFor } from '@/components/modules/what-employers-look-for'
@@ -37,6 +37,7 @@ import { PersonaShell } from './shell'
 
 const NAV: [string, string][] = [
   ['#check', 'Can I get in'],
+  ['#start', 'Start dates'],
   ['#outcomes-card', 'Outcomes'],
   ['#like', "What it's like"],
   ['#why', 'Why NZST'],
@@ -44,9 +45,7 @@ const NAV: [string, string][] = [
   ['#pathway', 'Pathway'],
   ['#cost', 'Cost'],
   ['#message', 'Message us'],
-  ['#start', 'Enrol'],
-  ['#structure', 'Modules'],
-  ['#formal', 'Details'],
+  ['#structure', 'Details'],
 ]
 
 const fee = `$${FLIGHT.fee.toLocaleString('en-NZ', { minimumFractionDigits: 2 })}`
@@ -60,7 +59,7 @@ export function NzstFlightPage() {
       reviewer={{
         forWho: `${PERSONAS.tailwinds.name} (41% of new enrolments). ${PERSONAS.tailwinds.oneLine} The "Start here" result also serves ${PERSONAS.confidence.name} (30%).`,
         testing: 'Whether one instant "Can I get in?" plus a short, readable page lifts enquiry to application on a phone, and whether "Start here" keeps people without Level 3.',
-        note: 'Visual structure follows the original round. Three call-outs: the check, message us, enrol. Fee, levy, dates and campuses are from the brief.',
+        note: 'Cut to about eight phone screens: hero, check, outcomes, why NZST, pathway, cost and enrol stay open; airlines, graduates, stories, drop-in days, structure and the formal bit are closed expanders.',
       }}
       mainAction={{ label: 'Can I get in?', href: '#check' }}
     >
@@ -72,7 +71,7 @@ export function NzstFlightPage() {
               Wake up in a different city. <span className="text-coral">Start in {FLIGHT.weeks} weeks.</span>
             </>
           }
-          sub="Sixteen weeks to cabin crew. Half of it in the simulator, three mock recruitment days, and airlines on campus in the final fortnight."
+          sub="A sixteen-week course for people who want to work as cabin crew. About half the course is in the cabin simulator, with three mock recruitment days and airline recruiters on campus in the final fortnight."
           facts={[
             { label: 'Length', value: `${FLIGHT.weeks} weeks` },
             { label: 'Where', value: FLIGHT.campuses.join(', ') },
@@ -89,43 +88,71 @@ export function NzstFlightPage() {
               </HeroButton>
             </>
           }
-          footnote={`Next class starts ${FLIGHT.intakes[0]}. Morning or afternoon.`}
+          footnote={`Next intake starts ${FLIGHT.intakes[0]}. Morning or afternoon classes.`}
           videoLabel="Vertical video, graduates in uniform"
         />
         <InPageNav items={NAV} />
 
-        <Section id="check" eyebrow="Thirty seconds" title="Can I get in?" dense tone="muted">
-          <Callout eyebrow="Instant check">
-            <InstantCheck title="Three questions" intro="A yes and a start date, or the first step of the same journey. Never a no." questions={flightQuestions} resolve={resolveFlight} ctaLabel="Tell me" placeholderNote={null} />
+        <Section id="check" eyebrow="Entry check" title="Can I get in?" dense tone="muted">
+          <Callout eyebrow="Three questions">
+            <InstantCheck title="Check your entry point" intro="Find out whether you can enrol in Level 4 Flight Attending now, or start with Level 3 Tourism." questions={flightQuestions} resolve={resolveFlight} ctaLabel="Tell me" placeholderNote={null} />
           </Callout>
         </Section>
 
-        <CourseOutcomes headline="Ready for the recruiters in sixteen weeks" image="/images/nzst/graduate-uniform.png" imageAlt="A recent graduate in cabin crew uniform at an airport terminal" outcomes={flightOutcomes} />
+        <StartSection
+          dense
+          intakes={[
+            { label: '25 Jan 2027', tag: 'Next intake', status: 'open' },
+            { label: '19 Jul 2027', tag: 'Mid-year', status: 'open' },
+          ]}
+          groups={[
+            { legend: 'Which campus is closest?', items: FLIGHT.campuses.map((c) => ({ name: c })) },
+            { legend: 'Morning or afternoon classes?', icon: 'none', items: FLIGHT.times.map((t) => ({ name: t.replace(' classes', '') })) },
+          ]}
+          advisor={{ name: 'Aroha', role: 'Flight Attending tutor', href: '#message' }}
+          holdLabel="Hold my place for"
+          intro="Choose a date, a campus and a class time, then leave your name and number. We hold your place for 7 days and text you. No payment or application yet."
+          confirmHold="Your place is held for 7 days. This is not an enrolment and nothing is decided until you confirm. Aroha will text you within the hour with the three requirements to arrange before you start, and the Fees Free form."
+          journeyHref="#like"
+        />
 
-        <Section id="like" eyebrow="The course" title="What it's like" dense>
-          <p className="max-w-[720px] text-[17px] leading-relaxed text-pretty">{flightLike.text}</p>
-          <WhatYouDo phases={flightPhases} />
+        <CourseOutcomes headline="What you will be able to do" image="/images/nzst/graduate-uniform.png" imageAlt="A recent graduate in cabin crew uniform at an airport terminal" outcomes={flightOutcomes} compact />
+
+        <Section id="like" eyebrow="The course" title="How the course works" dense>
+          <Expander title="How the course is taught, and the sixteen-week outline">
+            <p className="text-foreground text-pretty">{flightLike.text}</p>
+            <WhatYouDo phases={flightPhases} />
+          </Expander>
         </Section>
 
-        <Section id="why" eyebrow="Why this course" title="Why NZST" dense tone="muted">
-          <WhyThisCourse reasons={flightReasons} />
+        <Section id="why" eyebrow="Why this course" title="Why study with NZST" dense tone="muted">
+          <WhyThisCourse reasons={flightReasons} compact />
         </Section>
 
-        <Section id="airlines" eyebrow="Why this course" title="What airlines look for" dense>
-          <WhatEmployersLookFor rows={flightWants} who="airline recruiters" />
+        <Section id="airlines" eyebrow="Why this course" title="Airlines and graduates" dense>
+          <div className="flex flex-col gap-2">
+            <Expander title="What airlines look for, and how the course covers it">
+              <WhatEmployersLookFor rows={flightWants} who="airline recruiters" />
+            </Expander>
+            <Expander title="Who hires our graduates, by airline">
+              <div id="hired" className="scroll-mt-20">
+                <WhereGraduatesWent employers={flightAirlines} />
+              </div>
+            </Expander>
+            <Expander title="Graduate videos">
+              <VideoReel clips={flightClips} />
+            </Expander>
+          </div>
         </Section>
 
-        <Section id="hired" eyebrow="Why this course" title="Who hires our graduates" dense tone="muted">
-          <WhereGraduatesWent employers={flightAirlines} />
-          <VideoReel clips={flightClips} />
+        <Section id="pathway" eyebrow="Pathway" title="Level 3 Tourism, then Flight Attending, then airline recruitment" intro="If you do not have NCEA Level 3, Level 3 Tourism leads directly into this course at the same campus." dense>
+          <PathwayPicture steps={flightPathway} compact />
+          <Expander title="Graduates who started without Level 3">
+            <StoryCards stories={flightStories.slice(0, 3)} />
+          </Expander>
         </Section>
 
-        <Section id="pathway" eyebrow="Pathway" title="Level 3, then Flight, then your wings" intro="No Level 3? Start here. Same campuses, same tutors, and your place in Flight is held." dense>
-          <PathwayPicture steps={flightPathway} />
-          <StoryCards stories={flightStories.slice(0, 3)} />
-        </Section>
-
-        <Section id="cost" eyebrow="What it costs" title="Fees and ways to pay" dense tone="muted">
+        <Section id="cost" eyebrow="Fees" title="Fees and payment options" dense tone="muted">
           <FeesSimple
             total={FLIGHT.fee + FLIGHT.levy}
             totalNote={`${fee} course fee plus a $${FLIGHT.levy} student levy. Allow about $630 for the uniform kit, swim test, passport and security check.`}
@@ -141,7 +168,7 @@ export function NzstFlightPage() {
             talkLabel="WhatsApp or Instagram"
           />
           <div className="flex flex-col gap-2">
-            <Expander title="Before you start: swim test, passport, security check">
+            <Expander title="Requirements before you start: swim test, passport, security check">
               <ul className="flex flex-col gap-3">
                 {flightUpFront.map((x) => (
                   <li key={x.h} className="flex flex-col gap-0.5">
@@ -171,37 +198,27 @@ export function NzstFlightPage() {
           </div>
         </Section>
 
-        <Section id="message" eyebrow="Talk to us" title="Message us" dense tone="muted">
+        <Section id="message" eyebrow="Contact" title="Message us" dense tone="muted">
           <Callout eyebrow="Message us">
             <MessageUs who="Aroha, Flight tutor" hours="8am to 8pm, seven days" />
           </Callout>
+          <Expander title="Drop-in days at each campus">
+            <DateList items={flightDropIns.map((d) => ({ when: d.date, detail: `${d.where}, ${d.time}` }))} />
+          </Expander>
         </Section>
 
-        <Section id="dropin" eyebrow="Visit" title="Drop-in days" intro="Bring someone with you. No booking needed." dense>
-          <DateList items={flightDropIns.map((d) => ({ when: d.date, detail: `${d.where}, ${d.time}` }))} />
-        </Section>
-
-        <Section id="start" eyebrow="Enrol" title="Pick your start date and campus" dense tone="muted">
-          <Callout eyebrow="Enrol online">
-            <StartAndEnrol
-              intakes={flightIntakes}
-              campuses={FLIGHT.campuses}
-              times={FLIGHT.times}
-              cta="Enrol now"
-              confirm="Aroha will text you within the hour with the three things to sort before day one, and the Fees Free form. No phone call unless you want one."
-            />
-          </Callout>
-        </Section>
-
-        <Section id="structure" eyebrow="Course structure" title={`6 modules, 60 credits, ${FLIGHT.weeks} weeks`} dense>
-          <CourseBreakdown breakdown={flightBreakdown} />
-        </Section>
-        <section id="formal" aria-labelledby="formal-title" className="hairline-t scroll-mt-20 border-border bg-muted">
-          <div className="mx-auto flex max-w-[960px] flex-col gap-6 px-6 py-8 md:py-12">
-            <FormalHeading />
-            <FormalDetails rows={flightFormal} links={flightLinks} />
+        <Section id="structure" eyebrow="Course details" title="Course structure and formal details" dense>
+          <div className="flex flex-col gap-2">
+            <Expander title={`Course structure: 6 modules, 60 credits, ${FLIGHT.weeks} weeks`}>
+              <CourseBreakdown breakdown={flightBreakdown} />
+            </Expander>
+            <Expander title="Formal details: qualification, entry, fees, funding and policies">
+              <div id="formal" className="scroll-mt-20">
+                <FormalDetails rows={flightFormal} links={flightLinks} />
+              </div>
+            </Expander>
           </div>
-        </section>
+        </Section>
       </main>
     </PersonaShell>
   )

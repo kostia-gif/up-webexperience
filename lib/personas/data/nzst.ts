@@ -69,37 +69,37 @@ export function resolveFlight(a: Answers): CheckResult {
   if (qualifies) {
     return {
       tone: 'yes',
-      headline: "You're in. Pick your start date.",
-      body: `You meet entry for ${FLIGHT.short}. Sixteen weeks, then airline recruitment. Choose a date and a campus below and you are enrolling, no phone call needed.`,
+      headline: 'You meet the entry requirements.',
+      body: `You can enrol in ${FLIGHT.short}. Choose a start date and campus below to enrol online.`,
       bullets: [
-        a.cx === 'no' ? 'No customer experience yet is fine. The course covers it and gets you a service placement.' : 'Your customer experience counts. Recruiters ask for it.',
-        'Three things to sort before day one: swim test, passport, security check. All explained below.',
+        a.cx === 'no' ? 'No customer service experience yet is fine. The course includes a service placement.' : 'Your customer service experience is an advantage. Airlines ask for it.',
+        'Three things to arrange before you start: swim test, passport, security check. Details below.',
       ],
-      action: { label: 'Pick my start date', href: '#start' },
+      action: { label: 'Choose a start date', href: '#start' },
       secondary: { label: 'Message us first', href: '#message' },
     }
   }
   return {
     tone: 'start',
-    headline: 'Start here. Same journey, one step earlier.',
-    body: `${FLIGHT.level3.title} is step one of the same journey. ${FLIGHT.level3.weeks} weeks, then straight into Flight with the entry sorted. People who start here fly too.`,
+    headline: 'Start with Level 3 Tourism.',
+    body: `${FLIGHT.level3.title} leads directly into Flight Attending. ${FLIGHT.level3.weeks} weeks, then you meet the entry requirement for Level 4.`,
     bullets: [
-      'No NCEA Level 3 needed. Being 16 or over and keen is the entry.',
+      'No NCEA Level 3 needed. Entry is open from 16.',
       'Same campuses, same tutors, morning or afternoon classes around a job.',
-      'Fees Free covers it for most first-time students.',
+      'Fees Free covers it for most first-time tertiary students.',
     ],
     action: { label: 'See the pathway', href: '#pathway' },
-    secondary: { label: 'Text me back', href: '#text' },
+    secondary: { label: 'Message us', href: '#message' },
   }
 }
 
 export const flightWants: WantRow[] = [
-  { want: 'Calm under pressure, with a smile that holds', covered: 'Cabin simulator drills every week: turbulence, a sick passenger, a delayed boarding. Assessed on composure, not just procedure.' },
+  { want: 'Composure under pressure', covered: 'Weekly cabin simulator sessions: turbulence, an unwell passenger, a delayed boarding. Assessed on composure as well as procedure.' },
   { want: 'Safety and emergency procedures', covered: 'Evacuation, fire, first aid and ditching in the simulator and the pool. A current first aid certificate is part of the course.' },
   { want: 'Customer service experience', covered: 'A service placement with an airline partner, airport lounge or hotel, counted as experience on your CV.' },
   { want: 'Grooming and presentation to airline standard', covered: 'Uniform standards, grooming workshops and a graduation photoshoot you can use for applications.' },
   { want: 'Interview and group-assessment performance', covered: 'Three mock recruitment days run the way airlines run them, with feedback from ex-recruiters.' },
-  { want: 'Swim test, passport, security clearance', covered: 'We tell you on day one, book the swim test for you and walk you through the AvSec application.' },
+  { want: 'Swim test, passport, security clearance', covered: 'Explained on day one. We book the swim test and guide you through the Aviation Security application.' },
 ]
 
 export const flightAirlines: GradEmployer[] = [
@@ -121,9 +121,9 @@ export const flightClips: Clip[] = [
 ]
 
 export const flightPathway: PathStep[] = [
-  { label: 'Step 1, if you need it', title: FLIGHT.level3.title, time: `${FLIGHT.level3.weeks} weeks`, detail: 'No Level 3? Start here. Service skills, confidence, and guaranteed entry to Flight when you finish.' },
-  { label: 'Step 2', title: FLIGHT.short, time: `${FLIGHT.weeks} weeks`, detail: 'Safety, service, grooming and three mock recruitment days. The course this page is about.', current: true, href: '#facts' },
-  { label: 'Step 3', title: 'Your wings', time: '3 to 6 months after', detail: 'Airline recruitment. Most graduates who apply are flying within six months, domestic first, then wherever you want.' },
+  { label: 'Step 1, if you need it', title: FLIGHT.level3.title, time: `${FLIGHT.level3.weeks} weeks`, detail: 'For students without NCEA Level 3. Customer service skills and confidence, and entry to Flight Attending on completion.' },
+  { label: 'Step 2', title: FLIGHT.short, time: `${FLIGHT.weeks} weeks`, detail: 'Safety, service, grooming and three mock recruitment days. This course.', current: true, href: '#facts' },
+  { label: 'Step 3', title: 'Airline recruitment', time: 'After the course', detail: 'Airline recruitment, with recruiters on campus in the final fortnight. Time to first flying role: placeholder until UP supplies graduate data.' },
 ]
 
 export const flightStoryFilters = [

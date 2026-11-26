@@ -45,8 +45,8 @@ export function FeesSimple({
           <p className="text-sm leading-relaxed text-muted-foreground text-pretty">{totalNote}</p>
         </div>
 
-        <div className="flex flex-col gap-3 border-t border-border pt-5">
-          <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Or spread it</p>
+        <div className={cn('flex flex-col gap-3 border-t border-border pt-5', plans.length === 1 && 'hidden md:flex')}>
+          <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Spread over the course</p>
           {plans.length > 1 && (
             <div role="tablist" aria-label="Study load" className={cn('grid gap-1 rounded-lg bg-muted p-1', plans.length === 2 ? 'grid-cols-2' : 'grid-cols-3')}>
               {plans.map((p) => {
@@ -76,7 +76,7 @@ export function FeesSimple({
       </div>
 
       <div className="flex flex-col gap-3">
-        <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Ways to pay</p>
+        <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Payment options</p>
         <ul className="flex flex-col gap-2.5">
           {facts.map((f) => (
             <li key={f} className="flex items-start gap-2.5 text-[15px] leading-snug text-pretty">
@@ -88,7 +88,7 @@ export function FeesSimple({
           ))}
         </ul>
         <p className="text-sm leading-relaxed text-muted-foreground text-pretty">
-          Want the numbers for your exact situation? Talk it through on{' '}
+          For figures specific to your situation, ask{' '}
           <a href={talkHref} className="font-medium text-primary underline underline-offset-4 hover:no-underline">
             {talkLabel}
           </a>
