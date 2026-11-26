@@ -12,6 +12,7 @@ import type { Story } from '@/components/modules/stories-matched'
 import type { Work } from '@/components/modules/student-work-wall'
 import type { PlannerMode } from '@/components/modules/week-planner'
 import type { GradEmployer } from '@/components/modules/where-graduates-went'
+import type { Earnings } from '@/components/modules/earning-potential'
 
 /* Creative Media, for Plan B */
 
@@ -41,6 +42,18 @@ export const cmPay: PayRow[] = [
   { role: 'Content creator, in-house', band: '$55K to $65K', source: 'Seek NZ ads, Jan 2026, placeholder' },
   { role: 'Designer, 3 years in', band: '$70K to $85K', source: 'Hays creative salary guide 2026, placeholder' },
 ]
+
+export const cmEarnings: Earnings = {
+  currency: 'NZD',
+  start: 52000,
+  threeYear: 68000,
+  source: 'Designers Institute of NZ salary survey',
+  year: 2025,
+  stat: { value: '84%', label: 'In a creative job or further study within 6 months', cohort: 2025 },
+  employers: ['Weta Workshop', 'Mukpuddy Animation', 'DDB Aotearoa', 'Trade Me', 'Sky', 'Watermark Creative'],
+  employersMore: 40,
+  employersYear: 2025,
+}
 
 export const cmStoryFilters = [
   { id: 'hospo', label: 'Hospitality or retail' },

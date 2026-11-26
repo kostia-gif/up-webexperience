@@ -113,18 +113,19 @@ export function AipcCounsellingPage() {
           </Callout>
         </Section>
 
-        <Section id="fees" eyebrow="What it costs" title="Simple monthly pricing" tone="muted">
+        <Section id="fees" eyebrow="What it costs" title="Fees and ways to pay" tone="muted">
           <FeesSimple
             total={AIPC_COURSE.standard.tuition}
+            totalNote="Master of Counselling, 10 subjects at $3,465 each, billed per subject. The 24-month Advanced is $47,250. Allow about $2,500 across the course for workshop travel, placement checks and books."
             currency="AUD"
             plans={[
               { id: 'pt', label: 'Part-time', note: '18 months', months: 18 },
               { id: 'ft', label: 'Full-time', note: '12 months', months: 12 },
             ]}
             facts={[
-              `$${AIPC_COURSE.standard.tuition.toLocaleString('en-AU')} total course fee for the 18-month Master, billed per subject`,
-              '$0 upfront: defer the lot with FEE-HELP if eligible',
-              'Pay as you study, trimester by trimester, or mix the two',
+              'FEE-HELP: $0 upfront, defer the lot and repay through tax if eligible',
+              'Pay as you study, trimester by trimester',
+              'Pay up front, in full or subject by subject, or mix the two',
               'Withdraw before a subject\u2019s census date and pay nothing for it',
             ]}
             talkHref="#talk"

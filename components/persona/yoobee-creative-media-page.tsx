@@ -3,6 +3,7 @@
 import { ArrowDown, CalendarClock, MessageCircle } from 'lucide-react'
 import { InPageNav } from '@/components/course/above-fold'
 import { CourseBreakdown, FormalDetails, FormalHeading } from '@/components/modules/compliance'
+import { EarningPotential } from '@/components/modules/earning-potential'
 import { EnquiryForm } from '@/components/modules/enquiry-form'
 import { FeesSimple } from '@/components/modules/fees-simple'
 import { CourseOutcomes } from '@/components/modules/framing'
@@ -14,7 +15,7 @@ import { creativeMediaLevel4 } from '@/lib/courses'
 import { cmBreakdown, cmFormal, cmLinks } from '@/lib/personas/data/compliance'
 import { cmAdvisorRoute, cmOutcomes } from '@/lib/personas/data/framing'
 import { cmPhases } from '@/lib/personas/data/real-terms'
-import { CM, cmAdvisor, cmWorks } from '@/lib/personas/data/yoobee'
+import { CM, cmAdvisor, cmEarnings, cmWorks } from '@/lib/personas/data/yoobee'
 import { PERSONAS } from '@/lib/personas/registry'
 import { Billboard, HeroButton } from './billboard'
 import { PersonaShell } from './shell'
@@ -22,6 +23,7 @@ import { PersonaShell } from './shell'
 const NAV: [string, string][] = [
   ['#start', 'Start dates'],
   ['#outcomes-card', 'Outcomes'],
+  ['#earn', 'Earnings'],
   ['#journey', 'What you will make'],
   ['#work', 'Student work'],
   ['#fees', 'Fees'],
@@ -36,9 +38,9 @@ export const CM_INTAKES = [
 ]
 
 export const CM_FEE_FACTS = [
-  'Free for eligible domestic students under Fees Free, 2027',
-  '$4,753 total otherwise: tuition, levy and software, nothing extra',
-  'Split payments weekly or monthly, interest free',
+  'Fees Free: eligible domestic students pay nothing in their first year of tertiary study',
+  'Pay up front, in full, before the start date',
+  'Split payments weekly or monthly across the course, interest free',
   'StudyLink loan and living costs if Fees Free is used up',
 ]
 
@@ -61,7 +63,9 @@ export function YoobeeCreativeMediaPage() {
           eyebrow={`Yoobee · ${CM.short} · ${CM.weeks} weeks · Online or on campus`}
           title={
             <>
-              Turn your passion <span className="text-coral">into a new path.</span>
+              Turn your passion into a new path.
+              <br />
+              <span className="text-coral">Earn $52,000</span> to start.
             </>
           }
           sub="Animation, film and design in one certificate, around the job you have now. Next class starts 8 February 2027."
@@ -70,7 +74,7 @@ export function YoobeeCreativeMediaPage() {
             { label: 'Length', value: `${CM.weeks} weeks, or 38 part-time` },
             { label: 'Where', value: 'Online, or Auckland, Wellington, Christchurch' },
             { label: 'You need', value: '16+, NCEA Level 2' },
-            { label: 'Cost', value: 'Free for eligible students, or $4,753', placeholder: true },
+            { label: 'Cost', value: 'Free for domestic students starting February 2027. Otherwise $4,753 total: tuition, levy and software', placeholder: true },
           ]}
           actions={
             <>
@@ -110,6 +114,10 @@ export function YoobeeCreativeMediaPage() {
           link={{ label: 'View student portfolios', href: '#work' }}
         />
 
+        <Section id="earn" eyebrow="Where this takes you" title="What you could earn" tone="muted">
+          <EarningPotential e={cmEarnings} />
+        </Section>
+
         <Section id="journey" eyebrow="Week by week" title="What you will be making" intro={like.text}>
           <WhatYouDo phases={cmPhases} />
         </Section>
@@ -125,9 +133,10 @@ export function YoobeeCreativeMediaPage() {
           <StudentWorkWall disciplines={[]} works={cmWorks} />
         </section>
 
-        <Section id="fees" eyebrow="What it costs" title="Simple pricing">
+        <Section id="fees" eyebrow="What it costs" title="Fees and ways to pay">
           <FeesSimple
             total={4753}
+            totalNote="Tuition $4,464.72, levy $102.50 and software $186. Nothing extra. Free for eligible domestic students under Fees Free in 2027."
             currency="NZD"
             plans={[
               { id: 'ft', label: 'Full-time', note: '19 weeks', months: 4.5 },

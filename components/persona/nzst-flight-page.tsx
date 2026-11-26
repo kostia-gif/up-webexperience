@@ -125,16 +125,17 @@ export function NzstFlightPage() {
           <StoryCards stories={flightStories.slice(0, 3)} />
         </Section>
 
-        <Section id="cost" eyebrow="What it costs" title="Simple pricing" dense tone="muted">
+        <Section id="cost" eyebrow="What it costs" title="Fees and ways to pay" dense tone="muted">
           <FeesSimple
             total={FLIGHT.fee + FLIGHT.levy}
+            totalNote={`${fee} course fee plus a $${FLIGHT.levy} student levy. Allow about $630 for the uniform kit, swim test, passport and security check.`}
             currency="NZD"
             plans={[{ id: 'ft', label: 'Full-time', note: '16 weeks', months: 4 }]}
             facts={[
-              `${fee} course fee plus a $${FLIGHT.levy} student levy, nothing extra`,
               'Fees Free for most first-time students: a tutor does the forms with you in week one',
               'Split payments across the sixteen weeks, interest free',
               'StudyLink loan and living costs if Fees Free is used up',
+              'Pay up front, in full, before the start date',
             ]}
             talkHref="#message"
             talkLabel="WhatsApp or Instagram"
