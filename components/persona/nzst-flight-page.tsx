@@ -6,7 +6,8 @@ import { CourseBreakdown, FormalDetails, FormalHeading } from '@/components/modu
 import { InstantCheck } from '@/components/modules/instant-check'
 import { MessageUs } from '@/components/modules/message-us'
 import { PathwayPicture } from '@/components/modules/pathway-picture'
-import { CourseOutcomes, WaysToPay, WhyThisCourse } from '@/components/modules/framing'
+import { FeesSimple } from '@/components/modules/fees-simple'
+import { CourseOutcomes, WhyThisCourse } from '@/components/modules/framing'
 import { Callout, DateList, StoryCards, WhatYouDo } from '@/components/modules/real-terms'
 import { StartAndEnrol } from '@/components/modules/start-and-enrol'
 import { Expander, Placeholder, Section } from '@/components/modules/ui'
@@ -28,7 +29,7 @@ import {
   flightWants,
   resolveFlight,
 } from '@/lib/personas/data/nzst'
-import { flightOutcomes, flightReasons, flightWays } from '@/lib/personas/data/framing'
+import { flightOutcomes, flightReasons } from '@/lib/personas/data/framing'
 import { flightLike, flightPhases } from '@/lib/personas/data/real-terms'
 import { PERSONAS } from '@/lib/personas/registry'
 import { Billboard, HeroButton } from './billboard'
@@ -124,8 +125,20 @@ export function NzstFlightPage() {
           <StoryCards stories={flightStories.slice(0, 3)} />
         </Section>
 
-        <Section id="cost" eyebrow="Fees" title="Fees and ways to pay" dense tone="muted">
-          <WaysToPay fee={fee} feeNote={`Plus a $${FLIGHT.levy} student levy. Allow about $630 for the uniform kit, swim test, passport and security check.`} ways={flightWays} note="Kit and document costs are estimates." />
+        <Section id="cost" eyebrow="What it costs" title="Simple pricing" dense tone="muted">
+          <FeesSimple
+            total={FLIGHT.fee + FLIGHT.levy}
+            currency="NZD"
+            plans={[{ id: 'ft', label: 'Full-time', note: '16 weeks', months: 4 }]}
+            facts={[
+              `${fee} course fee plus a $${FLIGHT.levy} student levy, nothing extra`,
+              'Fees Free for most first-time students: a tutor does the forms with you in week one',
+              'Split payments across the sixteen weeks, interest free',
+              'StudyLink loan and living costs if Fees Free is used up',
+            ]}
+            talkHref="#message"
+            talkLabel="WhatsApp or Instagram"
+          />
           <div className="flex flex-col gap-2">
             <Expander title="Before you start: swim test, passport, security check">
               <ul className="flex flex-col gap-3">

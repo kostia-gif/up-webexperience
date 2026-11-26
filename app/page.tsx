@@ -12,6 +12,7 @@ const PARKED = [
   { label: 'Elite, Certificate in Beauty Therapy (Level 4), Options A, B and C', hrefs: ['/courses/beauty/certificate-in-beauty-therapy-level-4/a', '/courses/beauty/certificate-in-beauty-therapy-level-4/b', '/courses/beauty/certificate-in-beauty-therapy-level-4'] },
   { label: 'AIPC, Master of Counselling, Options B and C, and the international edition', hrefs: ['/courses/counselling/master-of-counselling/b', '/courses/counselling/master-of-counselling', '/courses/counselling/master-of-counselling/international'] },
   { label: 'Yoobee, Creative Media, Options B and C', hrefs: ['/courses/design/creative-media-certificate/b', '/courses/design/creative-media-certificate'] },
+  { label: 'Yoobee, Diploma in Animation, for Meta Kids (parked while we focus on Plan B)', hrefs: ['/yoobee/diploma-in-animation'] },
   { label: 'Yoobee, international edition (simulated country)', hrefs: ['/international/yoobee?from=CN', '/international/yoobee?from=IN', '/international/yoobee?from=OTHER'] },
 ]
 

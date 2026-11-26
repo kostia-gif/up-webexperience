@@ -15,6 +15,7 @@ export function StartAndEnrol({
   id,
   cta = 'Enrol online',
   confirm,
+  timesLabel = 'Classes',
 }: {
   intakes: IntakeOption[]
   campuses?: string[]
@@ -22,6 +23,7 @@ export function StartAndEnrol({
   id?: string
   cta?: string
   confirm: string
+  timesLabel?: string
 }) {
   const [intake, setIntake] = useState(intakes[0].id)
   const [campus, setCampus] = useState(campuses?.[0])
@@ -88,7 +90,7 @@ export function StartAndEnrol({
       )}
       {times && (
         <fieldset className="flex flex-col gap-2">
-          <legend className="text-sm font-medium">Classes</legend>
+          <legend className="text-sm font-medium">{timesLabel}</legend>
           <div className="flex flex-wrap gap-2">
             {times.map((t) => (
               <Pill key={t} active={time === t} onClick={() => setTime(t)}>

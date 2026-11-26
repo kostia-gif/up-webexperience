@@ -8,7 +8,21 @@ export type Outcome = { lead: string; text: string }
  * A large statement, a photo, and a "Course outcomes" card with a checklist.
  * Each item leads with the outcome in a few words, then says what it means.
  */
-export function CourseOutcomes({ id = 'outcomes-card', headline, image, imageAlt, outcomes }: { id?: string; headline: ReactNode; image: string; imageAlt: string; outcomes: Outcome[] }) {
+export function CourseOutcomes({
+  id = 'outcomes-card',
+  headline,
+  image,
+  imageAlt,
+  outcomes,
+  link,
+}: {
+  id?: string
+  headline: ReactNode
+  image: string
+  imageAlt: string
+  outcomes: Outcome[]
+  link?: { label: string; href: string }
+}) {
   return (
     <section id={id} aria-labelledby={`${id}-title`} className="hairline-t scroll-mt-20 border-border bg-muted">
       <div className="mx-auto flex max-w-[1100px] flex-col gap-8 px-6 py-12 md:gap-10 md:py-16">
@@ -34,6 +48,11 @@ export function CourseOutcomes({ id = 'outcomes-card', headline, image, imageAlt
                 </li>
               ))}
             </ul>
+            {link && (
+              <a href={link.href} className="mt-auto inline-flex items-center gap-1.5 self-start border-t border-dashed border-border pt-4 text-sm font-medium text-primary hover:underline hover:underline-offset-4">
+                {link.label} <ArrowRight className="size-4" aria-hidden />
+              </a>
+            )}
           </div>
         </div>
       </div>

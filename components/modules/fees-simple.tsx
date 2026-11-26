@@ -34,7 +34,7 @@ export function FeesSimple({
   return (
     <div className="grid gap-6 md:grid-cols-[1fr_1.1fr] md:items-center">
       <div className="flex flex-col gap-5 rounded-xl border border-border bg-card p-6">
-        <div role="tablist" aria-label="Study load" className={cn('grid gap-1 rounded-lg bg-muted p-1', plans.length === 2 ? 'grid-cols-2' : 'grid-cols-3')}>
+        <div role="tablist" aria-label="Study load" className={cn('grid gap-1 rounded-lg bg-muted p-1', plans.length === 1 ? 'grid-cols-1' : plans.length === 2 ? 'grid-cols-2' : 'grid-cols-3')}>
           {plans.map((p) => {
             const active = p.id === planId
             return (
