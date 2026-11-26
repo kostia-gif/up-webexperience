@@ -1,5 +1,5 @@
 export type BrandKey = 'aipc' | 'yoobee' | 'nzst'
-export type PersonaKey = 'sarah' | 'dan' | 'plan-b' | 'meta-kids' | 'tailwinds' | 'confidence'
+export type PersonaKey = 'sarah' | 'dan' | 'plan-b' | 'meta-kids' | 'tailwinds' | 'confidence' | 'dreams'
 export type Job = 'Check' | 'Prove' | 'Fit' | 'Act' | 'Talk and share'
 export type Status = 'In POC' | 'Adapted' | 'New' | 'Idea' | 'Parked'
 
@@ -118,6 +118,17 @@ export const PERSONAS: Record<PersonaKey, PersonaInfo> = {
     secondAction: 'Message us',
     question: 'Can this get me the life I picture?',
   },
+  dreams: {
+    key: 'dreams',
+    name: 'Dreams Will Get You Far',
+    brand: 'nzst',
+    role: 'lead',
+    oneLine: 'Median age 19, nearly half Pacific students. Thinks about travel constantly, rarely goes anywhere, and is buying the chance to travel, not a course.',
+    evidence: 'Validated',
+    mainAction: 'Pick a start date',
+    secondAction: 'Enquire first',
+    question: 'Can this get me the life I picture?',
+  },
   confidence: {
     key: 'confidence',
     name: 'Confidence Booster',
@@ -163,10 +174,10 @@ export const SCHOOL_PAGES: SchoolPage[] = [
   },
   {
     brand: 'nzst',
-    course: 'Level 4 Flight Attending',
-    personas: ['tailwinds', 'confidence'],
-    href: '/nzst/flight-attending',
-    testing: 'Whether an instant "Can I get in?" check lifts enquiry to application on a phone, and whether the "Start here" result turns Level 3 into a step rather than a rejection.',
+    course: 'Diploma in Tourism & Travel Management (Level 5)',
+    personas: ['dreams'],
+    href: '/nzst/diploma-tourism-travel',
+    testing: 'The Yoobee template applied to NZST: billboard straight into a start date, outcomes, where graduates are, fees and an advisor. Does the same flow work for a similar audience buying the chance to travel?',
   },
 ]
 

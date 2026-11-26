@@ -33,7 +33,8 @@ export type ModuleDef = {
 const AIPC = '/aipc/master-of-counselling'
 const CM = '/yoobee/creative-media'
 const CMO = '/yoobee/creative-media-online'
-const NZST = '/nzst/flight-attending'
+const NZST = '/nzst/diploma-tourism-travel'
+const FLIGHT = '/nzst/flight-attending-parked'
 
 const HBR: Source = {
   label: 'Harvard Business Review, "The Short Life of Online Sales Leads" (2011)',
@@ -122,13 +123,13 @@ export const MODULES: ModuleDef[] = [
     group: 'enhanced',
     job: 'Prove',
     brands: ['yoobee', 'nzst'],
-    personas: ['plan-b', 'tailwinds'],
+    personas: ['plan-b', 'tailwinds', 'dreams'],
     status: 'Adapted',
     whoFor: 'People giving up a wage to study, and anyone whose family will ask "but what will you earn?"',
     whatItDoes: 'Three sourced numbers and a row of employer pills. Keeps the salary out of the headline so the page does not read as a sales pitch.',
     learn: 'Does a sourced earnings module lift enquiry quality without attracting the wrong people?',
     sits: 'After the course outcomes.',
-    usedOn: [CM, CMO],
+    usedOn: [CM, CMO, NZST],
     evidence: {
       why: 'Outcome and salary data is what Plan B students weigh (UP personas brief) and what AI assistants quote when they recommend a provider. Google Career Certificates lead with a sourced outcome rate and median salary. It has to be sourced, or it costs trust.',
       sources: [COURSERA, BRIEF],
@@ -207,8 +208,8 @@ export const MODULES: ModuleDef[] = [
     whoFor: 'People who decide in the moment and will leave if the process slows down, and people who assume the answer is no.',
     whatItDoes: 'Age, school qualifications and customer experience in; "You\u2019re in, pick a start date" or "Start here" with Level 3 as step one out.',
     learn: 'Does an instant yes lift enquiry to application, and does "Start here" keep people who would otherwise bounce?',
-    sits: 'Directly under the hero on NZST, as the main action.',
-    usedOn: [NZST],
+    sits: 'Directly under the hero on the parked Flight Attending page. The Diploma page uses the Yoobee flow instead.',
+    usedOn: [FLIGHT],
     evidence: {
       why: 'Eligibility is a top task (Gerry McGovern, university top-task research). Higher-education quizzes that give an immediate personal answer report 15 to 16% of completers starting an application or enrolling (BI Norwegian Business School and ESCP, vendor case studies, directional).',
       sources: [QUIZ_CASES, TOP_TASKS, BRIEF],
@@ -282,14 +283,14 @@ export const MODULES: ModuleDef[] = [
     blurb: 'A credited gallery of real student work, linked from the outcomes as "View student portfolios".',
     group: 'new',
     job: 'Prove',
-    brands: ['yoobee'],
-    personas: ['plan-b', 'meta-kids'],
+    brands: ['yoobee', 'nzst'],
+    personas: ['plan-b', 'meta-kids', 'dreams'],
     status: 'New',
-    whoFor: 'Tribe for school leavers, standard for career-changers, and the thing employers actually hire on.',
+    whoFor: 'Tribe for school leavers, standard for career-changers, and the thing employers actually hire on. On NZST, repurposed as where graduates are working.',
     whatItDoes: 'An edge-to-edge grid where every piece is credited to a student and a course. Optional filter by discipline.',
     learn: 'Does leading with the work beat leading with a promise?',
-    sits: 'After the timeline on Yoobee; linked from the outcomes card.',
-    usedOn: [CM, CMO],
+    sits: 'After the timeline on Yoobee; linked from the outcomes card. On NZST it shows graduates at work in New Zealand and overseas.',
+    usedOn: [CM, CMO, NZST],
     evidence: {
       why: 'About 72% of creative hiring managers prefer candidates who show skills through a portfolio (Adobe and Creative Group surveys), so the standard of student work is the most honest proof a creative school can offer.',
       sources: [PORTFOLIO, BRIEF],
@@ -368,8 +369,8 @@ export const MODULES: ModuleDef[] = [
     whoFor: 'People comparing providers who want the argument in one screen.',
     whatItDoes: 'Reason cards that frame accreditation, tutors, employers and pathway as reasons, with a link to each.',
     learn: 'Does framing proof as reasons hold people who are comparing? Removed from AIPC and Yoobee as too much content; kept on NZST where the proof sections follow.',
-    sits: 'After the timeline on NZST.',
-    usedOn: [NZST],
+    sits: 'Parked Flight Attending page.',
+    usedOn: [FLIGHT],
     evidence: {
       why: 'Comparison shoppers want the case made for them. The pattern works when it is short and each reason has evidence behind it.',
       sources: [NNG_TABLES],
@@ -409,8 +410,8 @@ export const MODULES: ModuleDef[] = [
     whoFor: 'People who want to see the airlines and the names, not a statistic.',
     whatItDoes: 'A list grouped by employer, with the role and the year.',
     learn: 'Do named employers carry more weight than a percentage for passion-led readers?',
-    sits: 'After the recruiter checklist on NZST.',
-    usedOn: [NZST],
+    sits: 'Parked Flight Attending page.',
+    usedOn: [FLIGHT],
     evidence: {
       why: 'NZST\u2019s market leadership is its main asset. Named airlines and named graduates are the trust signal the research asked for.',
       sources: [BRIEF, WYZOWL],
@@ -429,8 +430,8 @@ export const MODULES: ModuleDef[] = [
     whoFor: 'People arriving from TikTok or Instagram who want faces and stories.',
     whatItDoes: 'A horizontal reel of 9:16 clips with name, employer and a one-line caption.',
     learn: 'Does social-style video hold people who arrive from social?',
-    sits: 'Under the employer list on NZST.',
-    usedOn: [NZST],
+    sits: 'Parked Flight Attending page.',
+    usedOn: [FLIGHT],
     evidence: {
       why: 'Social is the main driver of NZST enquiry (UP personas brief). Around 60% of video marketers make testimonial videos, with reported landing-page lifts of 15 to 40% (Wyzowl 2025 and vendor studies, directional).',
       sources: [WYZOWL, BRIEF],
@@ -450,8 +451,8 @@ export const MODULES: ModuleDef[] = [
     whoFor: 'People who need Level 3 to look like the start of Flight, not a remedial course.',
     whatItDoes: 'Three steps on one screen, each with its time, and the current step marked.',
     learn: 'Does a visible pathway turn Level 3 from a rejection into a first step?',
-    sits: 'After the employers on NZST, with three "people like me" stories under it.',
-    usedOn: [NZST],
+    sits: 'Parked Flight Attending page.',
+    usedOn: [FLIGHT],
     evidence: {
       why: 'The Confidence Booster persona assumes the answer is no. A pathway shown as steps says yes early and makes the first step small.',
       sources: [BRIEF],
@@ -470,8 +471,8 @@ export const MODULES: ModuleDef[] = [
     whoFor: 'People asking "would someone like me do this?"',
     whatItDoes: 'On AIPC: pick nurse, teacher, manager or something else and see the matching story. On NZST: three cards in an expander under the pathway.',
     learn: 'Do stories matched to the reader\u2019s starting point move people more than generic testimonials?',
-    sits: 'After fees on AIPC; under the pathway on NZST.',
-    usedOn: [AIPC, NZST],
+    sits: 'After fees on AIPC; under the pathway on the parked Flight Attending page.',
+    usedOn: [AIPC, FLIGHT],
     evidence: {
       why: 'Testimonials with a name, an age and a before-and-after are the social proof people trust; anonymous quotes are not.',
       sources: [WYZOWL, BRIEF],
@@ -490,8 +491,8 @@ export const MODULES: ModuleDef[] = [
     whoFor: 'People who live on messaging apps and will not fill in a callback form.',
     whatItDoes: 'Two buttons, a reply time and the hours someone is there.',
     learn: 'Do messaging channels replace the callback form for this age group?',
-    sits: 'The second action on NZST.',
-    usedOn: [NZST],
+    sits: 'Parked Flight Attending page.',
+    usedOn: [FLIGHT],
     evidence: {
       why: 'A majority of online adults would rather message a business than call it (Zendesk CX Trends); the under-25 split is a placeholder, source needed. Reply speed is the biggest single lever on conversion (Harvard Business Review, 2011).',
       sources: [MESSAGING, HBR, BRIEF],
@@ -505,14 +506,14 @@ export const MODULES: ModuleDef[] = [
     blurb: 'A named advisor in their own words, one form, and the follow-up spelled out.',
     group: 'enhanced',
     job: 'Talk and share',
-    brands: ['yoobee'],
-    personas: ['plan-b'],
+    brands: ['yoobee', 'nzst'],
+    personas: ['plan-b', 'dreams'],
     status: 'Adapted',
     whoFor: 'Adults with commitments who want a person, not a brochure.',
     whatItDoes: 'Advisor photo and line, name and email, optional mobile, and a confirmation that lists the next three messages.',
     learn: 'Does a named person and a known follow-up beat a generic enquiry form?',
-    sits: 'Late on the Yoobee blended page. Not on the online-only page.',
-    usedOn: [CM],
+    sits: 'Late on the Yoobee blended page and NZST. Not on the online-only page.',
+    usedOn: [CM, NZST],
     evidence: {
       why: 'A named person reduces the fear of the sales call, and setting expectations for follow-up reduces no-shows.',
       sources: [HBR, SCHEDULING],
@@ -585,8 +586,8 @@ export const MODULES: ModuleDef[] = [
     whoFor: 'People for whom cost can end the idea.',
     whatItDoes: 'Residency, prior study and mode in; yes, possibly or no out, with the condition spelled out. The fee line leads with the total and "free if you qualify" second.',
     learn: 'Does a personal yes or no beat a "Fees Free*" headline for trust?',
-    sits: 'Under the fee module on both Yoobee pages.',
-    usedOn: [CM, CMO],
+    sits: 'Under the fee module on both Yoobee pages and NZST.',
+    usedOn: [CM, CMO, NZST],
     evidence: { why: 'Stating the Fees Free conditions plainly removes the asterisk problem without an interaction.', sources: [NNG_PRICING], exemplars: ['StudyLink eligibility pages'] },
   },
   {
@@ -681,8 +682,8 @@ export const MODULES: ModuleDef[] = [
     whoFor: 'Students who judge the commute by cost and time.',
     whatItDoes: 'Suburb lookup. Replaced by a static route list in an expander under fees.',
     learn: 'The static list answers the question; revisit the lookup if the list gets long.',
-    sits: 'Static route list in an expander under fees on NZST.',
-    usedOn: [NZST],
+    sits: 'Parked Flight Attending page.',
+    usedOn: [FLIGHT],
     evidence: { why: 'Commute cost is a hidden barrier for lower-income students. A list is enough for five campuses.', sources: [BRIEF], exemplars: ['Auckland Transport journey planner'] },
   },
   {
